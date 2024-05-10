@@ -52,7 +52,7 @@ const Slider = () => {
                 </Link>
               </div>
             </div>
-            <div className="w-1/2">
+            <div className="">
               <img
                 src="https://i.postimg.cc/7ZxczcTH/sander-sammy-38-Un6-Oi5be-E-unsplash.png"
                 alt="Residential Image Coming soon"
@@ -76,7 +76,7 @@ const Slider = () => {
                 </Link>
               </div>
             </div>
-            <div className="w-1/2">
+            <div className="">
               <img
                 src="https://i.postimg.cc/xTGBH89L/michal-parzuchowski-7-TWRw-Djf-Gew-unsplash.png"
                 alt="Residential Image Coming soon"
@@ -100,11 +100,11 @@ const Slider = () => {
                 </Link>
               </div>
             </div>
-            <div className="w-1/2">
+            <div className="">
               <img
                 src="https://i.postimg.cc/fbPg6Rqy/kristine-wook-Zyx-NWi3-JCto-unsplash.png"
                 alt="Residential Image Coming soon"
-                className=""
+                className="w-[875px]"
               />
             </div>
           </div>
