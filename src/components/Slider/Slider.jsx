@@ -104,7 +104,7 @@ const Slider = () => {
               <img
                 src="https://i.postimg.cc/fbPg6Rqy/kristine-wook-Zyx-NWi3-JCto-unsplash.png"
                 alt="Residential Image Coming soon"
-                className="w-[875px]"
+                className="lg:w-[875px]"
               />
             </div>
           </div>
