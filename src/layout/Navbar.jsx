@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
+  const { user,logOut } = useAuth();
+    console.log(user);
+  const handleLogout = () => {
+    try {
+        logOut();
+    } catch (error) {
+        console.log(error.message);
+    }
+  };
   const navLink = (
     <>
       <Link to="/">Home</Link>
@@ -16,10 +26,10 @@ const Navbar = () => {
         <Link to="/Manage_Service">Manage Service</Link>
       </li>
       <li>
-      <Link to="/Booked_Services">Booked Services</Link>
+        <Link to="/Booked_Services">Booked Services</Link>
       </li>
       <li>
-      <Link to="/Service_To_Do">Service-To-Do</Link>
+        <Link to="/Service_To_Do">Service-To-Do</Link>
       </li>
     </>
   );
@@ -48,16 +58,16 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52"
             >
-            {navLink}
-            <details>
+              {navLink}
+              <details>
                 <summary>Dashboard</summary>
-                <ul>
-                  {dashboard}
-                </ul>
+                <ul>{dashboard}</ul>
               </details>
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost text-xl">Nearby Care</Link>
+          <Link to="/" className="btn btn-ghost text-xl">
+            Nearby Care
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal items-center space-x-4">
@@ -65,15 +75,24 @@ const Navbar = () => {
             <li>
               <details className="z-10">
                 <summary>Dashboard</summary>
-                <ul>
-                  {dashboard}
-                </ul>
+                <ul>{dashboard}</ul>
               </details>
             </li>
           </ul>
         </div>
         <div className="navbar-end">
-          <Link to='/Login' className="btn">Login</Link>
+          {user ? (
+            <div className="flex items-center space-x-2">
+              <img src={user?.photoURL? user.photoURL:"https://i.postimg.cc/vTN8PMKb/blank-profile-picture-973460-1280.png"} alt="" className="rounded-full w-10" />
+              <button onClick={handleLogout} className="btn">
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/Login" className="btn">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>

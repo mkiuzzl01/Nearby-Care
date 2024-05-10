@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import { LuEyeOff } from "react-icons/lu";
 import { FiEye } from "react-icons/fi";
 import { useState } from "react";
+import useAuth from "../hooks/useAuth";
 
 const Register = () => {
-    const [showPass, setShowPass] = useState(false);
+  const [showPass, setShowPass] = useState(false);
+  const { registerUser, profileUpdate, setUser, user } = useAuth();
+  console.log(registerUser);
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -12,8 +15,15 @@ const Register = () => {
     const email = form.email.value;
     const photo = form.photo.value;
     const pass = form.password.value;
-    console.log(name,email,photo,pass);
+    // console.log(name, email, photo, pass);
 
+    try {
+      registerUser(email, pass);
+      profileUpdate(name, photo);
+      setUser(user);
+    } catch (error) {
+        console.log(error.message);
+    }
   };
   return (
     <div className="my-4">
@@ -34,14 +44,14 @@ const Register = () => {
             <span className="w-1/6 border-b dark:border-gray-600"></span>
 
             <span className="text-sm text-center text-gray-500 uppercase dark:text-gray-400 hover:underline">
-            Mention Proper information
+              Mention Proper information
             </span>
 
             <span className="w-1/6 border-b dark:border-gray-400"></span>
           </div>
 
           <form onSubmit={handleRegister}>
-          <div className="form-control">
+            <div className="form-control">
               <label className="label">
                 <span className="block mb-2 text-sm font-medium ">Name</span>
               </label>
@@ -67,7 +77,9 @@ const Register = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="block mb-2 text-sm font-medium ">Photo URL</span>
+                <span className="block mb-2 text-sm font-medium ">
+                  Photo URL
+                </span>
               </label>
               <input
                 type="text"
@@ -77,7 +89,9 @@ const Register = () => {
               />
             </div>
             <div className="form-control">
-              <span className="my-2 block mb-2 text-sm font-medium ">Password</span>
+              <span className="my-2 block mb-2 text-sm font-medium ">
+                Password
+              </span>
               <label className="input w-full input-bordered  flex items-center gap-2">
                 <input
                   type={showPass ? "text" : "password"}
@@ -93,10 +107,8 @@ const Register = () => {
                 </div>
               </label>
               {/* <p className="text-red-600">{error}</p> */}
-            </div>  
-            <span className="text-xs hover:underline">
-                  Forget Password?
-                </span>
+            </div>
+            <span className="text-xs hover:underline">Forget Password?</span>
             <div className="mt-6">
               <input
                 className="w-full btn bg-gray-600 text-white hover:bg-blue-400"

@@ -79,6 +79,7 @@ const AuthProvider = ({ children }) => {
   const shareTools = {
     user,
     loading,
+    setUser,
     registerUser,
     logInUser,
     logInWithGoogle,

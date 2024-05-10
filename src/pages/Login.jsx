@@ -1,22 +1,44 @@
 import { FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
+    const {logInUser,logInWithGoogle,logInWithGithub,setUser,user} = useAuth();
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(password,email);
+    // console.log(password,email);
+
+    try {
+        logInUser(email,password);
+        setUser(user)
+        alert('Login successful')
+    } catch (error) {
+        console.log(error.message);
+    }
 
   };
 
   const handleWithGoogle = () =>{
-    console.log('hello');
+    try {
+        logInWithGoogle()
+        setUser(user)
+        alert('Login successful')
+    } catch (error) {
+        console.log(error.message);
+    }
 
   } 
   const handleWithGithub = () =>{
-    console.log('hello');
+    try {
+        logInWithGithub();
+        setUser(user)
+        alert('Login successful')
+    } catch (error) {
+        console.log(error.message);
+    }
 
   } 
   return (
