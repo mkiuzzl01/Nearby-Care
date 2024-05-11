@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import Services from "../pages/Services";
 import AddAppointment from "../pages/AddAppointment";
 import PrivetRoute from "./PrivetRoute";
+import All_Services from "../pages/All Services/All_Services";
 
 const Router = createBrowserRouter([
   {
@@ -37,6 +38,11 @@ const Router = createBrowserRouter([
           </PrivetRoute>
         ),
       },
+      {
+        path:"/All_Services",
+        loader:()=>fetch(`${import.meta.env.VITE_API_URL}/Popular_Services`),
+        element:<All_Services></All_Services>
+      }
     ],
   },
 ]);
