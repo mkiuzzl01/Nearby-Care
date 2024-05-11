@@ -25,7 +25,7 @@ const AddAppointment = () => {
       if(data.insertedId){
         Swal.fire({
           title: 'Success!',
-          text: 'Tourist Sport Created Successfully!',
+          text: 'Appointment Created Successfully!',
           icon: 'success',
           confirmButtonText: 'Ok'
         })
