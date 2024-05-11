@@ -7,11 +7,9 @@ const Root = () => {
   return (
     <div>
       <div className="max-w-7xl m-auto">
-        <header>
-          <nav>
+          <nav className="sticky top-0 z-10">
             <Navbar></Navbar>
           </nav>
-        </header>
         <main className="min-h-[calc(100vh-270px)]">
           <Outlet></Outlet>
           <ToastContainer limit={3} autoClose={1000}/>

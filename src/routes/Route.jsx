@@ -6,7 +6,8 @@ import Register from "../pages/Register";
 import Services from "../pages/Services";
 import AddAppointment from "../pages/AddAppointment";
 import PrivetRoute from "./PrivetRoute";
-import All_Services from "../pages/All Services/All_Services";
+import All_Services from "../pages/All_Services";
+import View_Details from "../pages/View_Details";
 
 const Router = createBrowserRouter([
   {
@@ -15,7 +16,8 @@ const Router = createBrowserRouter([
     children: [
       {
         path: "/",
-        loader: () => fetch(`${import.meta.env.VITE_API_URL}/Popular_Services`),
+        loader: async () =>
+          fetch(`${import.meta.env.VITE_API_URL}/Popular_Services`),
         element: <Home></Home>,
       },
       {
@@ -39,10 +41,17 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path:"/All_Services",
-        loader:()=>fetch(`${import.meta.env.VITE_API_URL}/Popular_Services`),
-        element:<All_Services></All_Services>
-      }
+        path: "/All_Services",
+        loader: async () =>
+          fetch(`${import.meta.env.VITE_API_URL}/Popular_Services`),
+        element: <All_Services></All_Services>,
+      },
+      {
+        path: "/View_Details/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/View_Details/${params.id}`),
+        element: <View_Details></View_Details>,
+      },
     ],
   },
 ]);

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Popular_Services_Card = ({ service, All_ServicesPage }) => {
   const {
+    _id,
     doctorName,
     doctorImage,
     expertise,
@@ -21,8 +22,8 @@ const Popular_Services_Card = ({ service, All_ServicesPage }) => {
           </figure>
           <div className="card-body lg:w-1/2 m-auto">
             <h2 className="card-title">{expertise}</h2>
-            <p>
-              {doctorName} {description}
+            <p className="border-x-2 px-4 rounded-lg border-blue-400">
+              {doctorName} {description.substring(0,100)} .........
             </p>
             <p>
               <span className="font-semibold">Consultation Cost:</span>{" "}
@@ -37,7 +38,7 @@ const Popular_Services_Card = ({ service, All_ServicesPage }) => {
             <div className="card-actions items-center">
               <img src={doctorImage} alt="" className="w-10 rounded-full" />
               <p>Dr.{doctorName}</p>
-              <Link>
+              <Link to={`/View_Details/${_id}`}>
                 <button className="btn btn-outline">View Detail</button>
               </Link>
             </div>
@@ -63,13 +64,13 @@ const Popular_Services_Card = ({ service, All_ServicesPage }) => {
                 <span>{location}</span>
               </p>
             </div>
-            <p className="border-y-2 border-dashed p-4">
+            <p className="border-y-2 border-dashed rounded-xl p-4">
               {doctorName} {description.substring(0, 100)} ....
             </p>
             <div className="card-actions items-center">
               <img src={doctorImage} alt="" className="w-10 rounded-full" />
               <p>Dr.{doctorName}</p>
-              <Link>
+              <Link to={`/View_Details/${_id}`}>
                 <button className="btn btn-outline">View Detail</button>
               </Link>
             </div>

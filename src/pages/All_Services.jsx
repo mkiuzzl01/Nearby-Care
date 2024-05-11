@@ -1,12 +1,14 @@
 import { useLoaderData } from "react-router-dom";
-import Popular_Services_Card from "../../components/Popular Services/Popular_Services_Card";
+import Popular_Services_Card from "../components/Popular Services/Popular_Services_Card";
 
 const All_Services = () => {
-    const All_ServicesPage = true;
   const loadServices = useLoaderData();
+    const All_ServicesPage = true;
   return (
-    <div>
-        <div></div>
+    <div className="my-4">
+        <div>
+           
+        </div>
       <div className="grid gap-4">
         {loadServices.map((service) => (
           <Popular_Services_Card

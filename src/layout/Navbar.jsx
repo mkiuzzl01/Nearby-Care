@@ -40,7 +40,7 @@ const Navbar = () => {
   );
   return (
     <div>
-      <div className="navbar rounded-lg shadow-md">
+      <div className="navbar bg-[#f2f2f2] rounded-b-lg shadow-md">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -108,12 +108,12 @@ const Navbar = () => {
             </a>
             <Tooltip id="my-tooltip" />
           </div>
-              <button onClick={handleLogout} className="btn">
+              <button onClick={handleLogout} className="btn btn-outline btn-ghost">
                 Logout
               </button>
             </div>
           ) : (
-            <Link to="/Login" className="btn">
+            <Link to="/Login" className="btn btn-outline btn-ghost">
               Login
             </Link>
           )}
