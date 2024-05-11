@@ -1,29 +1,59 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LuEyeOff } from "react-icons/lu";
 import { FiEye } from "react-icons/fi";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
-  const { registerUser, profileUpdate, setUser, user } = useAuth();
-  console.log(registerUser);
-  const handleRegister = (e) => {
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const {
+    registerUser,
+    profileUpdate,
+    setUser,
+    user,
+    successToast,
+  } = useAuth();
+
+  const handleRegister = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const photo = form.photo.value;
     const pass = form.password.value;
-    // console.log(name, email, photo, pass);
+
+    setError();
+    if (pass.length < 6) {
+      toast.error("Something Wrong!", {
+        position: "bottom-center",
+      });
+      return setError("Password must be at least 6 character or longer");
+    } else if (!/[A-Z]/.test(pass)) {
+      toast.error("Something Wrong!", {
+        position: "bottom-center",
+      });
+      return setError("Should contain at least one upper case");
+    } else if (!/[a-z]/.test(pass)) {
+      toast.error("Something Wrong!", {
+        position: "bottom-center",
+      });
+      return setError("Should contain at least one lower case");
+    }
 
     try {
-      registerUser(email, pass);
-      profileUpdate(name, photo);
-      setUser(user);
+      await registerUser(email, pass);
+      await profileUpdate(name, photo);
+      successToast('Registration successful');
+      navigate(location?.state ? location.state : "/");
+      form.reset();
     } catch (error) {
-        console.log(error.message);
+     return setError(error.message.split("/")[1].split(")"));
     }
+    setUser(...{ user, photoURL: photo, displayName: name });
   };
   return (
     <div className="my-4">
@@ -106,7 +136,7 @@ const Register = () => {
                   </span>
                 </div>
               </label>
-              {/* <p className="text-red-600">{error}</p> */}
+              <p className="text-red-600">{error}</p>
             </div>
             <span className="text-xs hover:underline">Forget Password?</span>
             <div className="mt-6">

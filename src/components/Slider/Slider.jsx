@@ -13,8 +13,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Slider = () => {
+    const {user,warningToast} = useAuth();
+    console.log(user);
   return (
     <div>
       <Swiper
@@ -47,8 +50,11 @@ const Slider = () => {
               Experience a seamless journey towards better health with trusted advice and comprehensive consultations from our team of experts. Your well-being is at the heart of everything we do.
               </p>
               <div>
-                <Link to="/Register">
-                  <button className="btn">Register Now</button>
+                <Link to={user? undefined :"/Register"} >
+                  <button onClick={()=> {
+                    user?
+                    warningToast(' You are Already Register') : undefined }} className="btn">Register Now</button>
+                    
                 </Link>
               </div>
             </div>
@@ -71,8 +77,11 @@ const Slider = () => {
               Discover personalized care and insights from seasoned doctors dedicated to your well-being. Navigate your health journey with confidence.
               </p>
               <div>
-                <Link to="/Register">
-                  <button className="btn">Register Now</button>
+              <Link to={user? undefined :"/Register"} >
+                  <button onClick={()=> {
+                    user?
+                    warningToast(' You are Already Register') : undefined }} className="btn">Register Now</button>
+                    
                 </Link>
               </div>
             </div>
@@ -95,8 +104,11 @@ const Slider = () => {
               Explore a spectrum of consultation services tailored to your needs. Knowledge meets compassion in every interaction, empowering you to make informed choices for a healthier life.
               </p>
               <div>
-                <Link to="/Register">
-                  <button className="btn">Register Now</button>
+              <Link to={user? undefined :"/Register"} >
+                  <button onClick={()=> {
+                    user?
+                    warningToast(' You are Already Register') : undefined }} className="btn">Register Now</button>
+                    
                 </Link>
               </div>
             </div>

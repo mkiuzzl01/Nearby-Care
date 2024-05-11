@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-
+import { Tooltip } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css'
 const Navbar = () => {
-  const { user,logOut } = useAuth();
-    console.log(user);
+  const { user,logOut,warningToast,errorToast} = useAuth();
+    // console.log(user);
+
   const handleLogout = () => {
     try {
         logOut();
+        warningToast('Logout Successful')
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
+        errorToast('Something Wrong')
+
     }
   };
   const navLink = (
@@ -81,9 +86,28 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          {user ? (
-            <div className="flex items-center space-x-2">
-              <img src={user?.photoURL? user.photoURL:"https://i.postimg.cc/vTN8PMKb/blank-profile-picture-973460-1280.png"} alt="" className="rounded-full w-10" />
+          {user? (
+            <div className="flex items-center space-x-2 z-10">
+            <div className="tooltip tooltip-accent tooltip-bottom lg:tooltip-left">
+            {" "}
+            <a
+              data-tooltip-id="my-tooltip"
+              data-tooltip-content={
+                user?.displayName ? user.displayName : "Username Not Found"
+              }
+            >
+              <img
+                src={
+                  user?.photoURL
+                    ? user.photoURL
+                    : "https://i.postimg.cc/vTN8PMKb/blank-profile-picture-973460-1280.png"
+                }
+                alt={user?.email}
+                className="w-10 rounded-full "
+              />
+            </a>
+            <Tooltip id="my-tooltip" />
+          </div>
               <button onClick={handleLogout} className="btn">
                 Logout
               </button>
