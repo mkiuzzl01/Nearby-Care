@@ -25,7 +25,7 @@ const Navbar = () => {
   const dashboard = (
     <>
       <li>
-        <Link to="/Add_Service">Add Service</Link>
+        <Link to="/Add_Appointment">Add Service</Link>
       </li>
       <li>
         <Link to="/Manage_Service">Manage Service</Link>
