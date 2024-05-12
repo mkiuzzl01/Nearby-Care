@@ -50,7 +50,11 @@ const Router = createBrowserRouter([
         path: "/View_Details/:id",
         loader: ({ params }) =>
           fetch(`http://localhost:5000/View_Details/${params.id}`),
-        element: <View_Details></View_Details>,
+        element: (
+          <PrivetRoute>
+            <View_Details></View_Details>
+          </PrivetRoute>
+        ),
       },
     ],
   },
