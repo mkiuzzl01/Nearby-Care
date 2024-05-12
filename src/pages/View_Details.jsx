@@ -133,7 +133,7 @@ const View_Details = () => {
         </div>
       </div>
       <dialog id="my_modal_3" className="modal">
-        <div className="modal-box w-1/2 max-w-5xl">
+        <div className="modal-box lg:w-1/2 lg:max-w-5xl">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
@@ -143,7 +143,7 @@ const View_Details = () => {
           <form onSubmit={handleSubmit}>
             <h1 className="text-center text-3xl font-semibold my-3">Booking</h1>
             <div className="flex justify-center">
-              <img src={info?.photo} alt="" className="w-1/4 h-1/4" />
+              <img src={info?.photo} alt="" className="lg:w-1/4 h-1/4" />
             </div>
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 p-4">
               <div className="form-control">
