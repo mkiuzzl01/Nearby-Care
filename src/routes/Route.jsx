@@ -8,6 +8,7 @@ import AddAppointment from "../pages/AddAppointment";
 import PrivetRoute from "./PrivetRoute";
 import All_Services from "../pages/All_Services";
 import View_Details from "../pages/View_Details";
+import Manage_Appointment from "../pages/Manage_Appointment";
 
 const Router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const Router = createBrowserRouter([
           </PrivetRoute>
         ),
       },
+      {
+        path:"/Manage_Appointment",
+        element:<Manage_Appointment></Manage_Appointment>
+      }
     ],
   },
 ]);

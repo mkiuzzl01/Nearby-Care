@@ -7,7 +7,7 @@ const PrivetRoute = ({children}) => {
   const location = useLocation();
 
   if (loading) {
-    return <div className="text-center"><span className="loading loading-dots loading-lg"></span></div>
+    return <h1 className='text-center'>Please wait...........</h1>
   }
 
   if (!user) {

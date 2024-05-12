@@ -1,19 +1,18 @@
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import { Tooltip } from 'react-tooltip'
-import 'react-tooltip/dist/react-tooltip.css'
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 const Navbar = () => {
-  const { user,logOut,warningToast,errorToast} = useAuth();
-    // console.log(user);
+  const { user, logOut, warningToast, errorToast } = useAuth();
+  // console.log(user);
 
   const handleLogout = () => {
     try {
-        logOut();
-        warningToast('Logout Successful')
+      logOut();
+      warningToast("Logout Successful");
     } catch (error) {
-        console.log(error);
-        errorToast('Something Wrong')
-
+      console.log(error);
+      errorToast("Something Wrong");
     }
   };
   const navLink = (
@@ -25,13 +24,15 @@ const Navbar = () => {
   const dashboard = (
     <>
       <li>
-        <Link to="/Add_Appointment">Add Service</Link>
+        <Link to="/Add_Appointment">Add Appointment</Link>
       </li>
+      {user && (
+        <li>
+          <Link to="/Manage_Appointment">Manage Appointment</Link>
+        </li>
+      )}
       <li>
-        <Link to="/Manage_Service">Manage Service</Link>
-      </li>
-      <li>
-        <Link to="/Booked_Services">Booked Services</Link>
+        <Link to="/Booked_Appointment">Booked Appointment</Link>
       </li>
       <li>
         <Link to="/Service_To_Do">Service-To-Do</Link>
@@ -78,7 +79,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal items-center space-x-4">
             {navLink}
             <li>
-              <details className="z-10">
+              <details className="w-48">
                 <summary>Dashboard</summary>
                 <ul>{dashboard}</ul>
               </details>
@@ -86,29 +87,32 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          {user? (
+          {user ? (
             <div className="flex items-center space-x-2 z-10">
-            <div className="tooltip tooltip-accent tooltip-bottom lg:tooltip-left">
-            {" "}
-            <a
-              data-tooltip-id="my-tooltip"
-              data-tooltip-content={
-                user?.displayName ? user.displayName : "Username Not Found"
-              }
-            >
-              <img
-                src={
-                  user?.photoURL
-                    ? user.photoURL
-                    : "https://i.postimg.cc/vTN8PMKb/blank-profile-picture-973460-1280.png"
-                }
-                alt={user?.email}
-                className="w-10 rounded-full "
-              />
-            </a>
-            <Tooltip id="my-tooltip" />
-          </div>
-              <button onClick={handleLogout} className="btn btn-outline btn-ghost">
+              <div className="tooltip tooltip-accent tooltip-bottom lg:tooltip-left">
+                {" "}
+                <a
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content={
+                    user?.displayName ? user.displayName : "Username Not Found"
+                  }
+                >
+                  <img
+                    src={
+                      user?.photoURL
+                        ? user.photoURL
+                        : "https://i.postimg.cc/vTN8PMKb/blank-profile-picture-973460-1280.png"
+                    }
+                    alt={user?.email}
+                    className="w-10 rounded-full "
+                  />
+                </a>
+                <Tooltip id="my-tooltip" />
+              </div>
+              <button
+                onClick={handleLogout}
+                className="btn btn-outline btn-ghost"
+              >
                 Logout
               </button>
             </div>
