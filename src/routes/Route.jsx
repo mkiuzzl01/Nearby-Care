@@ -9,6 +9,8 @@ import PrivetRoute from "./PrivetRoute";
 import All_Services from "../pages/All_Services";
 import View_Details from "../pages/View_Details";
 import Manage_Appointment from "../pages/Manage_Appointment";
+import Booked_Appointment from "../pages/Booked_Appointment";
+import Service_To_Do from "../pages/Service_To_Do";
 
 const Router = createBrowserRouter([
   {
@@ -31,6 +33,8 @@ const Router = createBrowserRouter([
       },
       {
         path: "/Services",
+        loader: async () =>
+        fetch(`${import.meta.env.VITE_API_URL}/Popular_Services`),
         element: <Services></Services>,
       },
       {
@@ -40,12 +44,6 @@ const Router = createBrowserRouter([
             <AddAppointment></AddAppointment>
           </PrivetRoute>
         ),
-      },
-      {
-        path: "/All_Services",
-        loader: async () =>
-          fetch(`${import.meta.env.VITE_API_URL}/Popular_Services`),
-        element: <All_Services></All_Services>,
       },
       {
         path: "/View_Details/:id",
@@ -59,7 +57,19 @@ const Router = createBrowserRouter([
       },
       {
         path:"/Manage_Appointment",
-        element:<Manage_Appointment></Manage_Appointment>
+        element:<PrivetRoute>
+          <Manage_Appointment></Manage_Appointment>
+        </PrivetRoute>
+      },
+      {
+        path:"/Booked_Appointment",
+        element:<PrivetRoute>
+          <Booked_Appointment></Booked_Appointment>
+        </PrivetRoute>
+      },
+      {
+        path:"/Service_To_Do",
+        element:<Service_To_Do></Service_To_Do>
       }
     ],
   },

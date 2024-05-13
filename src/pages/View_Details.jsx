@@ -1,5 +1,5 @@
 import { FaLocationDot } from "react-icons/fa6";
-import { Navigate, useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -18,6 +18,7 @@ const View_Details = () => {
     const expertise_image = info?.photo;
     const doctor_Email = form.doctor_email.value;
     const doctor_Name = form.Doctor_Name.value;
+    const area = info?.location;
     const user_Email = form.user_Email.value;
     const user_Name = form.user_Name.value;
     const date_and_time = new Date(Date.parse(form.date_and_time.value));
@@ -31,21 +32,28 @@ const View_Details = () => {
       expertise_image,
       doctor_Email,
       doctor_Name,
-      user_Email,
-      user_Name,
-      date,
       consultation_Cost,
-      instruction,
-      status,
+      area,
+      user: {
+        user_Email,
+        user_Name,
+        date,
+        instruction,
+        status,
+      },
     };
-    console.table(booking_info);
+    // console.table(booking_info);
+    if(user_Email === doctor_Email){
+      navigate(location?.state ? location.state : "/Services");
+      return errorToast("Something Wrong");
+    }
 
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/Book_Appointment`,
         booking_info
       );
-      navigate(location?.state ? location.state : '/All_Services' );
+      navigate(location?.state ? location.state : "/Services");
       if (data.insertedId) {
         Swal.fire({
           title: "Success!",

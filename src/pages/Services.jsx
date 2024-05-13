@@ -1,10 +1,25 @@
+import { useLoaderData } from "react-router-dom";
+import Popular_Services_Card from "../components/Popular Services/Popular_Services_Card";
 
 const Services = () => {
-    return (
+    const loadServices = useLoaderData();
+    const All_ServicesPage = true;
+  return (
+    <div className="my-4">
         <div>
-            <h1>Hello</h1>
+           
         </div>
-    );
+      <div className="grid gap-4">
+        {loadServices.map((service) => (
+          <Popular_Services_Card
+            key={service._id}
+            service={service}
+            All_ServicesPage={All_ServicesPage}
+          ></Popular_Services_Card>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Services;

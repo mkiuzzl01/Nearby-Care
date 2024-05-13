@@ -4,6 +4,7 @@ import Popular_Services_Card from "../Popular Services/Popular_Services_Card";
 
 const Home = () => {
   const loadServices = useLoaderData();
+  console.log(loadServices);
   const services = loadServices.slice(0, 6);
   return (
     <div>
@@ -37,7 +38,7 @@ const Home = () => {
           ))}
         </div>
         <div className="text-center my-2 border-b-2 py-5 rounded-lg">
-          <Link to="/All_Services">
+          <Link to="/Services">
             <button className="btn">Show All</button>
           </Link>
         </div>

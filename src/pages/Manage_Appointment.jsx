@@ -8,12 +8,13 @@ import { useNavigate } from "react-router-dom";
 
 const Manage_Appointment = () => {
   const { user, errorToast } = useAuth();
-  const [services, setServices] = useState([]);
+  const [services, setServices] = useState([])
+  // console.log(services);
   const [data, setData] = useState({});
   const navigate = useNavigate();
 
   const getData = async () => {
-    const data = await axios.post(
+    const data = await axios.get(
       `${import.meta.env.VITE_API_URL}/Manage_Appointment/${user?.email}`
     );
     return setServices(data.data);
@@ -107,7 +108,8 @@ const Manage_Appointment = () => {
 
   return (
     <div>
-      <div className="overflow-x-auto">
+      {services.length > 0? <div className="overflow-x-auto">
+        <h1 className="text-2xl font-bold text-center my-4">Your Appointment Information</h1>
         <table className="table">
           {/* head */}
           <thead>
@@ -306,7 +308,11 @@ const Manage_Appointment = () => {
             </form>
           </div>
         </dialog>
+      </div> :
+      <div>
+        <h1 className="text-center text-3xl font-bold pt-32">You are not add any Appointment</h1>
       </div>
+      }
     </div>
   );
 };
