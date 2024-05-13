@@ -60,7 +60,7 @@ const Booked_Appointment = () => {
                 <td>{book?.user?.instruction}</td>
                 <td>{book?.user?.date}</td>
                 <th>
-                  <button className="btn btn-ghost btn-xs">
+                  <button className={book?.user?.status === "Complete" ? 'btn bg-green-400 btn-xs':book?.user?.status === 'Working'?'btn bg-yellow-600 btn-xs':'btn btn-xs bg-gray-200'}>
                     {book?.user?.status}
                   </button>
                 </th>

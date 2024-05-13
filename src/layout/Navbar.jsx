@@ -5,7 +5,7 @@ import "react-tooltip/dist/react-tooltip.css";
 import { useEffect, useState } from "react";
 const Navbar = () => {
   const { user, logOut, warningToast, errorToast } = useAuth();
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
@@ -87,22 +87,31 @@ const Navbar = () => {
             </ul>
           </div>
           <Link to="/">
-            <img src="https://i.postimg.cc/C5qTrVN9/Nearby-Care-1-removebg-preview.png" alt=""  className="lg:w-2/3"/>
+            <img
+              src="https://i.postimg.cc/C5qTrVN9/Nearby-Care-1-removebg-preview.png"
+              alt=""
+              className="lg:w-2/3"
+            />
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal items-center space-x-4">
             {navLink}
-            <li>
-              <details className="w-48">
-                <summary>Dashboard</summary>
-                <ul>{dashboard}</ul>
-              </details>
-            </li>
+            <div className="dropdown dropdown-hover">
+              <div tabIndex={0} role="button">
+                Dashboard
+              </div>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+              >
+            {dashboard}
+              </ul>
+            </div>
           </ul>
         </div>
         <div className="navbar-end space-x-4">
-        <div>
+          <div>
             <label className="swap swap-rotate">
               {/* this hidden checkbox controls the state */}
               <input

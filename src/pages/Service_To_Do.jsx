@@ -77,7 +77,7 @@ const Service_To_Do = () => {
   return (
     <div>
       {booked.length > 0 ? (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto pt-10">
           <h1 className="text-center text-2xl font-bold my-4">
             Patient Booked Appointment Information
           </h1>
@@ -120,17 +120,39 @@ const Service_To_Do = () => {
                   <td>{book?.user?.instruction}</td>
                   <td>{book?.user?.date}</td>
                   <th>
-                    <div className="flex space-y-2 flex-col">
-                      <button className="btn btn-sm">Pending</button>
-                      <button
+                    <div className="dropdown dropdown-hover dropdown-top">
+                      <div tabIndex={0} role="button" className="btn m-1">
+                        Take a Action
+                      </div>
+                      <ul
+                        tabIndex={0}
+                        className="dropdown-content z-[1] space-y-2 menu shadow bg-base-100 rounded-box"
+                      >
+                        <li>
+                        <button
+                        className={
+                          book?.user?.status === "Working"
+                            ? "btn btn-sm bg-gray-500-500"
+                            : "btn btn-sm"
+                        }
+                         defaultValue={book?.user?.status}>Pending</button>
+                        </li>
+                        <li>
+                        <button
                         onClick={() =>
                           handleWorking(book._id, book?.user?.status, "Working")
                         }
-                        className={book?.user?.status === 'Working'? 'btn btn-sm bg-yellow-500' :'btn btn-sm'}
+                        className={
+                          book?.user?.status === "Working"
+                            ? "btn btn-sm bg-yellow-500"
+                            : "btn btn-sm"
+                        }
                       >
                         Working
                       </button>
-                      <button
+                        </li>
+                        <li>
+                        <button
                         onClick={() =>
                           handleComplete(
                             book._id,
@@ -138,10 +160,16 @@ const Service_To_Do = () => {
                             "Complete"
                           )
                         }
-                        className={book?.user?.status === 'Complete' ? 'btn btn-sm bg-green-600' :'btn btn-sm'}
+                        className={
+                          book?.user?.status === "Complete"
+                            ? "btn btn-sm bg-green-600"
+                            : "btn btn-sm"
+                        }
                       >
                         Complete
                       </button>
+                        </li>
+                      </ul>
                     </div>
                   </th>
                 </tr>

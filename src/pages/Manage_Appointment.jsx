@@ -231,11 +231,9 @@ const Manage_Appointment = () => {
                     defaultValue={data.expertise}
                     name="expertise"
                     id="expertise"
+                    required
                     className="select select-bordered join-item"
                   >
-                    <option disabled selected>
-                      Choose
-                    </option>
                     <option value="General Medicine">General Medicine</option>
                     <option value="Cardiology">Cardiology</option>
                     <option value="Neurology">Neurology</option>
