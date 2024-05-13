@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
 const Contact_Us = () => {
