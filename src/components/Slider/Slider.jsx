@@ -14,10 +14,10 @@ import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-
+import { FaArrowRightLong } from "react-icons/fa6";
 const Slider = () => {
     const {user,warningToast} = useAuth();
-    console.log(user);
+    // console.log(user);
   return (
     <div>
       <Swiper
@@ -49,18 +49,21 @@ const Slider = () => {
               <p className="animate__animated animate__backInLeft">
               Experience a seamless journey towards better health with trusted advice and comprehensive consultations from our team of experts. Your well-being is at the heart of everything we do.
               </p>
-              <div>
+              <div className="space-x-2 flex">
                 <Link to={user? undefined :"/Register"} >
                   <button onClick={()=> {
                     user?
                     warningToast(' You are Already Register') : undefined }} className="btn">Register Now</button>
                     
                 </Link>
+                <Link to="/Services" >
+                    <button className="flex items-center btn btn-outline"><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
+                </Link>
               </div>
             </div>
             <div className="">
               <img
-                src="https://i.postimg.cc/7ZxczcTH/sander-sammy-38-Un6-Oi5be-E-unsplash.png"
+                src="https://i.postimg.cc/SKCkJgy4/home-slider1.png"
                 alt="Residential Image Coming soon"
                 className=""
               />
@@ -76,20 +79,23 @@ const Slider = () => {
               <p className="animate__animated animate__backInLeft">
               Discover personalized care and insights from seasoned doctors dedicated to your well-being. Navigate your health journey with confidence.
               </p>
-              <div>
-              <Link to={user? undefined :"/Register"} >
+              <div className="space-x-2 flex">
+                <Link to={user? undefined :"/Register"} >
                   <button onClick={()=> {
                     user?
                     warningToast(' You are Already Register') : undefined }} className="btn">Register Now</button>
                     
                 </Link>
+                <Link to="/Services" >
+                    <button className="flex items-center btn btn-outline"><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
+                </Link>
               </div>
             </div>
             <div className="">
               <img
-                src="https://i.postimg.cc/xTGBH89L/michal-parzuchowski-7-TWRw-Djf-Gew-unsplash.png"
+                src="https://i.postimg.cc/7ZCxyxdf/home-slider2.png"
                 alt="Residential Image Coming soon"
-                className="im"
+                className=""
               />
             </div>
           </div>
@@ -103,20 +109,23 @@ const Slider = () => {
               <p className="animate__animated animate__backInLeft">
               Explore a spectrum of consultation services tailored to your needs. Knowledge meets compassion in every interaction, empowering you to make informed choices for a healthier life.
               </p>
-              <div>
-              <Link to={user? undefined :"/Register"} >
+              <div className="space-x-2 flex">
+                <Link to={user? undefined :"/Register"} >
                   <button onClick={()=> {
                     user?
                     warningToast(' You are Already Register') : undefined }} className="btn">Register Now</button>
                     
                 </Link>
+                <Link to="/Services" >
+                    <button className="flex items-center btn btn-outline"><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
+                </Link>
               </div>
             </div>
             <div className="">
               <img
-                src="https://i.postimg.cc/fbPg6Rqy/kristine-wook-Zyx-NWi3-JCto-unsplash.png"
+                src="https://i.postimg.cc/GhgcNBMW/home-slider3.png"
                 alt="Residential Image Coming soon"
-                className="lg:w-[875px]"
+                className=""
               />
             </div>
           </div>

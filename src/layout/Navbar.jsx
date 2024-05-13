@@ -56,7 +56,7 @@ const Navbar = () => {
   );
   return (
     <div>
-      <div className="navbar bg-[#f2f2f2] rounded-b-lg shadow-md">
+      <div className="navbar bg-[#f2f2f2] h-20 rounded-b-lg shadow-md">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -86,8 +86,8 @@ const Navbar = () => {
               </details>
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost text-xl">
-            Nearby Care
+          <Link to="/">
+            <img src="https://i.postimg.cc/C5qTrVN9/Nearby-Care-1-removebg-preview.png" alt=""  className="lg:w-2/3"/>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
