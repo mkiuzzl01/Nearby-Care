@@ -9,7 +9,7 @@ import { RiTeamLine } from "react-icons/ri";
 import Why_use from "../Why_Use/Why_use";
 
 const Home = () => {
-  const loadServices = useLoaderData();
+  const loadServices = useLoaderData() || [];
   // console.log(loadServices);
   const services = loadServices.slice(0, 6);
   return (

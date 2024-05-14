@@ -4,8 +4,8 @@ import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { useEffect, useState } from "react";
 const Navbar = () => {
-  const { user, logOut, warningToast, errorToast } = useAuth();
-  const [theme, setTheme] = useState("light");
+  const { user, logOut, warningToast, errorToast,dark,setDark} = useAuth();
+  const [theme, setTheme] = useState(localStorage.getItem("theme")? localStorage.getItem("theme"):"light");
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
@@ -15,7 +15,8 @@ const Navbar = () => {
 
   const handleToggle = (e) => {
     if (e.target.checked) {
-      setTheme("night");
+      setTheme("dim");
+      setDark(true);
     } else {
       setTheme("light");
     }
@@ -56,7 +57,7 @@ const Navbar = () => {
   );
   return (
     <div>
-      <div className="navbar bg-[#f2f2f2] h-20 rounded-b-lg shadow-md">
+      <div className={ dark?`navbar bg-base-300 h-20 rounded-b-lg shadow-md`: `navbar bg-[#f2f2f2] h-20 rounded-b-lg shadow-md`}>
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -117,6 +118,7 @@ const Navbar = () => {
               <input
                 onChange={handleToggle}
                 type="checkbox"
+                checked={theme==='light'? false: true}
                 className="theme-controller"
               />
 

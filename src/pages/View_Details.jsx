@@ -73,13 +73,13 @@ const View_Details = () => {
   return (
     <div className="lg:flex">
       <div className="my-4 lg:w-1/2">
-        <div className="w-full max-w-md px-8 py-4 mt-16 bg-white rounded-lg shadow-lg border-2">
+        <div className="w-full max-w-md px-8 py-4 mt-16 rounded-lg shadow-lg border-2">
           <h1 className="font-serif text-[#004d99]">Doctor information:</h1>
           <div className="flex justify-center -mt-16 md:justify-end">
             <img
               src={info.doctorImage}
               alt=""
-              className="object-cover w-32 h-32 border-2 border-blue-500 rounded-full dark:border-blue-400"
+              className="object-cover w-32 h-32 border-2 border-blue-500 rounded-full"
             />
           </div>
 
@@ -100,7 +100,7 @@ const View_Details = () => {
         </div>
       </div>
       <div className="lg:w-1/2 my-4 shadow-lg rounded-xl">
-        <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md">
+        <div className="max-w-2xl overflow-hidden  rounded-lg shadow-md">
           <img src={info.photo} alt="" className="object-cover w-full h-64" />
 
           <div className="p-6">

@@ -17,7 +17,7 @@ import useAuth from "../../hooks/useAuth";
 import { FaArrowRightLong } from "react-icons/fa6";
 const Slider = () => {
     const {user,warningToast} = useAuth();
-    // console.log(user);
+
   return (
     <div>
       <Swiper
@@ -42,7 +42,7 @@ const Slider = () => {
       >
         <SwiperSlide>
           <div className="flex flex-col lg:flex-row bg-orange-300 rounded-lg lg:justify-between items-center">
-            <div className="p-4 lg:w-1/2 lg:ms-16 md:space-y-4 ">
+            <div className="p-4 lg:w-1/2 lg:ms-16 md:space-y-4 text-black ">
               <h1 className="font-Merriweather font-medium text-4xl uppercase animate__animated animate__lightSpeedInRight">
               Your Health, Our Priority
               </h1>
@@ -72,7 +72,7 @@ const Slider = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="flex flex-col lg:flex-row bg-sky-300 rounded-lg lg:justify-between items-center">
-            <div className="p-4 lg:w-1/2 lg:ms-16 md:space-y-4">
+            <div className="p-4 lg:w-1/2 lg:ms-16 md:space-y-4 text-black">
               <h1 className="font-Merriweather font-medium text-4xl uppercase animate__animated animate__lightSpeedInRight">
               Expert Guidance for Your Health
               </h1>
@@ -87,7 +87,7 @@ const Slider = () => {
                     
                 </Link>
                 <Link to="/Services" >
-                    <button className="flex items-center btn btn-outline"><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
+                    <button className="flex items-center btn btn-outline btn-primary"><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
                 </Link>
               </div>
             </div>
@@ -102,7 +102,7 @@ const Slider = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="flex flex-col lg:flex-row bg-purple-200 rounded-lg lg:justify-between items-center">
-            <div className="p-4 lg:w-1/2 lg:ms-16 md:space-y-4">
+            <div className="p-4 lg:w-1/2 lg:ms-16 md:space-y-4 text-black">
               <h1 className="font-Merriweather font-medium text-4xl uppercase animate__animated animate__lightSpeedInRight">
               Empowering Lives Through Expert Consultations
               </h1>
@@ -117,7 +117,7 @@ const Slider = () => {
                     
                 </Link>
                 <Link to="/Services" >
-                    <button className="flex items-center btn btn-outline"><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
+                    <button className="flex items-center btn btn-outline btn-secondary"><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
                 </Link>
               </div>
             </div>

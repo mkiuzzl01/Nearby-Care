@@ -6,21 +6,23 @@ import Register from "../pages/Register";
 import Services from "../pages/Services";
 import AddAppointment from "../pages/AddAppointment";
 import PrivetRoute from "./PrivetRoute";
-import All_Services from "../pages/All_Services";
 import View_Details from "../pages/View_Details";
 import Manage_Appointment from "../pages/Manage_Appointment";
 import Booked_Appointment from "../pages/Booked_Appointment";
 import Service_To_Do from "../pages/Service_To_Do";
+import Update_Appointment from "../pages/Update_Appointment";
+import Not_Found from "../pages/Not_Found";
 
 const Router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement:<Not_Found></Not_Found>,
     children: [
       {
         path: "/",
         loader: async () =>
-          fetch(`${import.meta.env.VITE_API_URL}/Popular_Services`),
+          fetch(`${import.meta.env.VITE_API_URL}/Services`),
         element: <Home></Home>,
       },
       {
@@ -33,8 +35,6 @@ const Router = createBrowserRouter([
       },
       {
         path: "/Services",
-        loader: async () =>
-        fetch(`${import.meta.env.VITE_API_URL}/Popular_Services`),
         element: <Services></Services>,
       },
       {
@@ -46,8 +46,8 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path: "/View_Details/:id",
-        loader: ({ params }) =>
+        path:"/View_Details/:id",
+        loader: async ({ params }) =>
           fetch(`http://localhost:5000/View_Details/${params.id}`),
         element: (
           <PrivetRoute>
@@ -62,6 +62,11 @@ const Router = createBrowserRouter([
         </PrivetRoute>
       },
       {
+        path:"/Update_Appointment/:id",
+        loader:async ({params}) => fetch(`http://localhost:5000/View_Details/${params.id}`),
+        element:<PrivetRoute><Update_Appointment></Update_Appointment></PrivetRoute>
+      },
+      {
         path:"/Booked_Appointment",
         element:<PrivetRoute>
           <Booked_Appointment></Booked_Appointment>
@@ -69,7 +74,7 @@ const Router = createBrowserRouter([
       },
       {
         path:"/Service_To_Do",
-        element:<Service_To_Do></Service_To_Do>
+        element:<PrivetRoute><Service_To_Do></Service_To_Do></PrivetRoute>
       }
     ],
   },

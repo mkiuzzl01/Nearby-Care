@@ -57,7 +57,7 @@ const Register = () => {
   };
   return (
     <div className="my-4">
-      <div className="flex items-center w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg lg:max-w-4xl">
+      <div className="flex items-center w-full max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
         <div className="hidden bg-cover lg:block lg:w-1/2">
           <img
             src="https://i.postimg.cc/wM4LPS2d/istockphoto-1408025598-612x612.png"

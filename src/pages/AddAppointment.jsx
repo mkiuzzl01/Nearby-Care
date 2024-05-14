@@ -37,7 +37,7 @@ const AddAppointment = () => {
   };
   return (
     <div
-      className="max-w-4xl m-auto my-8 border-2 rounded-lg p-4 bg-[#f2f2f2]"
+      className="max-w-4xl m-auto my-8 border-2 rounded-lg p-4 "
       data-aos="zoom-in"
     >
       {/* <Helmet>
@@ -116,7 +116,7 @@ const AddAppointment = () => {
                 <span className="dark:text-black">Description:</span>
               </label>
               <textarea
-                className="textarea"
+                className="textarea input-bordered"
                 name="Description"
                 id="Description"
                 cols="30"

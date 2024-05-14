@@ -3,7 +3,7 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
 const Booked_Appointment = () => {
-  const { user } = useAuth();
+  const { user, dark } = useAuth();
   const [booked, setBooked] = useState([]) || [];
 
   const getData = async () => {
@@ -59,8 +59,8 @@ const Booked_Appointment = () => {
                 <td>$ {book?.consultation_Cost}</td>
                 <td>{book?.user?.instruction}</td>
                 <td>{book?.user?.date}</td>
-                <th>
-                  <button className={book?.user?.status === "Complete" ? 'btn bg-green-400 btn-xs':book?.user?.status === 'Working'?'btn bg-yellow-600 btn-xs':'btn btn-xs bg-gray-200'}>
+                <th> 
+                  <button className={book?.user?.status === "Complete" ? 'btn text-black bg-green-400 btn-xs':book?.user?.status === 'Working'?'btn bg-yellow-500 text-black btn-xs':'btn btn-xs text-black bg-gray-200'}>
                     {book?.user?.status}
                   </button>
                 </th>

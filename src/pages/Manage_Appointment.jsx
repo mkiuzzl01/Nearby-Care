@@ -4,15 +4,12 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Manage_Appointment = () => {
   const { user, errorToast } = useAuth();
   const [services, setServices] = useState([])
-  // console.log(services);
-  const [data, setData] = useState({});
-  const navigate = useNavigate();
-
+  
   const getData = async () => {
     const data = await axios.get(
       `${import.meta.env.VITE_API_URL}/Manage_Appointment/${user?.email}`
@@ -22,6 +19,7 @@ const Manage_Appointment = () => {
   useEffect(() => {
     getData();
   }, [user?.email]);
+
 
   const handleDelete = async (_id) => {
     try {
@@ -55,56 +53,45 @@ const Manage_Appointment = () => {
     }
   };
 
-  const handleEdit = async (_id) => {
-    try {
-      const { data } = await axios.get(
-        `http://localhost:5000/View_Details/${_id}`
-      );
-      return setData(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const expertise = form.expertise.value;
-    const doctorEmail = form.email.value;
-    const doctorName = form.name.value;
-    const consultation_cost = form.cost.value;
-    const description = form.description.value;
-    const location = form.location.value;
-    const photo = form.image.value;
-    const updateInfo = {
-      doctorName,
-      doctorEmail,
-      expertise,
-      location,
-      photo,
-      consultation_cost,
-      description,
-    };
+  //   e.preventDefault();
+  //   const form = e.target;
+  //   const expertise = form.expertise.value;
+  //   const doctorEmail = form.email.value;
+  //   const doctorName = form.name.value;
+  //   const consultation_cost = form.cost.value;
+  //   const description = form.description.value;
+  //   const location = form.location.value;
+  //   const photo = form.image.value;
+  //   const updateInfo = {
+  //     doctorName,
+  //     doctorEmail,
+  //     expertise,
+  //     location,
+  //     photo,
+  //     consultation_cost,
+  //     description,
+  //   };
 
-    try {
-      const info = await axios.put(
-        `http://localhost:5000/Update_Appointment/${data._id}`,
-        updateInfo
-      );
-    //   console.log(info.data);
-      if(info.data.modifiedCount>0){
-        Swal.fire({
-            title: "Updated!",
-            text: "Appointment has been Updated.",
-            icon: "success",
-          });
-          getData();
-          form.reset();
-        navigate('/Manage_Appointment');
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  //   try {
+  //     const info = await axios.put(
+  //       `http://localhost:5000/Update_Appointment/${data._id}`,
+  //       updateInfo
+  //     );
+  //   //   console.log(info.data);
+  //     if(info.data.modifiedCount>0){
+  //       Swal.fire({
+  //           title: "Updated!",
+  //           text: "Appointment has been Updated.",
+  //           icon: "success",
+  //         });
+  //         getData();
+  //         form.reset();
+  //       navigate('/Manage_Appointment');
+  //     }
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
 
   return (
     <div>
@@ -147,21 +134,17 @@ const Manage_Appointment = () => {
                 </td>
                 <td>
                   <p className="">
-                    {service.doctorName} {service.description}
+                    {service.doctorName} {service?.description.substring(0, 30)} .....
                   </p>
                 </td>
                 <th>
                   <div className="flex flex-col items-center space-y-4">
-                    <button
-                      onClick={() => {
-                        document.getElementById("my_modal_3").showModal();
-                        handleEdit(service._id)
-                      }}
+                    <Link to={`/Update_Appointment/${service._id}`}><button
                       title="Edit"
                       className="text-xl text-green-600"
                     >
                       <FaRegEdit />
-                    </button>
+                    </button></Link>
                     <button
                       title="Delete"
                       onClick={() => handleDelete(service._id)}
@@ -175,137 +158,6 @@ const Manage_Appointment = () => {
             ))}
           </tbody>
         </table>
-        {/* modal */}
-        <dialog id="my_modal_3" className="modal">
-          <div className="modal-box lg:w-1/2 lg:max-w-5xl">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
-            </form>
-            <form onSubmit={handleSubmit}>
-              <h1 className="text-center text-3xl font-semibold my-3">
-                Location
-              </h1>
-              <div className="flex justify-center">
-                <img src={data.photo} alt="" className="lg:w-1/4 h-1/4" />
-              </div>
-              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 p-4">
-                <div className="form-control">
-                  <label className="label">
-                    <span className="block text-sm font-medium ">
-                      Your Name
-                    </span>
-                  </label>
-                  <input
-                    defaultValue={data.doctorName}
-                    type="text"
-                    placeholder="Enter Your Name"
-                    className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
-                    name="name"
-                  />
-                </div>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="block text-sm font-medium">
-                      Your Email
-                    </span>
-                  </label>
-                  <input
-                    defaultValue={data.doctorEmail}
-                    type="email"
-                    disabled
-                    placeholder="Enter Your Email"
-                    className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
-                    name="email"
-                  />
-                </div>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="block text-sm font-medium ">
-                      Expertise Name
-                    </span>
-                  </label>
-                  <select
-                    defaultValue={data.expertise}
-                    name="expertise"
-                    id="expertise"
-                    required
-                    className="select select-bordered join-item"
-                  >
-                    <option value="General Medicine">General Medicine</option>
-                    <option value="Cardiology">Cardiology</option>
-                    <option value="Neurology">Neurology</option>
-                    <option value="Orthopedics">Orthopedics</option>
-                    <option value="Surgery">Surgery</option>
-                    <option value="Gastroenterology">Gastroenterology</option>
-                  </select>
-                </div>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="block text-sm font-medium ">
-                      Appointment Cost
-                    </span>
-                  </label>
-                  <input
-                    defaultValue={data.consultation_cost}
-                    placeholder="Appointment Cost"
-                    type="text"
-                    className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
-                    name="cost"
-                  />
-                </div>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="block text-sm font-medium">Location</span>
-                  </label>
-                  <input
-                    defaultValue={data.location}
-                    type="text"
-                    placeholder="Enter Your Location"
-                    className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
-                    name="location"
-                  />
-                </div>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="block text-sm font-medium">Image URL</span>
-                  </label>
-                  <input
-                    defaultValue={data.photo}
-                    type="text"
-                    placeholder="Enter Image URL"
-                    className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
-                    name="image"
-                  />
-                </div>
-                <div className="form-control lg:col-span-2">
-                  <label className="label">
-                    <span className="block text-sm font-medium ">
-                      Description
-                    </span>
-                  </label>
-                  <textarea
-                    defaultValue={data.description}
-                    placeholder="Enter Your Description"
-                    name="description"
-                    cols="30"
-                    rows="10"
-                    className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
-                  ></textarea>
-                </div>
-              </div>
-              <div className="my-2">
-                <input
-                  type="submit"
-                  className="btn w-full bg-sky-300"
-                  value="Update"
-                />
-              </div>
-            </form>
-          </div>
-        </dialog>
       </div> :
       <div>
         <h1 className="text-center text-3xl font-bold pt-32">You are not add any Appointment</h1>
