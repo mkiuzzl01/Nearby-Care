@@ -7,6 +7,7 @@ import { GrTechnology } from "react-icons/gr";
 import Contact_Us from "../Contact_Us/Contact_Us";
 import { RiTeamLine } from "react-icons/ri";
 import Why_use from "../Why_Use/Why_use";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const loadServices = useLoaderData() || [];
@@ -14,11 +15,14 @@ const Home = () => {
   const services = loadServices.slice(0, 6);
   return (
     <div>
+      <Helmet>
+        <title>Nearby Care | Home</title>
+      </Helmet>
       <div className="my-4">
         <Slider></Slider>
       </div>
       {/* This is About Us Secti  on */}
-      <div className="flex flex-col my-20 items-center lg:flex-row lg:justify-between">
+      <div className="flex flex-col my-20 items-center lg:flex-row lg:justify-between rounded-xl  shadow-lg shadow-indigo-500/50">
         <div className="1/2">
           <img src="https://i.postimg.cc/1Rjm7n7L/about3.jpg" alt="" />
         </div>

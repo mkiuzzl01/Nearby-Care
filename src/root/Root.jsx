@@ -10,7 +10,7 @@ const Root = () => {
           <nav className="sticky top-0 z-10">
             <Navbar></Navbar>
           </nav>
-        <main className="min-h-[calc(100vh-270px)]">
+        <main className="min-h-[calc(100vh-270px)] px-2 lg:px-0">
           <Outlet></Outlet>
           <ToastContainer limit={3} autoClose={1000}/>
         </main>

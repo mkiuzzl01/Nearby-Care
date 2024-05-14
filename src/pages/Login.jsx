@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth";
 import { useState } from "react";
 import { LuEyeOff } from "react-icons/lu";
 import { FiEye } from "react-icons/fi";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
@@ -15,6 +16,7 @@ const Login = () => {
     logInWithGithub,
     successToast,
     errorToast,
+    dark,
   } = useAuth();
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -55,8 +57,11 @@ const Login = () => {
   };
   return (
     <div className="my-4">
-      <div className="flex items-center w-full max-w-sm mx-auto overflow-hidden rounded-lg  lg:max-w-4xl">
-        <div className="hidden bg-cover lg:block lg:w-1/2">
+      <Helmet>
+        <title>Nearby Care | Login</title>
+      </Helmet>
+      <div className={ dark?`flex items-center w-full max-w-sm mx-auto overflow-hidden rounded-lg bg-gray-800 lg:max-w-6xl p-10` :`flex items-center w-full max-w-sm mx-auto overflow-hidden rounded-lg  bg-gray-600 text-white lg:max-w-6xl p-10`}>
+        <div className="hidden bg-cover lg:block lg:w-2/6">
           <img src="https://i.postimg.cc/GhwPnQ3G/login.png" alt="" />
         </div>
 
@@ -124,7 +129,7 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Email"
-                className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 "
+                className={dark? `input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300`:`tex-b input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 text-black `}
                 name="email"
                 required
               />
@@ -138,13 +143,13 @@ const Login = () => {
                 <input
                   type={showPass ? "text" : "password"}
                   placeholder="Password"
-                  className="grow"
+                  className={dark? `grow` : 'grow text-black'}
                   name="password"
                   required
                 />
                 <div>
                   <span onClick={() => setShowPass(!showPass)}>
-                    {showPass ? <LuEyeOff /> : <FiEye />}
+                    {showPass ? <LuEyeOff className={dark? undefined :`text-black`} /> : <FiEye  className={dark? undefined :`text-black`}/>}
                   </span>
                 </div>
               </label>
@@ -164,7 +169,7 @@ const Login = () => {
             <div className="border-2 p-2">
               <p className="text-sm">
                 Don't have an account?{" "}
-                <Link to="/Register" className="text-violet-700">
+                <Link to="/Register" className="text-green-200">
                   Create One
                 </Link>
               </p>

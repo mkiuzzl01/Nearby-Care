@@ -50,7 +50,7 @@ const Update_Appointment = () => {
 
     return (
         <div className="py-4">
-            <form onSubmit={handleSubmit} className="border-2 p-4 rounded-lg">
+            <form onSubmit={handleSubmit} className="border-2 p-4  m-auto lg:w-3/4 rounded-lg">
               <h1 className="text-center text-3xl font-semibold my-3 text-green-400">
                 Update Your Provided Information
               </h1>
@@ -157,16 +157,16 @@ const Update_Appointment = () => {
                     defaultValue={update.description}
                     placeholder="Enter Your Description"
                     name="description"
-                    cols="30"
-                    rows="10"
-                    className="input input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+                    cols="5"
+                    rows="5"
+                    className="textarea input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
                   ></textarea>
                 </div>
               </div>
               <div className="my-2">
                 <input
                   type="submit"
-                  className="btn w-full bg-sky-300"
+                  className="btn w-full text-black hover:text-white bg-green-300"
                   value="Update"
                 />
               </div>

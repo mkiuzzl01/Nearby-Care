@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const Service_To_Do = () => {
   const { user, errorToast, warningToast } = useAuth();
@@ -76,6 +77,9 @@ const Service_To_Do = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Nearby Care | To Do Services</title>
+      </Helmet>
       {booked.length > 0 ? (
         <div className="overflow-x-auto pt-10">
           <h1 className="text-center text-2xl font-bold my-4">
@@ -179,8 +183,8 @@ const Service_To_Do = () => {
         </div>
       ) : (
         <div>
-          <h1 className="text-center text-3xl font-bold mt-32">
-            Not Available Patient Appointment
+          <h1 className="text-center text-6xl mt-32">
+           Empty
           </h1>
         </div>
       )}

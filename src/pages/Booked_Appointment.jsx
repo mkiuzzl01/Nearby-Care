@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 const Booked_Appointment = () => {
   const { user, dark } = useAuth();
@@ -18,6 +19,9 @@ const Booked_Appointment = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Nearby Care | Booked Appointment</title>
+      </Helmet>
       {
         booked.length > 0? <div className="overflow-x-auto">
         <h1 className="text-center text-2xl font-bold my-4">Your Booked Information</h1>
@@ -60,7 +64,7 @@ const Booked_Appointment = () => {
                 <td>{book?.user?.instruction}</td>
                 <td>{book?.user?.date}</td>
                 <th> 
-                  <button className={book?.user?.status === "Complete" ? 'btn text-black bg-green-400 btn-xs':book?.user?.status === 'Working'?'btn bg-yellow-500 text-black btn-xs':'btn btn-xs text-black bg-gray-200'}>
+                  <button className={book?.user?.status === "Complete" ? 'btn text-black bg-green-400 btn-xs':book?.user?.status === 'Working'?'btn bg-yellow-500 text-black btn-xs':'btn btn-xs text-black bg-gray-200 animate-pulse'}>
                     {book?.user?.status}
                   </button>
                 </th>
@@ -70,7 +74,7 @@ const Booked_Appointment = () => {
         </table>
       </div> :
       <div>
-      <h1 className="text-center text-3xl font-bold mt-32">You are not Book any Appointment</h1>
+      <h1 className="text-center text-6xl mt-32">Empty</h1>
     </div>
       }
     </div>

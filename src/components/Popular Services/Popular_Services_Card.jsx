@@ -15,9 +15,9 @@ const Popular_Services_Card = ({ service, All_ServicesPage }) => {
   } = service;
   return (
     <div>
-      <div className={All_ServicesPage ? "visible" : "hidden"}>
-        <div className="card lg:card-side bg-base-100 shadow-xl">
-          <figure className="lg:w-1/2 m-auto">
+      <div className={All_ServicesPage ? "visible delay-150 hover:-translate-y-1 hover:scale-110 duration-1000 hover:my-10" : "hidden"}>
+        <div className="card lg:card-side border-2 bg-base-100 shadow-xl">
+          <figure className="lg:w-1/2 m-auto transition duration-150 ease-in-out">
             <img src={photo} alt={expertise} className="lg:w-[700px] lg:h-96" />
           </figure>
           <div className="card-body lg:w-1/2 m-auto">
@@ -45,8 +45,8 @@ const Popular_Services_Card = ({ service, All_ServicesPage }) => {
           </div>
         </div>
       </div>
-      <div className={All_ServicesPage ? "hidden" : "visible"}>
-        <div className="card bg-base-100 shadow-xl">
+      <div className={All_ServicesPage ? "hidden" : "visible hover:-translate-y-5 duration-1000"}>
+        <div className="card bg-base-100 border-2 shadow-xl">
           <figure>
             <img src={photo} alt={expertise} className="w-full h-64" />
           </figure>

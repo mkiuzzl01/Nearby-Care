@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { FaArrowRightLong } from "react-icons/fa6";
 const Slider = () => {
-    const {user,warningToast} = useAuth();
+    const {user,warningToast,dark} = useAuth();
 
   return (
     <div>
@@ -57,7 +57,7 @@ const Slider = () => {
                     
                 </Link>
                 <Link to="/Services" >
-                    <button className="flex items-center btn btn-outline"><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
+                    <button className={dark?`flex items-center btn bg-white text-black border-none hover:text-white`:`flex items-center btn btn-outline`}><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
                 </Link>
               </div>
             </div>
@@ -65,7 +65,7 @@ const Slider = () => {
               <img
                 src="https://i.postimg.cc/SKCkJgy4/home-slider1.png"
                 alt="Residential Image Coming soon"
-                className=""
+                className="w-[370px] md:w-full"
               />
             </div>
           </div>
@@ -87,7 +87,7 @@ const Slider = () => {
                     
                 </Link>
                 <Link to="/Services" >
-                    <button className="flex items-center btn btn-outline btn-primary"><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
+                    <button className={dark ? "flex items-center btn  btn-primary":"flex items-center btn btn-outline btn-primary"}><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
                 </Link>
               </div>
             </div>
@@ -95,7 +95,7 @@ const Slider = () => {
               <img
                 src="https://i.postimg.cc/7ZCxyxdf/home-slider2.png"
                 alt="Residential Image Coming soon"
-                className=""
+                className="w-[412px] md:w-full"
               />
             </div>
           </div>
@@ -117,7 +117,7 @@ const Slider = () => {
                     
                 </Link>
                 <Link to="/Services" >
-                    <button className="flex items-center btn btn-outline btn-secondary"><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
+                    <button className={dark ?"flex items-center btn  btn-secondary":"flex items-center btn btn-outline btn-secondary"}><span>Get Appointment</span><span><FaArrowRightLong /></span></button>
                 </Link>
               </div>
             </div>
@@ -125,7 +125,7 @@ const Slider = () => {
               <img
                 src="https://i.postimg.cc/GhgcNBMW/home-slider3.png"
                 alt="Residential Image Coming soon"
-                className=""
+                className="w-[320px] md:w-full"
               />
             </div>
           </div>

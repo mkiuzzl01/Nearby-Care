@@ -11,14 +11,15 @@ const Navbar = () => {
     localStorage.setItem("theme", theme);
     const localTheme = localStorage.getItem("theme");
     document.querySelector("html").setAttribute("data-theme", localTheme);
-  }, [theme]);
+  }, [theme,dark]);
 
   const handleToggle = (e) => {
     if (e.target.checked) {
-      setTheme("dim");
-      setDark(true);
-    } else {
       setTheme("light");
+      setDark(false);
+    } else {
+      setDark(true);
+      setTheme("dim");
     }
   };
 
@@ -56,7 +57,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div>
+    <div className=" rounded-b-lg shadow-lg shadow-cyan-200/50">
       <div className={ dark?`navbar bg-base-300 h-20 rounded-b-lg shadow-md`: `navbar bg-[#f2f2f2] h-20 rounded-b-lg shadow-md`}>
         <div className="navbar-start">
           <div className="dropdown">
@@ -118,7 +119,7 @@ const Navbar = () => {
               <input
                 onChange={handleToggle}
                 type="checkbox"
-                checked={theme==='light'? false: true}
+                checked={theme==='light'? true : false}
                 className="theme-controller"
               />
 

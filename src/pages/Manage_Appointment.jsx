@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Manage_Appointment = () => {
   const { user, errorToast } = useAuth();
@@ -95,6 +96,9 @@ const Manage_Appointment = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Nearby Care | Manage Appointment</title>
+      </Helmet>
       {services.length > 0? <div className="overflow-x-auto">
         <h1 className="text-2xl font-bold text-center my-4">Your Appointment Information</h1>
         <table className="table">
@@ -160,7 +164,7 @@ const Manage_Appointment = () => {
         </table>
       </div> :
       <div>
-        <h1 className="text-center text-3xl font-bold pt-32">You are not add any Appointment</h1>
+        <h1 className="text-center text-6xl pt-32">Empty</h1>
       </div>
       }
     </div>

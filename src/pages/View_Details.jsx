@@ -3,12 +3,13 @@ import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const View_Details = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const info = useLoaderData();
-  const { user, errorToast } = useAuth();
+  const { user, errorToast,dark } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,9 +73,12 @@ const View_Details = () => {
   };
   return (
     <div className="lg:flex">
+      <Helmet>
+        <title>Nearby Care | View Details </title>
+      </Helmet>
       <div className="my-4 lg:w-1/2">
         <div className="w-full max-w-md px-8 py-4 mt-16 rounded-lg shadow-lg border-2">
-          <h1 className="font-serif text-[#004d99]">Doctor information:</h1>
+          <h1 className={dark? `font-serif text-green-200`:`font-serif text-[#004d99]`}>Doctor information:</h1>
           <div className="flex justify-center -mt-16 md:justify-end">
             <img
               src={info.doctorImage}
@@ -149,7 +153,7 @@ const View_Details = () => {
             </button>
           </form>
           <form onSubmit={handleSubmit}>
-            <h1 className="text-center text-3xl font-semibold my-3">Booking</h1>
+            <h1 className="text-center text-3xl font-semibold my-3">Book Appointment !</h1>
             <div className="flex justify-center">
               <img src={info?.photo} alt="" className="lg:w-1/4 h-1/4" />
             </div>
@@ -287,7 +291,7 @@ const View_Details = () => {
             <div className="my-2">
               <input
                 type="submit"
-                className="btn w-full bg-sky-300"
+                className={dark?`btn w-full bg-green-700`:`btn w-full bg-sky-300`}
                 value="Book Appointment"
               />
             </div>

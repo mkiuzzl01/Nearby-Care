@@ -4,6 +4,7 @@ import { FiEye } from "react-icons/fi";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
@@ -16,6 +17,7 @@ const Register = () => {
     setUser,
     user,
     successToast,
+    dark
   } = useAuth();
 
   const handleRegister = async (e) => {
@@ -57,8 +59,11 @@ const Register = () => {
   };
   return (
     <div className="my-4">
-      <div className="flex items-center w-full max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-4xl">
-        <div className="hidden bg-cover lg:block lg:w-1/2">
+      <Helmet>
+        <title>Nearby Care | Registration </title>
+      </Helmet>
+      <div className={ dark? `flex items-center w-full max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-6xl p-10 bg-gray-800`:`flex items-center w-full max-w-sm mx-auto overflow-hidden rounded-lg lg:max-w-6xl p-10 bg-gray-600 text-white`}>
+        <div className="hidden bg-cover lg:block lg:w-2/6">
           <img
             src="https://i.postimg.cc/wM4LPS2d/istockphoto-1408025598-612x612.png"
             alt=""
@@ -88,7 +93,7 @@ const Register = () => {
               <input
                 type="text"
                 placeholder="Name"
-                className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+                className={dark? `input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300`:`tex-b input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 text-black `}
                 name="name"
                 required
               />
@@ -100,7 +105,7 @@ const Register = () => {
               <input
                 type="email"
                 placeholder="Email"
-                className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 "
+                className={dark? `input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300`:`tex-b input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 text-black `}
                 name="email"
                 required
               />
@@ -114,7 +119,7 @@ const Register = () => {
               <input
                 type="text"
                 placeholder="Photo URL"
-                className="input w-full  input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+                className={dark? `input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300`:`tex-b input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 text-black `}
                 name="photo"
               />
             </div>
@@ -126,13 +131,13 @@ const Register = () => {
                 <input
                   type={showPass ? "text" : "password"}
                   placeholder="Password"
-                  className="grow"
+                  className={dark? `grow` : 'grow text-black'}
                   name="password"
                   required
                 />
                 <div>
                   <span onClick={() => setShowPass(!showPass)}>
-                    {showPass ? <LuEyeOff /> : <FiEye />}
+                  {showPass ? <LuEyeOff className={dark? undefined :`text-black`} /> : <FiEye  className={dark? undefined :`text-black`}/>}
                   </span>
                 </div>
               </label>
@@ -153,7 +158,7 @@ const Register = () => {
             <div className="border-2 p-2">
               <p className="text-sm">
                 Already have an account?{" "}
-                <Link to="/Login" className="text-violet-700">
+                <Link to="/Login" className="text-green-300">
                   Login
                 </Link>
               </p>

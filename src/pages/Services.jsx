@@ -1,6 +1,7 @@
 import Popular_Services_Card from "../components/Popular Services/Popular_Services_Card";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 
 const Services = () => {
   const [search, setSearch] = useState("");
@@ -24,7 +25,10 @@ const Services = () => {
   };
 
   return (
-    <div className="pt-4">
+    <div className="py-4">
+      <Helmet>
+        <title>Nearby Care | Services </title>
+      </Helmet>
       <div className="my-4">
         <label className="input lg:w-1/2 input-bordered flex items-center gap-2">
           <input

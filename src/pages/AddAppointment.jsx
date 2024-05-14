@@ -2,10 +2,10 @@ import { FaBriefcaseMedical } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const AddAppointment = () => {
-    const {user} = useAuth();
-
+    const {user,dark} = useAuth();
   const handleAppointment = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -18,7 +18,6 @@ const AddAppointment = () => {
     const doctorEmail = user?.email;
     const doctorImage = user?.photoURL;
     const doctorInfo = {doctorName,doctorEmail,doctorImage,expertise,location,photo,consultation_cost,description};
-    console.table(doctorInfo);
 
     try {
       const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/Add_Appointment`,doctorInfo);
@@ -37,17 +36,17 @@ const AddAppointment = () => {
   };
   return (
     <div
-      className="max-w-4xl m-auto my-8 border-2 rounded-lg p-4 "
+      className={ dark ? `max-w-4xl m-auto my-8 border-2 rounded-lg p-4 bg-gray-500 text-white`:`max-w-4xl m-auto my-8 border-2 rounded-lg p-4 bg-sky-600 text-white`}
       data-aos="zoom-in"
     >
-      {/* <Helmet>
+      <Helmet>
           <title>Nearby-Care | Add Appointment </title>
-      </Helmet> */}
+      </Helmet>
       <div>
         <div className="space-y-4 mb-4">
           <h1 className="text-4xl flex space-x-2 justify-center items-center">
             <span>
-              <FaBriefcaseMedical className="text-[#004d99]" />
+              <FaBriefcaseMedical className="text-white" />
             </span>
             <span>Add Appointment</span>
           </h1>
@@ -56,12 +55,12 @@ const AddAppointment = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="form-control">
               <label htmlFor="Expertise">
-                <span className="dark:text-black">Expertise Name:</span>
+                <span className="">Expertise Name:</span>
               </label>
               <select
                 name="Expertise"
                 id="Expertise"
-                className="select select-bordered join-item"
+                className={dark? `select select-bordered join-item`:` text-black select select-bordered join-item`}
               >
                 <option selected disabled>Choose</option>
                 <option value="General Medicine">General Medicine</option>
@@ -74,7 +73,7 @@ const AddAppointment = () => {
             </div>
             <div className="form-control">
               <label htmlFor="Location">
-                <span className="dark:text-black">Location:</span>
+                <span className="">Location:</span>
               </label>
               <input
                 required
@@ -82,12 +81,12 @@ const AddAppointment = () => {
                 type="text"
                 placeholder="Location"
                 id="Location"
-                className="input input-bordered w-full"
+                className={dark? `input input-bordered w-full`:`input text-black input-bordered w-full`}
               />
             </div>
             <div className="form-control">
               <label htmlFor="Photo">
-                <span className="dark:text-black">Photo URL:</span>
+                <span className="">Photo URL:</span>
               </label>
               <input
                 required
@@ -95,12 +94,13 @@ const AddAppointment = () => {
                 type="text"
                 placeholder="Photo URL"
                 id="Photo"
-                className="input input-bordered w-full"
+                className={dark? `input input-bordered w-full`:`input text-black input-bordered w-full`}
+
               />
             </div>
             <div className="form-control">
               <label htmlFor="Consultation_Cost">
-                <span className="dark:text-black">Consultation Cost:</span>
+                <span className="">Consultation Cost:</span>
               </label>
               <input
                 required
@@ -108,15 +108,16 @@ const AddAppointment = () => {
                 type="text"
                 placeholder="Consultation Cost"
                 id="Consultation_Cost"
-                className="input input-bordered w-full"
+                className={dark? `input input-bordered w-full`:`input text-black input-bordered w-full`}
+
               />
             </div>
             <div className="form-control lg:col-span-2">
               <label htmlFor="description">
-                <span className="dark:text-black">Description:</span>
+                <span className="">Description:</span>
               </label>
               <textarea
-                className="textarea input-bordered"
+                className={dark? `textarea input-bordered`:`textarea input-bordered text-black`}
                 name="Description"
                 id="Description"
                 cols="30"
@@ -129,7 +130,7 @@ const AddAppointment = () => {
               <input
                 required
                 type="submit"
-                className="btn text-white bg-[#004d99] w-full hover:bg-[#7fb800] dark:hover:text-white"
+                className="btn text-white hover:bg-[#004d99] w-full bg-[#7fb800] dark:hover:text-white"
                 value="Add"
               />
             </div>
