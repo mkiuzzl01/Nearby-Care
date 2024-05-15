@@ -36,8 +36,7 @@ const AddAppointment = () => {
   };
   return (
     <div
-      className={ dark ? `max-w-4xl m-auto my-8 border-2 rounded-lg p-4 bg-gray-500 text-white`:`max-w-4xl m-auto my-8 border-2 rounded-lg p-4 bg-sky-600 text-white`}
-      data-aos="zoom-in"
+      className={ dark ? `max-w-4xl m-auto my-8 border-2 rounded-lg p-4 bg-gray-500`:`max-w-4xl m-auto my-8 border-2 rounded-lg p-4 bg-sky-600`}
     >
       <Helmet>
           <title>Nearby-Care | Add Appointment </title>
@@ -48,19 +47,19 @@ const AddAppointment = () => {
             <span>
               <FaBriefcaseMedical className="text-white" />
             </span>
-            <span>Add Appointment</span>
+            <span className="text-white">Add Appointment</span>
           </h1>
         </div>
         <form onSubmit={handleAppointment} className="form-control p-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="form-control">
               <label htmlFor="Expertise">
-                <span className="">Expertise Name:</span>
+                <span className="text-white">Expertise Name:</span>
               </label>
               <select
                 name="Expertise"
                 id="Expertise"
-                className={dark? `select select-bordered join-item`:` text-black select select-bordered join-item`}
+                className="select select-bordered join-item"
               >
                 <option selected disabled>Choose</option>
                 <option value="General Medicine">General Medicine</option>
@@ -73,7 +72,7 @@ const AddAppointment = () => {
             </div>
             <div className="form-control">
               <label htmlFor="Location">
-                <span className="">Location:</span>
+                <span className="text-white">Location:</span>
               </label>
               <input
                 required
@@ -81,12 +80,12 @@ const AddAppointment = () => {
                 type="text"
                 placeholder="Location"
                 id="Location"
-                className={dark? `input input-bordered w-full`:`input text-black input-bordered w-full`}
+                className="input input-bordered w-full"
               />
             </div>
             <div className="form-control">
               <label htmlFor="Photo">
-                <span className="">Photo URL:</span>
+                <span className="text-white">Photo URL:</span>
               </label>
               <input
                 required
@@ -94,13 +93,13 @@ const AddAppointment = () => {
                 type="text"
                 placeholder="Photo URL"
                 id="Photo"
-                className={dark? `input input-bordered w-full`:`input text-black input-bordered w-full`}
+                className="input input-bordered w-full"
 
               />
             </div>
             <div className="form-control">
               <label htmlFor="Consultation_Cost">
-                <span className="">Consultation Cost:</span>
+                <span className="text-white">Consultation Cost:</span>
               </label>
               <input
                 required
@@ -108,16 +107,16 @@ const AddAppointment = () => {
                 type="text"
                 placeholder="Consultation Cost"
                 id="Consultation_Cost"
-                className={dark? `input input-bordered w-full`:`input text-black input-bordered w-full`}
+                className="input input-bordered w-full"
 
               />
             </div>
             <div className="form-control lg:col-span-2">
               <label htmlFor="description">
-                <span className="">Description:</span>
+                <span className="text-white">Description:</span>
               </label>
               <textarea
-                className={dark? `textarea input-bordered`:`textarea input-bordered text-black`}
+                className="textarea input-bordered"
                 name="Description"
                 id="Description"
                 cols="30"
@@ -130,7 +129,7 @@ const AddAppointment = () => {
               <input
                 required
                 type="submit"
-                className="btn text-white hover:bg-[#004d99] w-full bg-[#7fb800] dark:hover:text-white"
+                className="btn hover:bg-[#004d99] w-full border-none bg-[#7fb800] dark:hover:text-white"
                 value="Add"
               />
             </div>

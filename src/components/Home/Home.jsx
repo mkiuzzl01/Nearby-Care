@@ -8,17 +8,23 @@ import Contact_Us from "../Contact_Us/Contact_Us";
 import { RiTeamLine } from "react-icons/ri";
 import Why_use from "../Why_Use/Why_use";
 import { Helmet } from "react-helmet";
+import Aos from "aos";
+import 'aos/dist/aos.css'
+import { useEffect } from "react";
 
 const Home = () => {
   const loadServices = useLoaderData() || [];
   // console.log(loadServices);
   const services = loadServices.slice(0, 6);
+  useEffect(()=>{
+    Aos.init({duration:1000});
+  },[])
   return (
     <div>
       <Helmet>
         <title>Nearby Care | Home</title>
       </Helmet>
-      <div className="my-4">
+      <div className="my-5">
         <Slider></Slider>
       </div>
       {/* This is About Us Secti  on */}
@@ -27,7 +33,7 @@ const Home = () => {
           <img src="https://i.postimg.cc/1Rjm7n7L/about3.jpg" alt="" />
         </div>
         <div className="1/2 space-y-4 lg:ms-12">
-          <div className="text-center lg:text-start">
+          <div className="text-center mt-4 lg:mt-4 lg:text-start">
             <h1 className="text-3xl md:text-4xl font-bold">About Us</h1>
             <p className="text-2xl md:text-3xl">
               Welcome to Our Nearby Care....
@@ -35,7 +41,7 @@ const Home = () => {
           </div>
           <div className="flex items-center space-x-4">
             <div>
-              <FaUserDoctor className="text-8xl border-8 border-sky-400 hover:border-green-400 rounded-full p-2" />
+              <FaUserDoctor className="text-8xl mx-2 lg:mx-0 border-8 border-sky-400 hover:border-green-400 rounded-full p-2" />
             </div>
             <div>
               <h1 className="text-2xl font-medium">Certified Doctors:</h1>
@@ -51,7 +57,7 @@ const Home = () => {
 
           <div className="flex items-center space-x-4">
             <div>
-              <Ri24HoursLine className="text-8xl border-8 border-sky-400 hover:border-green-400 rounded-full p-2" />
+              <Ri24HoursLine className="text-8xl mx-2 lg:mx-0 border-8 border-sky-400 hover:border-green-400 rounded-full p-2" />
             </div>
             <div>
               <h1 className="text-2xl font-medium">Emergency 24 Hours</h1>
@@ -66,7 +72,7 @@ const Home = () => {
 
           <div className="flex items-center space-x-4">
             <div className="">
-              <GrTechnology className="text-8xl border-8 border-sky-400 hover:border-green-400 rounded-full p-2" />
+              <GrTechnology className="text-8xl mx-2 lg:mx-0 border-8 border-sky-400 hover:border-green-400 rounded-full p-2" />
             </div>
             <div>
               <h1 className="text-2xl font-medium">Modern Technology</h1>
@@ -104,7 +110,7 @@ const Home = () => {
             first step towards better health.
           </p>
         </div>
-        <div className="my-2 grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <div data-aos="fade-up" className="my-2 grid grid-cols-1 gap-4 lg:grid-cols-3">
           {services.map((service) => (
             <Popular_Services_Card
               key={service._id}
@@ -119,7 +125,9 @@ const Home = () => {
         </div>
 
         {/* why use to user Nearby Care website */}
+        <div data-aos="zoom-in">
         <Why_use></Why_use>
+        </div>
         {/* this is contact us section */}
         <Contact_Us></Contact_Us>
       </div>

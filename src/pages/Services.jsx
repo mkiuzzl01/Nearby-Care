@@ -2,11 +2,13 @@ import Popular_Services_Card from "../components/Popular Services/Popular_Servic
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Services = () => {
   const [search, setSearch] = useState("");
   const [services, setServices] = useState([]);
-  const [itemsPerPage,setItemsPerPage] = useState(4);
+  const [itemsPerPage,setItemsPerPage] = useState(6);
   const [count,setCount] = useState(0);
   const [currentPage,setCurrentPage] = useState(1);
   const All_ServicesPage = true;
@@ -14,7 +16,7 @@ const Services = () => {
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/All_Services?search=${search}&page=${currentPage}&size=${itemsPerPage}`
+        `${import.meta.env.VITE_API_URL}/All_Services?search=${search}&page=${currentPage}&size=${itemsPerPage}`
       );
       setServices(data);
     };
@@ -25,7 +27,7 @@ const Services = () => {
   useEffect(() => {
     const getCount = async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/Services_count?search=${search}`
+        `${import.meta.env.VITE_API_URL}/Services_count?search=${search}`
       );
       setCount(data.numbers);
     };
@@ -91,11 +93,11 @@ const Services = () => {
       </div>
       {/* pagination */}
          <div className="text-center my-20 space-x-4">
-          <button disabled={currentPage === 1} onClick={()=>handlePagination(currentPage-1)} className="btn">Prev</button>
+          <button disabled={currentPage === 1} onClick={()=>handlePagination(currentPage-1)} className="btn items-center"><span><FaArrowLeftLong className="text-blue-400 "/></span><span>Prev</span></button>
           {
             pages.map(page=> <button className={currentPage === page ?' btn bg-green-500':'btn'} onClick={()=>handlePagination(page)} key={page}>{page}</button>)
           }
-          <button disabled={currentPage === numberOfPages} onClick={()=>handlePagination(currentPage + 1)}  className="btn">Next</button>
+          <button disabled={currentPage === numberOfPages} onClick={()=>handlePagination(currentPage + 1)}  className="btn items-center"><span>Next</span><span><FaArrowRightLong className="text-blue-400 "/></span></button>
          </div>
     </div>
   );

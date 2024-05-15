@@ -22,7 +22,6 @@ const Navbar = () => {
       setTheme("dim");
     }
   };
-
   const handleLogout = () => {
     try {
       logOut();
@@ -58,7 +57,7 @@ const Navbar = () => {
   );
   return (
     <div className=" rounded-b-lg shadow-lg shadow-cyan-200/50">
-      <div className={ dark?`navbar bg-base-300 h-20 rounded-b-lg shadow-md`: `navbar bg-[#f2f2f2] h-20 rounded-b-lg shadow-md`}>
+      <div className={ dark?`navbar bg-base-200 h-20 rounded-b-lg shadow-md`:`navbar bg-base-200  h-20 rounded-b-lg shadow-md `}>
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -144,6 +143,8 @@ const Navbar = () => {
           </div>
           {user ? (
             <div className="flex items-center space-x-2 z-10">
+              <div className="relative flex ">
+              <span className={ user ?`visible animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75`:`hidden`}></span>
               <div className="tooltip tooltip-accent tooltip-bottom lg:tooltip-left">
                 {" "}
                 <a
@@ -163,6 +164,7 @@ const Navbar = () => {
                   />
                 </a>
                 <Tooltip id="my-tooltip" />
+              </div>
               </div>
               <button
                 onClick={handleLogout}

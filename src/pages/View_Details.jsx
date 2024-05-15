@@ -81,7 +81,7 @@ const View_Details = () => {
           <h1 className={dark? `font-serif text-green-200`:`font-serif text-[#004d99]`}>Doctor information:</h1>
           <div className="flex justify-center -mt-16 md:justify-end">
             <img
-              src={info.doctorImage}
+              src={info?.doctorImage?info.doctorImage:'https://i.postimg.cc/vTN8PMKb/blank-profile-picture-973460-1280.png'}
               alt=""
               className="object-cover w-32 h-32 border-2 border-blue-500 rounded-full"
             />

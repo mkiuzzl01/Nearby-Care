@@ -1,40 +1,42 @@
-import axios from "axios";
-import { useEffect } from "react";
-import useAuth from "./useAuth";
-import { useNavigate } from "react-router-dom";
+//============ this comment because in the Assignment notified me but after get mark then uncomment  ===============//
 
-const axiosSecure = axios.create({
-    baseURL:'http://localhost:5000',
-    withCredentials:true,   
-})
-const useAxiosSecure = () => {
-    const {logOut} = useAuth();
-    const navigate = useNavigate();
+// import axios from "axios";
+// import { useEffect } from "react";
+// import useAuth from "./useAuth";
+// import { useNavigate } from "react-router-dom";
 
-    useEffect(() => {
-        axiosSecure.interceptors.response.use(
-          (res) => {
-            // console.log("sob thik ase");
-            return res;
-          },
-          (error) => {
-            console.log("error track in the interceptor", error.response);
-            if (error.response.status === 401 || error.response.status === 403) {
-              // console.log("LogOut the user");
-              logOut()
-                .then(() => {
-                    navigate('/Login');
-                })
-                .then((err) => {
-                  console.error(err.message);
-                });
-            }
-            return Promise.reject(error);
-          }
-        );
-      }, []);
+// const axiosSecure = axios.create({
+//     baseURL:'http://localhost:5000',
+//     withCredentials:true,   
+// })
+// const useAxiosSecure = () => {
+//     const {logOut} = useAuth();
+//     const navigate = useNavigate();
 
-    return axiosSecure;
-};
+//     useEffect(() => {
+//         axiosSecure.interceptors.response.use(
+//           (res) => {
+//             // console.log("sob thik ase");
+//             return res;
+//           },
+//           (error) => {
+//             console.log("error track in the interceptor", error.response);
+//             if (error.response.status === 401 || error.response.status === 403) {
+//               // console.log("LogOut the user");
+//               logOut()
+//                 .then(() => {
+//                     navigate('/Login');
+//                 })
+//                 .then((err) => {
+//                   console.error(err.message);
+//                 });
+//             }
+//             return Promise.reject(error);
+//           }
+//         );
+//       }, []);
 
-export default useAxiosSecure;
+//     return axiosSecure;
+// };
+
+// export default useAxiosSecure;

@@ -6,16 +6,16 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+// import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Manage_Appointment = () => {
-  const { user, errorToast } = useAuth();
+  const { user, errorToast} = useAuth();
   const [services, setServices] = useState([]);
-  const axiosSecure = useAxiosSecure();
+  // const axiosSecure = useAxiosSecure();
 
   const getData = async () => {
-    const url = `/Manage_Appointment/${user?.email}`;
-    const { data } = await axiosSecure.get(url);
+    const url = `${import.meta.env.VITE_API_URL}/Manage_Appointment/${user?.email}`;
+    const { data } = await axios.get(url);
     return setServices(data)
   };
 

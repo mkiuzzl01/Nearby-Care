@@ -60,7 +60,7 @@ const Login = () => {
       <Helmet>
         <title>Nearby Care | Login</title>
       </Helmet>
-      <div className={ dark?`flex items-center w-full max-w-sm mx-auto overflow-hidden rounded-lg bg-gray-800 lg:max-w-6xl p-10` :`flex items-center w-full max-w-sm mx-auto overflow-hidden rounded-lg  bg-gray-600 text-white lg:max-w-6xl p-10`}>
+      <div className={ dark?`flex items-center w-full  mx-auto overflow-hidden rounded-lg bg-gray-800 lg:max-w-6xl p-10 ` :`flex items-center w-full mx-auto overflow-hidden rounded-lg  bg-gray-600 lg:max-w-6xl p-10`}>
         <div className="hidden bg-cover lg:block lg:w-2/6">
           <img src="https://i.postimg.cc/GhwPnQ3G/login.png" alt="" />
         </div>
@@ -68,7 +68,7 @@ const Login = () => {
         <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
           <div className="flex justify-center mx-auto"></div>
 
-          <p className="mt-3 text-4xl font-bold text-center ">Login</p>
+          <p className="mt-3 text-4xl font-bold text-center text-white">Login</p>
 
           <div
             onClick={handleWithGoogle}
@@ -95,26 +95,26 @@ const Login = () => {
               </svg>
             </div>
 
-            <button className="w-5/6 px-4 py-3 font-bold text-center">
+            <button className="w-5/6 px-4 py-3 font-bold text-center text-white">
               Sign in with Google
             </button>
           </div>
           <div
             onClick={handleWithGithub}
-            className="flex items-center justify-center mt-4 transition-colors duration-300 transform border rounded-l"
+            className="flex items-center text-white justify-center mt-4 transition-colors duration-300 transform border rounded-l"
           >
             <div className="px-4 py-2">
               <FaGithub className="text-2xl" />
             </div>
-            <div className="w-5/6 px-4 py-3 font-bold text-center">
+            <div className="w-5/6 px-4 py-3 font-bold text-center ">
               Login with Github
             </div>
           </div>
 
           <div className="flex items-center justify-between mt-4">
-            <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
+            <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
 
-            <span className="text-xs text-center text-gray-500 uppercase dark:text-gray-400 hover:underline">
+            <span className="text-xs text-center text-gray-100 uppercase dark:text-gray-400 hover:underline">
               or login with email
             </span>
 
@@ -124,32 +124,32 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <div className="form-control">
               <label className="label">
-                <span className="block mb-2 text-sm font-medium ">Email</span>
+                <span className="block mb-2 text-sm font-medium text-white">Email</span>
               </label>
               <input
                 type="email"
                 placeholder="Email"
-                className={dark? `input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300`:`tex-b input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 text-black `}
+                className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
                 name="email"
                 required
               />
             </div>
 
             <div className="form-control">
-              <span className="my-2 block mb-2 text-sm font-medium ">
+              <span className="my-2 block mb-2 text-sm font-medium text-white">
                 Password
               </span>
               <label className="input w-full input-bordered  flex items-center gap-2">
                 <input
                   type={showPass ? "text" : "password"}
                   placeholder="Password"
-                  className={dark? `grow` : 'grow text-black'}
+                  className={`grow`}
                   name="password"
                   required
                 />
                 <div>
                   <span onClick={() => setShowPass(!showPass)}>
-                    {showPass ? <LuEyeOff className={dark? undefined :`text-black`} /> : <FiEye  className={dark? undefined :`text-black`}/>}
+                    {showPass ? <LuEyeOff /> : <FiEye/>}
                   </span>
                 </div>
               </label>
@@ -157,7 +157,7 @@ const Login = () => {
 
             <div className="mt-6">
               <input
-                className="w-full btn bg-gray-600 text-white hover:bg-red-600"
+                className="w-full btn bg-gray-500 border-none text-white hover:bg-red-600"
                 type="submit"
                 value="Login"
               />
@@ -167,7 +167,7 @@ const Login = () => {
           <div className="flex items-center justify-between mt-4">
             <span className="w-1/6 border-b dark:border-gray-600"></span>
             <div className="border-2 p-2">
-              <p className="text-sm">
+              <p className="text-sm text-white">
                 Don't have an account?{" "}
                 <Link to="/Register" className="text-green-200">
                   Create One
