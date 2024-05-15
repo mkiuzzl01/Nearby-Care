@@ -17,12 +17,14 @@ const Router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
-    errorElement:<Not_Found></Not_Found>,
+    errorElement: <Not_Found></Not_Found>,
     children: [
       {
         path: "/",
         loader: async () =>
-          fetch(`${import.meta.env.VITE_API_URL}/Services`),
+          fetch(`${import.meta.env.VITE_API_URL}/Services`, {
+            credentials: "include",
+          }),
         element: <Home></Home>,
       },
       {
@@ -46,7 +48,7 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path:"/View_Details/:id",
+        path: "/View_Details/:id",
         loader: async ({ params }) =>
           fetch(`http://localhost:5000/View_Details/${params.id}`),
         element: (
@@ -56,26 +58,39 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path:"/Manage_Appointment",
-        element:<PrivetRoute>
-          <Manage_Appointment></Manage_Appointment>
-        </PrivetRoute>
+        path: "/Manage_Appointment",
+        element: (
+          <PrivetRoute>
+            <Manage_Appointment></Manage_Appointment>
+          </PrivetRoute>
+        ),
       },
       {
-        path:"/Update_Appointment/:id",
-        loader:async ({params}) => fetch(`http://localhost:5000/View_Details/${params.id}`),
-        element:<PrivetRoute><Update_Appointment></Update_Appointment></PrivetRoute>
+        path: "/Update_Appointment/:id",
+        loader: async ({ params }) =>
+          fetch(`http://localhost:5000/View_Details/${params.id}`),
+        element: (
+          <PrivetRoute>
+            <Update_Appointment></Update_Appointment>
+          </PrivetRoute>
+        ),
       },
       {
-        path:"/Booked_Appointment",
-        element:<PrivetRoute>
-          <Booked_Appointment></Booked_Appointment>
-        </PrivetRoute>
+        path: "/Booked_Appointment",
+        element: (
+          <PrivetRoute>
+            <Booked_Appointment></Booked_Appointment>
+          </PrivetRoute>
+        ),
       },
       {
-        path:"/Service_To_Do",
-        element:<PrivetRoute><Service_To_Do></Service_To_Do></PrivetRoute>
-      }
+        path: "/Service_To_Do",
+        element: (
+          <PrivetRoute>
+            <Service_To_Do></Service_To_Do>
+          </PrivetRoute>
+        ),
+      },
     ],
   },
 ]);

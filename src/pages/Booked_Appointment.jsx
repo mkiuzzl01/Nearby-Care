@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import { Helmet } from "react-helmet";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Booked_Appointment = () => {
-  const { user, dark } = useAuth();
+  const { user} = useAuth();
   const [booked, setBooked] = useState([]) || [];
+  const axiosSecure = useAxiosSecure();
 
   const getData = async () => {
-    const data = await axios.get(
-      `${import.meta.env.VITE_API_URL}/Booked_Appointment/${user?.email}`
-    );
-    return setBooked(data.data);
+    const url =`/Booked_Appointment/${user?.email}`; 
+    const {data} = await axiosSecure.get(url)
+    return setBooked(data);
   };
   useEffect(() => {
     getData();

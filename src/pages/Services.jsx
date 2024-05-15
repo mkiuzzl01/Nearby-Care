@@ -6,23 +6,47 @@ import { Helmet } from "react-helmet";
 const Services = () => {
   const [search, setSearch] = useState("");
   const [services, setServices] = useState([]);
+  const [itemsPerPage,setItemsPerPage] = useState(4);
+  const [count,setCount] = useState(0);
+  const [currentPage,setCurrentPage] = useState(1);
   const All_ServicesPage = true;
 
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/Search?search=${search}`
+        `http://localhost:5000/All_Services?search=${search}&page=${currentPage}&size=${itemsPerPage}`
       );
       setServices(data);
     };
     getData();
+  }, [search,currentPage,itemsPerPage]);
+
+  //Pages Count
+  useEffect(() => {
+    const getCount = async () => {
+      const { data } = await axios.get(
+        `http://localhost:5000/Services_count?search=${search}`
+      );
+      setCount(data.numbers);
+    };
+    getCount();
   }, [search]);
 
+//handle Search
   const handleSearch = (e) => {
     e.preventDefault();
     const search = e.target.value;
     setSearch(search);
   };
+
+
+  //pagination
+  const numberOfPages = Math.ceil(count/itemsPerPage)
+  const pages = [...Array(numberOfPages).keys()].map(element=> element +1)
+
+  const handlePagination = (value)=>{
+    setCurrentPage(value);
+  }
 
   return (
     <div className="py-4">
@@ -65,6 +89,14 @@ const Services = () => {
           <h1 className="text-6xl text-center mt-10">Empty</h1>
         )}
       </div>
+      {/* pagination */}
+         <div className="text-center my-20 space-x-4">
+          <button disabled={currentPage === 1} onClick={()=>handlePagination(currentPage-1)} className="btn">Prev</button>
+          {
+            pages.map(page=> <button className={currentPage === page ?' btn bg-green-500':'btn'} onClick={()=>handlePagination(page)} key={page}>{page}</button>)
+          }
+          <button disabled={currentPage === numberOfPages} onClick={()=>handlePagination(currentPage + 1)}  className="btn">Next</button>
+         </div>
     </div>
   );
 };

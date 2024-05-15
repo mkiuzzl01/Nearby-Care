@@ -3,16 +3,17 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Service_To_Do = () => {
   const { user, errorToast, warningToast } = useAuth();
   const [booked, setBooked] = useState([]) || [];
+  const axiosSecure = useAxiosSecure();
 
   const getData = async () => {
-    const data = await axios.get(
-      `${import.meta.env.VITE_API_URL}/Service_To_Do/${user?.email}`
-    );
-    return setBooked(data.data);
+    const url =`/Service_To_Do/${user?.email}`;
+    const {data} = await axiosSecure.get(url);
+    return setBooked(data);
   };
   useEffect(() => {
     getData();
