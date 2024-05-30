@@ -1,8 +1,12 @@
-# React + Vite
+# Website Name: Nearby Care
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+==>Website Live URL: https://nearby-care.web.app/
 
-Currently, two official plugins are available:
+==>Feature of this website:
+1. This is a website helpful for patients. Easy appointment book and meet doctors.
+2. The patient can see the doctor's schedule and the cost of his/her appointment.
+3. The Doctors can publish Her schedule on this website so that people can see it and book it.
+4. A user I mean  a doctor overwrites the schedule.
+5. The public can instruct her doctors on the booking time and doctors who see this.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+==>My Selected Category: Consultation Services by Doctors.
