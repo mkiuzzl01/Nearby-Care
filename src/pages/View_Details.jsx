@@ -288,6 +288,7 @@ const View_Details = () => {
                 className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
               ></textarea>
             </div>
+       
             <div className="my-2">
               <input
                 type="submit"

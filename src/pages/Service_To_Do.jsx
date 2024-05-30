@@ -11,8 +11,8 @@ const Service_To_Do = () => {
   // const axiosSecure = useAxiosSecure();
 
   const getData = async () => {
-    const url =`${import.meta.env.VITE_API_URL}/Service_To_Do/${user?.email}`;
-    const {data} = await axios.get(url);
+    const url = `${import.meta.env.VITE_API_URL}/Service_To_Do/${user?.email}`;
+    const { data } = await axios.get(url);
     return setBooked(data);
   };
   useEffect(() => {
@@ -95,6 +95,7 @@ const Service_To_Do = () => {
                 <th>Consultation Cost</th>
                 <th>Patient Provide Instruction</th>
                 <th>Patient Provide Date</th>
+                <th>Payment Information</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -119,11 +120,27 @@ const Service_To_Do = () => {
                     </div>
                   </td>
                   <td>
-                    <h1>{book?.user?.user_Name}</h1>
+                    <div>{book?.user?.user_Name}</div>
+                    <div className="text-sm opacity-50">{book?.user?.user_Email}</div>
                   </td>
                   <td>$ {book?.consultation_Cost}</td>
                   <td>{book?.user?.instruction}</td>
                   <td>{book?.user?.date}</td>
+                  <td className="">
+                    {book?.user?.transaction ? (
+                      <div className="">
+                        <p className="text-blue-600">
+                          Payment Success
+                        </p>
+                        <p>
+                          <span className="text-blue-600 pe-2">Payment Time:</span>
+                          <span>{book?.user?.paymentDate}</span>
+                        </p>
+                      </div>
+                    ) : (
+                      <p>Not Payment</p>
+                    )}
+                  </td>
                   <th>
                     <div className="dropdown dropdown-hover dropdown-top">
                       <div tabIndex={0} role="button" className="btn m-1">
@@ -134,45 +151,52 @@ const Service_To_Do = () => {
                         className="dropdown-content z-[1] space-y-2 menu shadow bg-base-100 rounded-box"
                       >
                         <li>
-                        <button
-                        className={
-                          book?.user?.status === "Working"
-                            ? "btn btn-sm bg-gray-500-500"
-                            : "btn btn-sm"
-                        }
-                         defaultValue={book?.user?.status}>Pending</button>
+                          <button
+                            className={
+                              book?.user?.status === "Working"
+                                ? "btn btn-sm bg-gray-500-500"
+                                : "btn btn-sm"
+                            }
+                            defaultValue={book?.user?.status}
+                          >
+                            Pending
+                          </button>
                         </li>
                         <li>
-                        <button
-                        onClick={() =>
-                          handleWorking(book._id, book?.user?.status, "Working")
-                        }
-                        className={
-                          book?.user?.status === "Working"
-                            ? "btn btn-sm bg-yellow-500"
-                            : "btn btn-sm"
-                        }
-                      >
-                        Working
-                      </button>
+                          <button
+                            onClick={() =>
+                              handleWorking(
+                                book._id,
+                                book?.user?.status,
+                                "Working"
+                              )
+                            }
+                            className={
+                              book?.user?.status === "Working"
+                                ? "btn btn-sm bg-yellow-500"
+                                : "btn btn-sm"
+                            }
+                          >
+                            Working
+                          </button>
                         </li>
                         <li>
-                        <button
-                        onClick={() =>
-                          handleComplete(
-                            book._id,
-                            book?.user?.status,
-                            "Complete"
-                          )
-                        }
-                        className={
-                          book?.user?.status === "Complete"
-                            ? "btn btn-sm bg-green-600"
-                            : "btn btn-sm"
-                        }
-                      >
-                        Complete
-                      </button>
+                          <button
+                            onClick={() =>
+                              handleComplete(
+                                book._id,
+                                book?.user?.status,
+                                "Complete"
+                              )
+                            }
+                            className={
+                              book?.user?.status === "Complete"
+                                ? "btn btn-sm bg-green-600"
+                                : "btn btn-sm"
+                            }
+                          >
+                            Complete
+                          </button>
                         </li>
                       </ul>
                     </div>
@@ -184,9 +208,7 @@ const Service_To_Do = () => {
         </div>
       ) : (
         <div>
-          <h1 className="text-center text-6xl mt-32">
-           Empty
-          </h1>
+          <h1 className="text-center text-6xl mt-32">Empty</h1>
         </div>
       )}
     </div>

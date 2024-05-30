@@ -29,7 +29,7 @@ const Update_Appointment = () => {
         };
         try {
           const info = await axios.put(
-            `http://localhost:5000/Update_Appointment/${update._id}`,
+            `https://nearby-care.vercel.app/Update_Appointment/${update._id}`,
             updateInfo
           );
           if(info.data.modifiedCount>0){

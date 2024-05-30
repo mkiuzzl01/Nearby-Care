@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 // import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Booked_Appointment = () => {
@@ -35,6 +36,7 @@ const Booked_Appointment = () => {
               <th>Consultation Cost</th>
               <th>Your Provide Instruction</th>
               <th>Date</th>
+              <th>Action</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -64,6 +66,15 @@ const Booked_Appointment = () => {
                 <td>$ {book?.consultation_Cost}</td>
                 <td>{book?.user?.instruction}</td>
                 <td>{book?.user?.date}</td>
+                <td>
+                  {
+                    book.user?.transaction? <span className="text-green-600"  data-tooltip-id="my-tooltip"
+                    data-tooltip-content={book.user?.transaction}> Payment Success</span>:
+                  <Link to={`/Payment/${book._id}`}>
+                  <button className="btn btn-sm">Payment</button>
+                  </Link>
+                  }
+                </td>
                 <th> 
                   <button className={book?.user?.status === "Complete" ? 'btn text-black bg-green-400 btn-xs':book?.user?.status === 'Working'?'btn bg-yellow-500 text-black btn-xs':'btn btn-xs text-black bg-gray-200 animate-pulse'}>
                     {book?.user?.status}

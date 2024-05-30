@@ -81,13 +81,13 @@ const AuthProvider = ({ children }) => {
     //   const loggedUser = {email:userEmail};
 
     //   if(currentUser){
-    //     axios.post('http://localhost:5000/jwt',loggedUser,{withCredentials:true})
+    //     axios.post('https://nearby-care.vercel.app/jwt',loggedUser,{withCredentials:true})
     //     .then(res=>{
     //       console.log('current user data',res.data);
     //     })
     // }
     // else{
-    //   axios.post('http://localhost:5000/Logout',loggedUser,{withCredentials:true})
+    //   axios.post('https://nearby-care.vercel.app/Logout',loggedUser,{withCredentials:true})
     //       .then(res=>{
     //         console.log('token response', res.data);
     //       })
