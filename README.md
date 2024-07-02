@@ -36,6 +36,6 @@ real-time schedules and take actions based on bookings.
 
 => npm install
 
-=> Set up Environment Variable
+=> Set up Environment Variables
 
 => npm run dev
