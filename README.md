@@ -1,15 +1,15 @@
 # Website Name: Nearby Care
 
 ## Overview:
-    Easy Appointment Booking: The website allows patients to book appointments with doctors.
+**Easy Appointment Booking: The website enables patients to book appointments with doctors conveniently.
 
-    Doctor's Schedule Visibility: Patients can view the schedule of doctors, including available Locations and appointment costs.
+**Doctor's Schedule Visibility: Patients can easily view doctors' schedules, including available locations and appointment costs.
 
-    Doctor's Schedule Management: Doctors can publish and manage their schedules on the platform, making it convenient for patients to book appointments.
+**Doctor's Schedule Management: Doctors can publish and manage their schedules on the platform, streamlining the appointment booking process for patients.
 
-    Schedule Override: Doctors can update or override their schedules as needed, ensuring real-time accuracy for patients.
+**Schedule Override: Doctors can update or override their schedules as necessary, ensuring real-time accuracy and availability for patients.
 
-    Patients Feedback: Patients can provide feedback on their disease in booking time with doctors.
+**Patient Feedback: Patients can provide feedback on their experience when booking appointments with doctors, enhancing overall service quality.
     
 This setup aims to streamline the appointment booking process, improve transparency, and enhance patient-doctor interaction through an online platform.
 
@@ -18,14 +18,18 @@ This setup aims to streamline the appointment booking process, improve transpare
 1. Doctor Appointment Booking: Enabled users to view and book available appointments, and
    provide issue details before their visit.
    
-3. Online Payment Integration: Integrated secure online payments for appointments.
-4. Appointment Management: Developed a doctor dashboard to manage and update 
+2. Online Payment Integration: Integrated secure online payments for appointments.
+
+4. Appointment Management: Developed a doctor dashboard to manage and update
 real-time schedules and take actions based on bookings.
 
 ## Uses Technology:
 => Front-end: HTML, CSS, Tailwind, JavaScript, React js
+
 => Backend: Node js, Express js
+
 => Database: MongoDB
+
 =>Authentication: Firebase
 
 ## Follow the instructions if running this project on a local machine:
