@@ -3,8 +3,8 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
-import Loading from "../layout/Loading";
-import Empty from "../layout/Empty";
+import Loading from "../Utility/Loading";
+import Empty from "../Utility/Empty";
 // import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Service_To_Do = () => {

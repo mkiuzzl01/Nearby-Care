@@ -3,8 +3,8 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import Loading from "../layout/Loading";
-import Empty from "../layout/Empty";
+import Loading from "../Utility/Loading";
+import Empty from "../Utility/Empty";
 // import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Booked_Appointment = () => {

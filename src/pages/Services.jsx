@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
-import Loading from "../layout/Loading";
-import Empty from "../layout/Empty";
+import Loading from "../Utility/Loading";
+import Empty from "../Utility/Empty";
 
 const Services = () => {
   const [search, setSearch] = useState("");

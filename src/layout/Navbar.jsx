@@ -3,15 +3,18 @@ import useAuth from "../hooks/useAuth";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { useEffect, useState } from "react";
+import { FaOutdent, FaSignOutAlt } from "react-icons/fa";
 const Navbar = () => {
-  const { user, logOut, warningToast, errorToast,dark,setDark} = useAuth();
-  const [theme, setTheme] = useState(localStorage.getItem("theme")? localStorage.getItem("theme"):"light");
+  const { user, logOut, warningToast, errorToast, dark, setDark } = useAuth();
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
+  );
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
     const localTheme = localStorage.getItem("theme");
     document.querySelector("html").setAttribute("data-theme", localTheme);
-  }, [theme,dark]);
+  }, [theme, dark]);
 
   const handleToggle = (e) => {
     if (e.target.checked) {
@@ -37,27 +40,16 @@ const Navbar = () => {
       <Link to="/Services">Services</Link>
     </>
   );
-  const dashboard = (
-    <>
-      <li>
-        <Link to="/Add_Appointment">Add Appointment</Link>
-      </li>
-      {user && (
-        <li>
-          <Link to="/Manage_Appointment">Manage Appointment</Link>
-        </li>
-      )}
-      <li>
-        <Link to="/Booked_Appointment">Booked Appointment</Link>
-      </li>
-      <li>
-        <Link to="/Service_To_Do">Service-To-Do</Link>
-      </li>
-    </>
-  );
+  
   return (
     <div className=" rounded-b-lg shadow-lg shadow-cyan-200/50">
-      <div className={ dark?`navbar bg-base-200 h-20 rounded-b-lg shadow-md`:`navbar bg-base-200  h-20 rounded-b-lg shadow-md `}>
+      <div
+        className={
+          dark
+            ? `navbar bg-base-200 h-20 rounded-b-lg shadow-md`
+            : `navbar bg-base-200  h-20 rounded-b-lg shadow-md `
+        }
+      >
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -81,10 +73,6 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52"
             >
               {navLink}
-              <details>
-                <summary>Dashboard</summary>
-                <ul>{dashboard}</ul>
-              </details>
             </ul>
           </div>
           <Link to="/">
@@ -98,7 +86,7 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal items-center space-x-4">
             {navLink}
-            <div className="dropdown dropdown-hover">
+            {/* <div className="dropdown dropdown-hover">
               <div tabIndex={0} role="button">
                 Dashboard
               </div>
@@ -106,19 +94,19 @@ const Navbar = () => {
                 tabIndex={0}
                 className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
               >
-            {dashboard}
+                {dashboard}
               </ul>
-            </div>
+            </div> */}
           </ul>
         </div>
-        <div className="navbar-end space-x-4">
+        <div className="navbar-end space-x-6">
           <div>
             <label className="swap swap-rotate">
               {/* this hidden checkbox controls the state */}
               <input
                 onChange={handleToggle}
                 type="checkbox"
-                checked={theme==='light'? true : false}
+                checked={theme === "light" ? true : false}
                 className="theme-controller"
               />
 
@@ -142,36 +130,51 @@ const Navbar = () => {
             </label>
           </div>
           {user ? (
-            <div className="flex items-center space-x-2 z-10">
-              <div className="relative flex ">
-              <span className={ user ?`visible animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75`:`hidden`}></span>
-              <div className="tooltip tooltip-accent tooltip-bottom lg:tooltip-left">
-                {" "}
-                <a
-                  data-tooltip-id="my-tooltip"
-                  data-tooltip-content={
-                    user?.displayName ? user.displayName : "Username Not Found"
+            <div className="flex items-center pe-6 z-10">
+              <div className="dropdown dropdown-end">
+                <span
+                  className={
+                    user
+                      ? `visible animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75`
+                      : `hidden`
                   }
+                ></span>
+
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                  title={user?.displayName}
                 >
-                  <img
-                    src={
-                      user?.photoURL
-                        ? user.photoURL
-                        : "https://i.postimg.cc/vTN8PMKb/blank-profile-picture-973460-1280.png"
-                    }
-                    alt={user?.email}
-                    className="w-10 rounded-full "
-                  />
-                </a>
-                <Tooltip id="my-tooltip" />
+                  <div className="relative flex">
+                    <div>
+                      <img
+                        src={
+                          user?.photoURL
+                            ? user.photoURL
+                            : "https://i.postimg.cc/vTN8PMKb/blank-profile-picture-973460-1280.png"
+                        }
+                        alt={user?.email}
+                        className="w-10 rounded-full "
+                      />
+                    </div>
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu bg-gray-300 rounded-box"
+                >
+                  <li>
+                    <Link to="Dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout} className="btn-sm ">
+                      <FaSignOutAlt color="red" size={18}></FaSignOutAlt>
+                      Logout
+                    </button>
+                  </li>
+                </ul>
               </div>
-              </div>
-              <button
-                onClick={handleLogout}
-                className="btn btn-outline btn-ghost"
-              >
-                Logout
-              </button>
             </div>
           ) : (
             <Link to="Login" className="btn btn-outline btn-ghost">

@@ -6,31 +6,29 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import Loading from "../layout/Loading";
-import Empty from "../layout/Empty";
+import Loading from "../Utility/Loading";
+import Empty from "../Utility/Empty";
 
 const Manage_Appointment = () => {
-  const { user, errorToast} = useAuth();
+  const { user, errorToast } = useAuth();
   const [services, setServices] = useState([]);
-  const [isDataFetched, setIsDataFetched] = useState(false); 
+  const [isDataFetched, setIsDataFetched] = useState(false);
 
   //data face here
   const getData = async () => {
-    setIsDataFetched(true); 
+    setIsDataFetched(true);
     const url = `${import.meta.env.VITE_API_URL}/Manage_Appointment/${
       user?.email
     }`;
     const { data } = await axios.get(url);
     setServices(data);
-    setIsDataFetched(false); 
+    setIsDataFetched(false);
   };
-
 
   //call data face function
   useEffect(() => {
-      getData();
+    getData();
   }, [user?.email]);
-
 
   const handleDelete = async (_id) => {
     try {
@@ -117,7 +115,7 @@ const Manage_Appointment = () => {
                 </td>
                 <th>
                   <div className="flex flex-col items-center space-y-4">
-                    <Link to={`/Update_Appointment/${service._id}`}>
+                    <Link to={`/Dashboard/Update_Appointment/${service?._id}`}>
                       <button title="Edit" className="text-xl text-green-600">
                         <FaRegEdit />
                       </button>
