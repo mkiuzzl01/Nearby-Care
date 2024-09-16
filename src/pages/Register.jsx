@@ -135,7 +135,7 @@ const Register = () => {
                   name="password"
                   required
                 />
-                <div>
+                <div className="absolute inset-y-0 left-0 flex items-center pl-2">
                   <span onClick={() => setShowPass(!showPass)}>
                   {showPass ? <LuEyeOff/> : <FiEye />}
                   </span>

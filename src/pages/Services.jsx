@@ -4,24 +4,31 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
+import Loading from "../layout/Loading";
+import Empty from "../layout/Empty";
 
 const Services = () => {
   const [search, setSearch] = useState("");
   const [services, setServices] = useState([]);
-  const [itemsPerPage,setItemsPerPage] = useState(6);
-  const [count,setCount] = useState(0);
-  const [currentPage,setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [count, setCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const All_ServicesPage = true;
+  const [isDataFetched, setIsDataFetched] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
+      setIsDataFetched(true);
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/All_Services?search=${search}&page=${currentPage}&size=${itemsPerPage}`
+        `${
+          import.meta.env.VITE_API_URL
+        }/All_Services?search=${search}&page=${currentPage}&size=${itemsPerPage}`
       );
       setServices(data);
+      setIsDataFetched(false);
     };
     getData();
-  }, [search,currentPage,itemsPerPage]);
+  }, [search, currentPage, itemsPerPage]);
 
   //Pages Count
   useEffect(() => {
@@ -34,21 +41,20 @@ const Services = () => {
     getCount();
   }, [search]);
 
-//handle Search
+  //handle Search
   const handleSearch = (e) => {
     e.preventDefault();
     const search = e.target.value;
     setSearch(search);
   };
 
-
   //pagination
-  const numberOfPages = Math.ceil(count/itemsPerPage)
-  const pages = [...Array(numberOfPages).keys()].map(element=> element +1)
+  const numberOfPages = Math.ceil(count / itemsPerPage);
+  const pages = [...Array(numberOfPages).keys()].map((element) => element + 1);
 
-  const handlePagination = (value)=>{
+  const handlePagination = (value) => {
     setCurrentPage(value);
-  }
+  };
 
   return (
     <div className="py-4">
@@ -79,6 +85,7 @@ const Services = () => {
         </label>
       </div>
       <div className="grid gap-4">
+        {isDataFetched && <Loading></Loading>}
         {services.length > 0 ? (
           services?.map((service) => (
             <Popular_Services_Card
@@ -88,17 +95,41 @@ const Services = () => {
             ></Popular_Services_Card>
           ))
         ) : (
-          <h1 className="text-6xl text-center mt-10">Empty</h1>
+          !isDataFetched && <Empty></Empty>
         )}
       </div>
       {/* pagination */}
-         <div className="text-center my-20 space-x-4">
-          <button disabled={currentPage === 1} onClick={()=>handlePagination(currentPage-1)} className="btn items-center"><span><FaArrowLeftLong className="text-blue-400 "/></span><span>Prev</span></button>
-          {
-            pages.map(page=> <button className={currentPage === page ?' btn bg-green-500':'btn'} onClick={()=>handlePagination(page)} key={page}>{page}</button>)
-          }
-          <button disabled={currentPage === numberOfPages} onClick={()=>handlePagination(currentPage + 1)}  className="btn items-center"><span>Next</span><span><FaArrowRightLong className="text-blue-400 "/></span></button>
-         </div>
+      <div className="text-center my-20 space-x-4">
+        <button
+          disabled={currentPage === 1}
+          onClick={() => handlePagination(currentPage - 1)}
+          className="btn items-center"
+        >
+          <span>
+            <FaArrowLeftLong className="text-blue-400 " />
+          </span>
+          <span>Prev</span>
+        </button>
+        {pages.map((page) => (
+          <button
+            className={currentPage === page ? " btn bg-green-500" : "btn"}
+            onClick={() => handlePagination(page)}
+            key={page}
+          >
+            {page}
+          </button>
+        ))}
+        <button
+          disabled={currentPage === numberOfPages}
+          onClick={() => handlePagination(currentPage + 1)}
+          className="btn items-center"
+        >
+          <span>Next</span>
+          <span>
+            <FaArrowRightLong className="text-blue-400 " />
+          </span>
+        </button>
+      </div>
     </div>
   );
 };

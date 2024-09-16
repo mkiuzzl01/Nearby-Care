@@ -3,18 +3,26 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import Loading from "../layout/Loading";
+import Empty from "../layout/Empty";
 // import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Service_To_Do = () => {
-  const { user, errorToast, warningToast } = useAuth();
-  const [booked, setBooked] = useState([]) || [];
+  const { user, errorToast, warningToast} = useAuth();
+  const [booked, setBooked] = useState([]);
+  const [isDataFetched, setIsDataFetched] = useState(false); 
+
   // const axiosSecure = useAxiosSecure();
 
   const getData = async () => {
+    setIsDataFetched(true)
     const url = `${import.meta.env.VITE_API_URL}/Service_To_Do/${user?.email}`;
     const { data } = await axios.get(url);
-    return setBooked(data);
+    setBooked(data);
+    setIsDataFetched(false)
   };
+
+
   useEffect(() => {
     getData();
   }, [user?.email]);
@@ -76,12 +84,15 @@ const Service_To_Do = () => {
       return;
     }
   };
+
+  if (isDataFetched) return <Loading></Loading>
+  if(!booked.length) return <Empty></Empty>
+
   return (
     <div>
       <Helmet>
         <title>Nearby Care | To Do Services</title>
       </Helmet>
-      {booked.length > 0 ? (
         <div className="overflow-x-auto pt-10">
           <h1 className="text-center text-2xl font-bold my-4">
             Patient Booked Appointment Information
@@ -206,11 +217,6 @@ const Service_To_Do = () => {
             </tbody>
           </table>
         </div>
-      ) : (
-        <div>
-          <h1 className="text-center text-6xl mt-32">Empty</h1>
-        </div>
-      )}
     </div>
   );
 };
