@@ -174,7 +174,7 @@ const Navbar = () => {
               </button>
             </div>
           ) : (
-            <Link to="/Login" className="btn btn-outline btn-ghost">
+            <Link to="Login" className="btn btn-outline btn-ghost">
               Login
             </Link>
           )}

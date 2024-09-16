@@ -39,22 +39,6 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path: "/Login",
-        element: (
-          <Suspense fallback={<Loading></Loading>}>
-            <Login></Login>
-          </Suspense>
-        ),
-      },
-      {
-        path: "/Register",
-        element: (
-          <Suspense fallback={<Loading></Loading>}>
-            <Register></Register>
-          </Suspense>
-        ),
-      },
-      {
         path: "/Services",
         element: (
           <Suspense fallback={<Loading></Loading>}>
@@ -137,6 +121,23 @@ const Router = createBrowserRouter([
         ),
       },
     ],
+    
+  },
+  {
+    path: "Login",
+    element: (
+      <Suspense fallback={<Loading></Loading>}>
+        <Login></Login>
+      </Suspense>
+    ),
+  },
+  {
+    path: "Register",
+    element: (
+      <Suspense fallback={<Loading></Loading>}>
+        <Register></Register>
+      </Suspense>
+    ),
   },
 ]);
 

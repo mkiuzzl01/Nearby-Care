@@ -58,11 +58,15 @@ const Register = () => {
     setUser(...{ user, photoURL: photo, displayName: name });
   };
   return (
-    <div className="my-4">
+    <div className={
+      dark
+        ? `bg-gray-800 flex justify-center items-center min-h-screen `
+        : `bg-emerald-900 flex justify-center items-center min-h-screen `
+    }>
       <Helmet>
         <title>Nearby Care | Registration</title>
       </Helmet>
-      <div className={ dark? `flex items-center w-full mx-auto overflow-hidden rounded-lg lg:max-w-6xl p-10 bg-gray-800`:`flex items-center w-full  mx-auto overflow-hidden rounded-lg lg:max-w-6xl p-10 bg-gray-600`}>
+      <div className="m-auto w-full lg: max-w-6xl items-center flex">
         <div className="hidden bg-cover lg:block lg:w-2/6">
           <img
             src="https://i.postimg.cc/wM4LPS2d/istockphoto-1408025598-612x612.png"
@@ -135,7 +139,7 @@ const Register = () => {
                   name="password"
                   required
                 />
-                <div className="absolute inset-y-0 left-0 flex items-center pl-2">
+                <div>
                   <span onClick={() => setShowPass(!showPass)}>
                   {showPass ? <LuEyeOff/> : <FiEye />}
                   </span>
@@ -143,7 +147,9 @@ const Register = () => {
               </label>
               <p className="text-red-600">{error}</p>
             </div>
-            <span className="text-xs hover:underline text-white">Forget Password?</span>
+            {/* Todo: implement forget password functionality */}
+            
+            {/* <span className="text-xs hover:underline text-white">Forget Password?</span> */}
             <div className="mt-6">
               <input
                 className="w-full btn border-none bg-gray-500 text-white hover:bg-blue-400"
@@ -158,7 +164,7 @@ const Register = () => {
             <div className="border-2 p-2">
               <p className="text-sm text-white">
                 Already have an account?{" "}
-                <Link to="/Login" className="text-green-300">
+                <Link to="/Login" className="text-yellow-300">
                   Login
                 </Link>
               </p>
