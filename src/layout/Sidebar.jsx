@@ -1,67 +1,65 @@
 import React from "react";
 import { FaSignOutAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import Menu from "../Utility/Menu";
 
 const Sidebar = ({ isOpen }) => {
   const { logOut } = useAuth();
 
   const handleLogout = () => {
     logOut();
-    
   };
 
   const navLink = (
     <>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/Services">Services</Link>
-      </li>
+      <Menu link="/" name="Home"></Menu>
+      <Menu link="/Services" name="Services"></Menu>
     </>
   );
 
   const dashboardLinks = (
     <>
-      <li>
-        <Link to="Add_Appointment">Add Appointment</Link>
-      </li>
-      <li>
-        <Link to="Manage_Appointment">Manage Appointment</Link>
-      </li>
+      <Menu link="/Dashboard" name="User Profile"></Menu>
 
-      <li>
-        <Link to="Booked_Appointment">Booked Appointment</Link>
-      </li>
-      <li>
-        <Link to="Service_To_Do">Service-To-Do</Link>
-      </li>
+      <Menu link="/Dashboard/Add_Appointment" name="Add Appointment"></Menu>
+
+      <Menu
+        link="/Dashboard/Manage_Appointment"
+        name="Manage Appointment"
+      ></Menu>
+
+      <Menu
+        link="/Dashboard/Booked_Appointment"
+        name="Booked Appointment"
+      ></Menu>
+
+      <Menu link="/Dashboard/Service_To_Do" name="Service-To-Do"></Menu>
     </>
   );
 
   return (
     <div
-      className={`z-40  flex flex-col justify-between overflow-x-hidden text-white bg-[#2F4F4F] w-64 md:w-1/4 space-y-6 px-2 py-4 absolute lg:static inset-y-0 left-0 transform ${
-        isOpen && "-translate-x-full"
+      className={`z-40  flex flex-col justify-between overflow-x-hidden text-white w-64  bg-[#2F4F4F] md:w-1/4 space-y-6 px-2 py-4 absolute lg:static inset-y-0 left-0 transform ${
+        isOpen && "-translate-x-full "
       }  md:translate-x-0  transition duration-200 ease-in-out`}
     >
-      <div className="">
+      <div>
         <div className="flex justify-center">
-          <Link to="/" className="">
+          <Link to="/">
             <img
               src="https://i.postimg.cc/C5qTrVN9/Nearby-Care-1-removebg-preview.png"
               alt=""
-              className=" w-24 lg:w-32"
+              className=" w-24 lg:w-40"
             />
           </Link>
         </div>
-        <div className="menu">
-          <ul>{dashboardLinks}</ul>
+        <div>
+          <ul className="space-y-4 ms-6">{dashboardLinks}</ul>
         </div>
         <div className="divider divider-accent">OR</div>
-        <div className="menu">
-          <ul>{navLink}</ul>
+        <div>
+          <ul className="space-y-4 ms-6">{navLink}</ul>
         </div>
       </div>
       <div>

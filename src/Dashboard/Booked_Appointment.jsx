@@ -8,9 +8,9 @@ import Empty from "../Utility/Empty";
 // import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Booked_Appointment = () => {
-  const { user, setLoading} = useAuth();
+  const { user, setLoading } = useAuth();
   const [booked, setBooked] = useState([]);
-  const [isDataFetched, setIsDataFetched] = useState(false); 
+  const [isDataFetched, setIsDataFetched] = useState(false);
   // const axiosSecure = useAxiosSecure();
 
   const getData = async () => {
@@ -23,15 +23,12 @@ const Booked_Appointment = () => {
     setIsDataFetched(false);
   };
 
-
   useEffect(() => {
     getData();
   }, [user?.email]);
 
-
   if (isDataFetched) return <Loading />;
   if (!booked.length) return <Empty />;
-
 
   return (
     <div>
@@ -42,21 +39,21 @@ const Booked_Appointment = () => {
         <h1 className="text-center text-2xl font-bold my-4">
           Your Booked Information
         </h1>
-        {booked.map((book, idx) => {
-          <table className="table">
-            <thead>
-              <tr>
-                <th>SL</th>
-                <th>Expertise Info</th>
-                <th>Doctors Info</th>
-                <th>Consultation Cost</th>
-                <th>Your Provide Instruction</th>
-                <th>Date</th>
-                <th>Action</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>SL</th>
+              <th>Expertise Info</th>
+              <th>Doctors Info</th>
+              <th>Consultation Cost</th>
+              <th>Your Provide Instruction</th>
+              <th>Date</th>
+              <th>Action</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {booked.map((book, idx) => 
               <tr key={book._id}>
                 <th>{idx + 1}</th>
                 <td>
@@ -111,9 +108,10 @@ const Booked_Appointment = () => {
                   </button>
                 </th>
               </tr>
-            </tbody>
-          </table>;
-        })}
+            )}
+          </tbody>
+        </table>
+        ;
       </div>
     </div>
   );

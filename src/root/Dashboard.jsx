@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "./Sidebar";
+import Sidebar from "../layout/Sidebar";
 import { Outlet } from "react-router-dom";
 import { FaMinimize } from "react-icons/fa6";
 import { FaList } from "react-icons/fa";
@@ -15,8 +15,12 @@ const Dashboard_Layout = () => {
     <div>
       <div className="m-auto">
         <div className="relative min-h-screen md:flex">
+
+          
           {/* This is NavLink part  */}
-          <Sidebar isOpen={isOpen} toggleMenu={toggleMenu}></Sidebar>
+          <Sidebar isOpen={isOpen}></Sidebar>
+
+
           {/* this is content part */}
           <div className="flex-1 md:ml-64 lg:m-5">
             <div className="flex justify-end">

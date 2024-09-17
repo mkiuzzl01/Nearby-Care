@@ -4,7 +4,8 @@ import PrivetRoute from "./PrivetRoute";
 import Not_Found from "../pages/Not_Found";
 import React, { Suspense } from "react";
 import Loading from "../Utility/Loading";
-import Dashboard_Layout from "../layout/Dashboard_Layout";
+import UserProfile from "../Dashboard/UserProfile";
+import Dashboard from "../root/Dashboard";
 // import Payment from "../Utility/Payment/Payment";
 
 const Home = React.lazy(() => import("../components/Home/Home"));
@@ -77,16 +78,22 @@ const Router = createBrowserRouter([
   // =========================
   //Dashboard Related Routes
 
-
   {
-
     path: "Dashboard",
     element: (
       <PrivetRoute>
-        <Dashboard_Layout></Dashboard_Layout>
+        <Dashboard></Dashboard>
       </PrivetRoute>
     ),
     children: [
+      {
+        path:'/Dashboard',
+        element: (
+          <Suspense fallback={<Loading></Loading>}>
+            <UserProfile></UserProfile>
+          </Suspense>
+        ),
+      },
       {
         path: "Add_Appointment",
         element: (
@@ -120,7 +127,7 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path:"Update_Appointment/:id",
+        path: "Update_Appointment/:id",
         loader: async ({ params }) =>
           fetch(`https://nearby-care.vercel.app/View_Details/${params.id}`),
         element: (

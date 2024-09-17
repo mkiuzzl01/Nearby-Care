@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
 import { useEffect, useState } from "react";
-import { FaOutdent, FaSignOutAlt } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
 const Navbar = () => {
   const { user, logOut, warningToast, errorToast, dark, setDark } = useAuth();
   const [theme, setTheme] = useState(
@@ -130,7 +128,7 @@ const Navbar = () => {
             </label>
           </div>
           {user ? (
-            <div className="flex items-center pe-6 z-10">
+            <div className="flex items-center pe-10 z-10">
               <div className="dropdown dropdown-end">
                 <span
                   className={
@@ -143,7 +141,7 @@ const Navbar = () => {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="btn btn-ghost btn-circle avatar"
+                  className="btn btn-ghost btn-circle "
                   title={user?.displayName}
                 >
                   <div className="relative flex">
