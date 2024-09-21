@@ -5,28 +5,48 @@ import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import { FaSpinner } from "react-icons/fa6";
+
+const imgAPI = import.meta.env.VITE_IMG_API_KEY;
+const imageHosting = `https://api.imgbb.com/1/upload?key=${imgAPI}`;
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const {
-    registerUser,
-    profileUpdate,
-    setUser,
-    user,
-    successToast,
-    dark
-  } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const [Loading, setLoading] = useState(false);
+
+  const { registerUser, profileUpdate, setUser, user, successToast, dark } =
+    useAuth();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
-    const photo = form.photo.value;
+    const photo = form.photo.files[0];
     const pass = form.password.value;
+
+    setLoading(true);
+
+    let image = null;
+    if (photo) {
+      try {
+        const imgPath = new FormData();
+        imgPath.append("image", photo);
+
+        const { data } = await axiosPublic.post(imageHosting, imgPath);
+        image = data?.data?.display_url;
+        setLoading(false);
+      } catch (error) {
+        toast.error(error?.message, {
+          position: "bottom-center",
+        });
+      }
+    }
 
     setError();
     if (pass.length < 6) {
@@ -48,21 +68,23 @@ const Register = () => {
 
     try {
       await registerUser(email, pass);
-      await profileUpdate(name, photo);
-      successToast('Registration successful');
+      await profileUpdate(name, image);
+      successToast("Registration successful");
       navigate(location?.state ? location.state : "/");
       form.reset();
     } catch (error) {
-     return setError(error.message.split("/")[1].split(")"));
+      return setError(error.message.split("/")[1].split(")"));
     }
-    setUser(...{ user, photoURL: photo, displayName: name });
+    setUser({ user, photoURL: image, displayName: name });
   };
   return (
-    <div className={
-      dark
-        ? `bg-gray-800 flex justify-center items-center min-h-screen `
-        : `bg-emerald-900 flex justify-center items-center min-h-screen `
-    }>
+    <div
+      className={
+        dark
+          ? `bg-gray-800 flex justify-center items-center min-h-screen `
+          : `bg-emerald-900 flex justify-center items-center min-h-screen `
+      }
+    >
       <Helmet>
         <title>Nearby Care | Registration</title>
       </Helmet>
@@ -77,7 +99,9 @@ const Register = () => {
         <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
           <div className="flex justify-center mx-auto"></div>
 
-          <p className="mt-3 text-4xl font-bold text-center text-white">Registration</p>
+          <p className="mt-3 text-4xl font-bold text-center text-white">
+            Registration
+          </p>
 
           <div className="flex items-center justify-between mt-4">
             <span className="w-1/6 border-b dark:border-gray-400"></span>
@@ -92,7 +116,9 @@ const Register = () => {
           <form onSubmit={handleRegister}>
             <div className="form-control">
               <label className="label">
-                <span className="block mb-2 text-sm font-medium text-white">Name</span>
+                <span className="block mb-2 text-sm font-medium text-white">
+                  Name
+                </span>
               </label>
               <input
                 type="text"
@@ -104,7 +130,9 @@ const Register = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="block mb-2 text-sm font-medium text-white">Email</span>
+                <span className="block mb-2 text-sm font-medium text-white">
+                  Email
+                </span>
               </label>
               <input
                 type="email"
@@ -117,13 +145,12 @@ const Register = () => {
             <div className="form-control">
               <label className="label">
                 <span className="block mb-2 text-sm font-medium text-white">
-                  Photo URL
+                  Photo
                 </span>
               </label>
               <input
-                type="text"
-                placeholder="Photo URL"
-                className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+                type="file"
+                className="file-input file-input-bordered w-full max-w-2xl input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
                 name="photo"
               />
             </div>
@@ -141,27 +168,31 @@ const Register = () => {
                 />
                 <div>
                   <span onClick={() => setShowPass(!showPass)}>
-                  {showPass ? <LuEyeOff/> : <FiEye />}
+                    {showPass ? <LuEyeOff /> : <FiEye />}
                   </span>
                 </div>
               </label>
               <p className="text-red-600">{error}</p>
             </div>
-            {/* Todo: implement forget password functionality */}
-            
-            {/* <span className="text-xs hover:underline text-white">Forget Password?</span> */}
+           
             <div className="mt-6">
-              <input
+              <button
+                disabled={Loading}
                 className="w-full btn border-none bg-gray-500 text-white hover:bg-blue-400"
                 type="submit"
-                value="Registration"
-              />
+              >
+                {Loading ? (
+                  <FaSpinner size={20} color="red"></FaSpinner>
+                ) : (
+                  "Registration"
+                )}
+              </button>
             </div>
           </form>
 
           <div className="flex items-center justify-between mt-4">
             <span className="w-1/6 border-b dark:border-gray-600"></span>
-            <div className="border-2 p-2">
+            <div className="border-2 p-2 hover:shadow-lg hover:shadow-red-200">
               <p className="text-sm text-white">
                 Already have an account?{" "}
                 <Link to="/Login" className="text-yellow-300">

@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -22,32 +23,31 @@ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [dark,setDark] = useState(false);
-  
+  const [dark, setDark] = useState(false);
 
-  const registerUser = (email, pass) => {
+  const registerUser = async (email, pass) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, pass);
+    return await createUserWithEmailAndPassword(auth, email, pass);
   };
-  const logInUser = (email, pass) => {
+  const logInUser = async (email, pass) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, pass);
+    return await signInWithEmailAndPassword(auth, email, pass);
   };
-  const logInWithGoogle = () => {
+  const logInWithGoogle = async () => {
     setLoading(true);
-    return signInWithPopup(auth, googleProvider);
+    return await signInWithPopup(auth, googleProvider);
   };
-  const logInWithGithub = () => {
+  const logInWithGithub = async () => {
     setLoading(true);
-    return signInWithPopup(auth, githubProvider);
+    return await signInWithPopup(auth, githubProvider);
   };
   const logOut = () => {
     setLoading(true);
     setUser(null);
     return signOut(auth);
   };
-  const profileUpdate = (name, image) => {
-    return updateProfile(auth.currentUser, {
+  const profileUpdate = async (name, image) => {
+    return await updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: image,
     });
@@ -74,33 +74,31 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      
+
       setLoading(false);
-//============ this comment because in the Assignment notified me but after get mark then uncomment  ===============
-    //   const userEmail = currentUser?.email || user?.email;
-    //   const loggedUser = {email:userEmail};
+      //============ this comment because in the Assignment notified me but after get mark then uncomment  ===============
+      //   const userEmail = currentUser?.email || user?.email;
+      //   const loggedUser = {email:userEmail};
 
-    //   if(currentUser){
-    //     axios.post('https://nearby-care.vercel.app/jwt',loggedUser,{withCredentials:true})
-    //     .then(res=>{
-    //       console.log('current user data',res.data);
-    //     })
-    // }
-    // else{
-    //   axios.post('https://nearby-care.vercel.app/Logout',loggedUser,{withCredentials:true})
-    //       .then(res=>{
-    //         console.log('token response', res.data);
-    //       })
-    // }
+      //   if(currentUser){
+      //     axios.post('https://nearby-care.vercel.app/jwt',loggedUser,{withCredentials:true})
+      //     .then(res=>{
+      //       console.log('current user data',res.data);
+      //     })
+      // }
+      // else{
+      //   axios.post('https://nearby-care.vercel.app/Logout',loggedUser,{withCredentials:true})
+      //       .then(res=>{
+      //         console.log('token response', res.data);
+      //       })
+      // }
 
-    return () => {
-      unsubscribe();
-    };
-  });
-
+      return () => {
+        unsubscribe();
+      };
+    });
   }, [user?.email]);
 
-  
   const shareTools = {
     user,
     loading,

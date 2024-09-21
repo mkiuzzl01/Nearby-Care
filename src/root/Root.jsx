@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../layout/Footer";
 import Navbar from "../layout/Navbar";
-import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 const Root = () => {
   return (
@@ -12,7 +11,6 @@ const Root = () => {
           </nav>
         <main className="min-h-[calc(100vh-432px)] px-2 lg:px-0">
           <Outlet></Outlet>
-          <ToastContainer limit={3} autoClose={1000}/>
         </main>
       </div>
       <footer>

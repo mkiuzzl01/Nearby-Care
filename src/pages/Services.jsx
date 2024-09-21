@@ -46,6 +46,7 @@ const Services = () => {
     e.preventDefault();
     const search = e.target.value;
     setSearch(search);
+    setCurrentPage(1);
   };
 
   //pagination
@@ -56,6 +57,7 @@ const Services = () => {
     setCurrentPage(value);
   };
 
+  console.log(services);
   return (
     <div className="py-4">
       <Helmet>
@@ -86,17 +88,15 @@ const Services = () => {
       </div>
       <div className="grid gap-4">
         {isDataFetched && <Loading></Loading>}
-        {services.length > 0 ? (
-          services?.map((service) => (
-            <Popular_Services_Card
-              key={service._id}
-              service={service}
-              All_ServicesPage={All_ServicesPage}
-            ></Popular_Services_Card>
-          ))
-        ) : (
-          !isDataFetched && <Empty></Empty>
-        )}
+        {services.length > 0
+          ? services?.map((service) => (
+              <Popular_Services_Card
+                key={service._id}
+                service={service}
+                All_ServicesPage={All_ServicesPage}
+              ></Popular_Services_Card>
+            ))
+          : !isDataFetched && <Empty></Empty>}
       </div>
       {/* pagination */}
       <div className="text-center my-20 space-x-4">

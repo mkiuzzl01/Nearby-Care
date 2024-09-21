@@ -11,6 +11,7 @@ const Booked_Appointment = () => {
   const { user, setLoading } = useAuth();
   const [booked, setBooked] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
+  const [instruction, setInstruction] = useState("");
   // const axiosSecure = useAxiosSecure();
 
   const getData = async () => {
@@ -37,7 +38,7 @@ const Booked_Appointment = () => {
       </Helmet>
       <div className="overflow-x-auto">
         <h1 className="text-center text-2xl font-bold my-4">
-          Your Booked Information
+          Your Booked Appointments
         </h1>
         <table className="table">
           <thead>
@@ -46,14 +47,14 @@ const Booked_Appointment = () => {
               <th>Expertise Info</th>
               <th>Doctors Info</th>
               <th>Consultation Cost</th>
-              <th>Your Provide Instruction</th>
+              <th>Your Instruction</th>
               <th>Date</th>
               <th>Action</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            {booked.map((book, idx) => 
+            {booked.map((book, idx) => (
               <tr key={book._id}>
                 <th>{idx + 1}</th>
                 <td>
@@ -76,7 +77,27 @@ const Booked_Appointment = () => {
                   <h1>{book?.doctor_Name}</h1>
                 </td>
                 <td>$ {book?.consultation_Cost}</td>
-                <td>{book?.user?.instruction}</td>
+                <td>
+                  <button
+                    className="btn btn-sm"
+                    onClick={() => {
+                      setInstruction(book?.user?.instruction);
+                      document.getElementById("my_modal_3").showModal();
+                    }}
+                  >
+                    See
+                  </button>
+                  <dialog id="my_modal_3" className="modal">
+                    <div className="modal-box">
+                      <form method="dialog">
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                          ✕
+                        </button>
+                      </form>
+                      <p className="py-4">{instruction}</p>
+                    </div>
+                  </dialog>
+                </td>
                 <td>{book?.user?.date}</td>
                 <td>
                   {book.user?.transaction ? (
@@ -108,7 +129,7 @@ const Booked_Appointment = () => {
                   </button>
                 </th>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
         ;

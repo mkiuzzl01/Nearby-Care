@@ -31,16 +31,16 @@ const Sidebar = ({ isOpen }) => {
 
       <Menu
         link="/Dashboard/Booked_Appointment"
-        name="Booked Appointment"
+        name="Your Booked"
       ></Menu>
 
-      <Menu link="/Dashboard/Service_To_Do" name="Service-To-Do"></Menu>
+      <Menu link="/Dashboard/Service_To_Do" name="Patient Booked"></Menu>
     </>
   );
 
   return (
     <div
-      className={`z-40  flex flex-col justify-between overflow-x-hidden text-white w-64  bg-[#2F4F4F] md:w-1/4 space-y-6 px-2 py-4 absolute lg:static inset-y-0 left-0 transform ${
+      className={`z-40 w-64 md:w-3/12 h-svh  flex flex-col justify-between overflow-x-hidden text-white  bg-[#2F4F4F] space-y-6 px-2 py-4 absolute lg:static inset-y-0 left-0 transform ${
         isOpen && "-translate-x-full "
       }  md:translate-x-0  transition duration-200 ease-in-out`}
     >

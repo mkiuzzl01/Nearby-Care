@@ -5,6 +5,8 @@ import { useState } from "react";
 import { LuEyeOff } from "react-icons/lu";
 import { FiEye } from "react-icons/fi";
 import { Helmet } from "react-helmet";
+import auth from "../Firebase/Firebase.config";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
@@ -17,12 +19,14 @@ const Login = () => {
     successToast,
     errorToast,
     dark,
+    warningToast,
+    updateUserPass
   } = useAuth();
   const handleLogin = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
+    const email = form?.email?.value;
+    const password = form?.password?.value;
 
     try {
       await logInUser(email, password);
@@ -56,6 +60,19 @@ const Login = () => {
     }
   };
 
+  const handleForgetPass = async (email) => {
+    if (!email) {
+      return warningToast("Please enter your email address");
+    }
+    try {
+      await sendPasswordResetEmail(auth, email);
+      successToast("Password reset email sent. Check your inbox.");
+    } catch (error) {
+      errorToast("Failed to send reset email: " + error.message);
+    }
+  };
+  
+
   return (
     <div
       className={
@@ -82,7 +99,7 @@ const Login = () => {
           {/* Google Sign-in Button */}
           <div
             onClick={handleWithGoogle}
-            className="flex items-center justify-center mt-4 transition-colors duration-300 transform border rounded-l"
+            className="flex items-center hover:shadow-lg hover:shadow-red-200 justify-center mt-4 transition-colors duration-300 transform border rounded-l"
           >
             <div className="px-4 py-2">
               <FaGoogle className="text-2xl text-white" />
@@ -95,7 +112,7 @@ const Login = () => {
           {/* GitHub Sign-in Button */}
           <div
             onClick={handleWithGithub}
-            className="flex items-center text-white justify-center mt-4 transition-colors duration-300 transform border rounded-l"
+            className="flex items-center hover:shadow-lg hover:shadow-red-200 text-white justify-center mt-4 transition-colors duration-300 transform border rounded-l"
           >
             <div className="px-4 py-2">
               <FaGithub className="text-2xl" />
@@ -151,6 +168,7 @@ const Login = () => {
               </label>
             </div>
 
+            <span onClick={handleForgetPass} className="text-xs hover:underline text-white">Forget Password?</span>
             <div className="mt-6">
               <input
                 className="w-full btn bg-gray-500 border-none text-white hover:bg-red-600"
@@ -163,7 +181,7 @@ const Login = () => {
           {/* Footer */}
           <div className="flex items-center justify-between mt-4">
             <span className="w-1/6 border-b dark:border-gray-600"></span>
-            <div className="border-2 p-2">
+            <div className="border-2 p-2 hover:shadow-lg hover:shadow-red-200">
               <p className="text-sm text-white">
                 Don't have an account?{" "}
                 <Link to="/Register" className="text-yellow-300">

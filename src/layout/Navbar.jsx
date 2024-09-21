@@ -161,14 +161,14 @@ const Navbar = () => {
                             : "https://i.postimg.cc/vTN8PMKb/blank-profile-picture-973460-1280.png"
                         }
                         alt={user?.email}
-                        className="rounded-full"
+                        className="rounded-full w-12 h-12"
                       />
                     </div>
                   </div>
                 </div>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content z-[1]  shadow-lg menu menu-sm bg-base-100 rounded-box"
+                  className="dropdown-content z-[1] space-y-2  shadow-lg menu menu-sm bg-base-100 rounded-box"
                 >
                   <li>
                     <Link to="/Dashboard" className="justify-between">

@@ -3,43 +3,83 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import { useState } from "react";
+import { FaSpinner } from "react-icons/fa6";
+
+const imgAPI = import.meta.env.VITE_IMG_API_KEY;
+const imageHosting = `https://api.imgbb.com/1/upload?key=${imgAPI}`;
 
 const AddAppointment = () => {
-    const {user,dark} = useAuth();
+  const { user, dark, errorToast } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const [creating, setCreating] = useState(false);
+
   const handleAppointment = async (e) => {
     e.preventDefault();
     const form = e.target;
     const expertise = form.Expertise.value;
-    const location = form.Location.value
-    const photo = form.Photo.value;
+    const location = form.Location.value;
+    const photo = form.Photo.files[0];
     const consultation_cost = parseInt(form.Consultation_Cost.value);
     const description = form.Description.value;
     const doctorName = user?.displayName;
     const doctorEmail = user?.email;
     const doctorImage = user?.photoURL;
-    const doctorInfo = {doctorName,doctorEmail,doctorImage,expertise,location,photo,consultation_cost,description};
+
+    let image = 'https://i.ibb.co.com/MfnRRd4/Hands-Denied.png';
+    if (photo) {
+      setCreating(true);
+      const imagePath = new FormData();
+      imagePath.append("image", photo);
+      try {
+        const { data } = await axiosPublic.post(imageHosting, imagePath);
+        image = data?.data?.display_url;
+        setCreating(false);
+      } catch (error) {
+        errorToast(error.message);
+      }
+    }
+
+    const doctorInfo = {
+      doctorName,
+      doctorEmail,
+      doctorImage,
+      expertise,
+      location,
+      image,
+      consultation_cost,
+      description,
+    };
 
     try {
-      const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/Add_Appointment`,doctorInfo);
-      if(data.insertedId){
+      const { data } = await axiosPublic.post(`/Add_Appointment`, doctorInfo);
+      if (data.insertedId) {
         Swal.fire({
-          title: 'Success!',
-          text: 'Appointment Created Successfully!',
-          icon: 'success',
-          confirmButtonText: 'Ok'
-        })
+          title: "Success!",
+          text: "Appointment Created Successfully!",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
       form.reset();
     } catch (error) {
-      console.log(error.message);
+      errorToast(error.message);
     }
   };
+
+
   return (
     <div
-      className={ dark ? `max-w-4xl m-auto my-8 border-2 rounded-lg p-4 bg-gray-500`:`max-w-4xl m-auto my-8 border-2 rounded-lg p-4 bg-sky-600`}
+      className={
+        dark
+          ? `max-w-4xl m-auto my-8 border-2 rounded-lg p-4 bg-gray-500`
+          : `max-w-4xl m-auto my-8 border-2 rounded-lg p-4 bg-sky-600`
+      }
     >
       <Helmet>
-          <title>Nearby-Care | Add Appointment </title>
+        <title>Nearby-Care | Add Appointment </title>
       </Helmet>
       <div>
         <div className="space-y-4 mb-4">
@@ -61,7 +101,9 @@ const AddAppointment = () => {
                 id="Expertise"
                 className="select select-bordered join-item"
               >
-                <option selected disabled>Choose</option>
+                <option selected disabled>
+                  Choose
+                </option>
                 <option value="General Medicine">General Medicine</option>
                 <option value="Cardiology">Cardiology</option>
                 <option value="Neurology">Neurology</option>
@@ -90,11 +132,9 @@ const AddAppointment = () => {
               <input
                 required
                 name="Photo"
-                type="text"
-                placeholder="Photo URL"
+                type="file"
                 id="Photo"
-                className="input input-bordered w-full"
-
+                className="file-input file-input-bordered w-full max-w-2xl input-bordered"
               />
             </div>
             <div className="form-control">
@@ -108,7 +148,6 @@ const AddAppointment = () => {
                 placeholder="Consultation Cost"
                 id="Consultation_Cost"
                 className="input input-bordered w-full"
-
               />
             </div>
             <div className="form-control lg:col-span-2">
@@ -126,12 +165,17 @@ const AddAppointment = () => {
           </div>
           <div className="my-8">
             <div className="lg:col-span-2">
-              <input
-                required
+              <button
+                disabled={creating}
                 type="submit"
                 className="btn hover:bg-[#004d99] w-full border-none bg-[#7fb800] dark:hover:text-white"
-                value="Add"
-              />
+              >
+                {creating ? (
+                  <FaSpinner size={20} color="red"></FaSpinner>
+                ) : (
+                  "Add"
+                )}
+              </button>
             </div>
           </div>
         </form>

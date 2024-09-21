@@ -14,7 +14,7 @@ const Dashboard_Layout = () => {
   return (
     <div>
       <div className="m-auto">
-        <div className="relative min-h-screen md:flex">
+        <div className="relative md:flex">
 
           
           {/* This is NavLink part  */}
@@ -22,7 +22,7 @@ const Dashboard_Layout = () => {
 
 
           {/* this is content part */}
-          <div className="flex-1 md:ml-64 lg:m-5">
+          <div className="w-full md:ml-64 lg:m-5">
             <div className="flex justify-end">
               <button onClick={toggleMenu} className="md:hidden px-4 py-3">
                 {isOpen ? (

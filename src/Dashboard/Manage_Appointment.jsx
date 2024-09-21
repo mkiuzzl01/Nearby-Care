@@ -50,6 +50,8 @@ const Manage_Appointment = () => {
               title: "Deleted!",
               text: "Appointment has been deleted.",
               icon: "success",
+              showConfirmButton: false,
+              timer: 1500
             });
             getData();
           }
@@ -93,7 +95,7 @@ const Manage_Appointment = () => {
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
-                        <img src={service.photo} alt={service.expertise} />
+                        <img src={service.image} alt={service.expertise} />
                       </div>
                     </div>
                     <div>
