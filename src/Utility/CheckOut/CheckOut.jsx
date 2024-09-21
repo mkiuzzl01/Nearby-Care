@@ -86,7 +86,7 @@ const CheckOut = ({ bookInfo }) => {
               });
             }
         //navigate to book from
-        navigate('/Booked_Appointment');
+        navigate('/Dashboard/Booked_Appointment');
         } catch (error) {
             setError(error.message);
             

@@ -9,7 +9,7 @@ import { FaLocationDot } from "react-icons/fa6";
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PUBLISHABLE_KEY);
 const Payment = () => {
   const bookInfo = useLoaderData();
-  console.log(bookInfo);
+
   return (
     <div className="my-12">
       <Helmet>

@@ -15,8 +15,8 @@ const Popular_Services_Card = ({ service, All_ServicesPage }) => {
   } = service;
   return (
     <div>
-      <div className={All_ServicesPage ? "visible delay-150 hover:-translate-y-1 hover:scale-110 duration-1000 hover:my-10" : "hidden"}>
-        <div className="card lg:card-side border-2 bg-base-100 shadow-xl">
+      <div className={All_ServicesPage ? "visible" : "hidden"}>
+        <div className="card lg:card-side border-2  hover:shadow-md duration-200 hover:shadow-green-400">
           <figure className="lg:w-1/2 m-auto transition duration-150 ease-in-out">
             <img src={photo} alt={expertise} className="lg:w-[700px] lg:h-96" />
           </figure>

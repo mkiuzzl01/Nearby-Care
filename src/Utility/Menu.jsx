@@ -8,7 +8,7 @@ const Menu = ({ link, name }) => {
         end
         to={link}
         className={({ isActive }) =>
-          isActive ? " text-[#f1f141]" : " hover:text-green-400 rounded-lg"
+          isActive ? "text-red-400" : " hover:text-green-400 rounded-lg"
         }
       >
         {name}
