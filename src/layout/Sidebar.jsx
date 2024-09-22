@@ -1,6 +1,5 @@
-import React, { useState } from "react";
 import { FaSignOutAlt } from "react-icons/fa";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Menu from "../Utility/Menu";
 
@@ -48,7 +47,7 @@ const Sidebar = ({ isOpen, setOpen }) => {
       </li>
 
       <li onClick={click}>
-        <Menu link="/Dashboard/Service_To_Do" name="Patient Booked"></Menu>
+        <Menu link="/Dashboard/Service_To_Do" name="Patients Booked"></Menu>
       </li>
     </>
   );

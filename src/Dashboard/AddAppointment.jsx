@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa6";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const imgAPI = import.meta.env.VITE_IMG_API_KEY;
 const imageHosting = `https://api.imgbb.com/1/upload?key=${imgAPI}`;
@@ -13,6 +14,7 @@ const imageHosting = `https://api.imgbb.com/1/upload?key=${imgAPI}`;
 const AddAppointment = () => {
   const { user, dark, errorToast } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const [creating, setCreating] = useState(false);
 
   const handleAppointment = async (e) => {
@@ -53,7 +55,7 @@ const AddAppointment = () => {
     };
 
     try {
-      const { data } = await axiosPublic.post(`/Add_Appointment`, doctorInfo);
+      const { data } = await axiosSecure.post(`/Add_Appointment`, doctorInfo);
       if (data.insertedId) {
         Swal.fire({
           title: "Success!",

@@ -32,7 +32,7 @@ const Navbar = () => {
       logOut();
       warningToast("Logout Successful");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       errorToast("Something went wrong");
     }
   };
@@ -105,7 +105,7 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="flex items-center space-x-4">{navLink}</ul>
         </div>
-        <div className="navbar-end space-x-6">
+        <div className="navbar-end me-4 space-x-6">
           <div>
             <label className="swap swap-rotate">
               {/* Theme toggle */}

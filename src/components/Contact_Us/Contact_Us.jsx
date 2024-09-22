@@ -18,7 +18,7 @@ const Contact_Us = () => {
         `${import.meta.env.VITE_API_URL}/Contact_us`,
         userQueryInfo
       );
-      console.log(data);
+      // console.log(data);
       if (data.insertedId) {
         Swal.fire({
           title: "Success!",

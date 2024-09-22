@@ -6,7 +6,6 @@ import React, { Suspense } from "react";
 import Loading from "../Utility/Loading";
 import UserProfile from "../Dashboard/UserProfile";
 import Dashboard from "../root/Dashboard";
-// import Payment from "../Utility/Payment/Payment";
 
 const Home = React.lazy(() => import("../components/Home/Home"));
 const Login = React.lazy(() => import("../pages/Login"));

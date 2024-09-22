@@ -5,12 +5,14 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import Loading from "../Utility/Loading";
 import Empty from "../Utility/Empty";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Service_To_Do = () => {
   const { user, errorToast, warningToast } = useAuth();
   const [booked, setBooked] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
-  const [selectedInstruction, setSelectedInstruction] = useState(""); // New state
+  const [selectedInstruction, setSelectedInstruction] = useState("");
+  const axiosSecure = useAxiosSecure();
 
   const getData = async () => {
     setIsDataFetched(true);
@@ -31,7 +33,7 @@ const Service_To_Do = () => {
     }
 
     try {
-      const { data } = await axios.patch(
+      const { data } = await axiosSecure.patch(
         `${import.meta.env.VITE_API_URL}/Status/${id}`,
         { Status }
       );
@@ -56,7 +58,7 @@ const Service_To_Do = () => {
       return;
     }
     try {
-      const { data } = await axios.patch(
+      const { data } = await axiosSecure.patch(
         `${import.meta.env.VITE_API_URL}/Status/${id}`,
         { Status }
       );

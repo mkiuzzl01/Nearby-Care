@@ -3,8 +3,8 @@ import useAuth from "../../hooks/useAuth";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const CheckOut = ({ bookInfo }) => {
   const { consultation_Cost,_id,} = bookInfo;
@@ -13,6 +13,7 @@ const CheckOut = ({ bookInfo }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState("");
+  const axiosSecure = useAxiosSecure();
 
   const [clientSecret, setClientSecret] = useState("");
   const [transactionID, setTransaction] = useState("");
@@ -21,7 +22,7 @@ const CheckOut = ({ bookInfo }) => {
 //   const taka = 200;
   const postData = async () => {
     if(cost > 0){
-        const {data} = await axios.post("http://localhost:5000/payment-intent",{cost});
+        const {data} = await axiosSecure.post("http://localhost:5000/payment-intent",{cost});
         setClientSecret(data.clientSecret);
     }
   };
@@ -77,7 +78,7 @@ const CheckOut = ({ bookInfo }) => {
 
         // after payment sent data to database
         try {
-            const {data} =  await axios.patch(`http://localhost:5000/payment-update/${_id}`,paymentInfo)
+            const {data} =  await axiosSecure.patch(`http://localhost:5000/payment-update/${_id}`,paymentInfo)
             if(data.modifiedCount>0){
                 Swal.fire({
                 title: "Your Payment Successful.!",

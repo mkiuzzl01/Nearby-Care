@@ -18,9 +18,9 @@ const Popular_Services_Card = ({ service, All_ServicesPage }) => {
       <div className={All_ServicesPage ? "visible" : "hidden"}>
         <div className="card lg:card-side border-2  hover:shadow-md duration-200 hover:shadow-green-400">
           <figure className="lg:w-1/2 m-auto transition duration-150 ease-in-out">
-            <img src={image} alt={expertise} className="lg:w-[700px] lg:h-96" />
+            <img src={image} alt={expertise} className="lg:w-[700px] lg:h-60" />
           </figure>
-          <div className="card-body lg:w-1/2 m-auto">
+          <div className="card-body lg:ms-2 lg:p-5 lg:w-1/2 lg:h-60">
             <h2 className="card-title">{expertise}</h2>
             <p className="border-x-2 px-4 rounded-lg border-blue-400">
               {doctorName} {description.substring(0,100)} .........

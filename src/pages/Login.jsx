@@ -34,7 +34,7 @@ const Login = () => {
       form.reset();
       navigate(location?.state ? location.state : "/");
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       errorToast("Something Wrong");
     }
   };
@@ -45,7 +45,7 @@ const Login = () => {
       successToast("Login successful");
       navigate(location?.state ? location.state : "/");
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       errorToast("Something Wrong");
     }
   };
@@ -55,7 +55,7 @@ const Login = () => {
       successToast("Login successful");
       navigate(location?.state ? location.state : "/");
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       errorToast("Something Wrong");
     }
   };

@@ -57,7 +57,7 @@ const Services = () => {
     setCurrentPage(value);
   };
 
-  console.log(services);
+  // console.log(services);
   return (
     <div className="py-4">
       <Helmet>

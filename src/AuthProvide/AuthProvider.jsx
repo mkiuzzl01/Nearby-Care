@@ -5,7 +5,6 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
-  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -13,6 +12,7 @@ import {
 } from "firebase/auth";
 import { toast } from "react-toastify";
 import auth from "../Firebase/Firebase.config";
+import axios from "axios";
 // import axios from "axios";
 
 export const AuthContext = createContext(null);
@@ -76,22 +76,26 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
 
       setLoading(false);
-      //============ this comment because in the Assignment notified me but after get mark then uncomment  ===============
-      //   const userEmail = currentUser?.email || user?.email;
-      //   const loggedUser = {email:userEmail};
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
 
-      //   if(currentUser){
-      //     axios.post('http://localhost:5000/jwt',loggedUser,{withCredentials:true})
-      //     .then(res=>{
-      //       console.log('current user data',res.data);
-      //     })
-      // }
-      // else{
-      //   axios.post('http://localhost:5000/Logout',loggedUser,{withCredentials:true})
-      //       .then(res=>{
-      //         console.log('token response', res.data);
-      //       })
-      // }
+      if (currentUser) {
+        axios
+          .post("http://localhost:5000/jwt", loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            // console.log("current user data", res.data);
+          });
+      } else {
+        axios
+          .post("http://localhost:5000/Logout", loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            // console.log("token response", res.data);
+          });
+      }
 
       return () => {
         unsubscribe();

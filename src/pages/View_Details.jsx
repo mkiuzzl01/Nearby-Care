@@ -1,22 +1,24 @@
 import { FaLocationDot } from "react-icons/fa6";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const View_Details = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const info = useLoaderData();
   const { user, errorToast,dark } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const id = form.id.value;
     const expertise_Name = form.Expertise_Name.value;
-    const expertise_image = info?.photo;
+    const expertise_image = info?.image;
     const doctor_Email = form.doctor_email.value;
     const doctor_Name = form.Doctor_Name.value;
     const area = info?.location;
@@ -43,14 +45,15 @@ const View_Details = () => {
         status,
       },
     };
-    // console.table(booking_info);
+
+    //check user and provider are same or not 
     if(user_Email === doctor_Email){
       navigate(location?.state ? location.state : "/Services");
       return errorToast("Something Wrong");
     }
 
     try {
-      const { data } = await axios.post(
+      const { data } = await axiosSecure.post(
         `${import.meta.env.VITE_API_URL}/Book_Appointment`,
         booking_info
       );
@@ -105,7 +108,7 @@ const View_Details = () => {
       </div>
       <div className="lg:w-1/2 my-4 shadow-lg rounded-xl">
         <div className="max-w-2xl overflow-hidden  rounded-lg shadow-md">
-          <img src={info.photo} alt="" className="object-cover w-full h-64" />
+          <img src={info.image} alt="" className="object-cover w-full h-64" />
 
           <div className="p-6">
             <div>
@@ -237,7 +240,7 @@ const View_Details = () => {
                 </label>
                 <input
                   defaultValue={user?.displayName}
-                  disabled
+                  disabled={user?.displayName}
                   type="text"
                   placeholder="Your Name"
                   className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"

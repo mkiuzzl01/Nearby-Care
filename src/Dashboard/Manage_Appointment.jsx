@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
@@ -8,12 +7,14 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Loading from "../Utility/Loading";
 import Empty from "../Utility/Empty";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Manage_Appointment = () => {
   const { user, errorToast } = useAuth();
   const [services, setServices] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [description, setDescription] = useState('');
+  const axiosSecure = useAxiosSecure();
 
   //data face here
   const getData = async () => {
@@ -21,7 +22,7 @@ const Manage_Appointment = () => {
     const url = `${import.meta.env.VITE_API_URL}/Manage_Appointment/${
       user?.email
     }`;
-    const { data } = await axios.get(url);
+    const { data } = await axiosSecure.get(url);
     setServices(data);
     setIsDataFetched(false);
   };
@@ -43,7 +44,7 @@ const Manage_Appointment = () => {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const { data } = await axios.delete(
+          const { data } = await axiosSecure.delete(
             `${import.meta.env.VITE_API_URL}/Delete_Appointment/${_id}`
           );
           if (data.deletedCount > 0) {

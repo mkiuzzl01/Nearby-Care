@@ -20,7 +20,7 @@ const Payment = () => {
         <div className="w-full max-w-md px-8 py-4 mt-16 rounded-lg shadow-lg border-2">
           <div className="flex justify-center -mt-16 md:justify-end">
             <img
-              src={bookInfo?.expertise_image? bookInfo?.expertise_image :'https://i.postimg.cc/vTN8PMKb/blank-profile-picture-973460-1280.png'}
+              src={bookInfo?.expertise_image ? bookInfo?.expertise_image :'https://i.postimg.cc/vTN8PMKb/blank-profile-picture-973460-1280.png'}
               alt=""
               className="object-cover w-full h-36 border-2 border-blue-500 rounded-md shadow-xl "
             />

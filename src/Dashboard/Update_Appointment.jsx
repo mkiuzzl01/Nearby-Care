@@ -2,6 +2,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const imgAPI = import.meta.env.VITE_IMG_API_KEY;
 const imageHosting = `https://api.imgbb.com/1/upload?key=${imgAPI}`;
@@ -11,6 +12,7 @@ const Update_Appointment = () => {
   const { errorToast, warningToast } = useAuth();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +49,7 @@ const Update_Appointment = () => {
     };
 
     try {
-      const info = await axiosPublic.put(
+      const info = await axiosSecure.put(
         `${import.meta.env.VITE_API_URL}/Update_Appointment/${update._id}`,
         updateInfo
       );
