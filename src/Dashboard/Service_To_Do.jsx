@@ -105,7 +105,7 @@ const Service_To_Do = () => {
               <tr key={book._id}>
                 <th>{idx + 1}</th>
                 <td>
-                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
                         <img
@@ -131,7 +131,7 @@ const Service_To_Do = () => {
                   <button
                     className="btn btn-sm"
                     onClick={() => {
-                      setSelectedInstruction(book?.user?.instruction); 
+                      setSelectedInstruction(book?.user?.instruction);
                       document.getElementById("my_modal_3").showModal();
                     }}
                   >
@@ -164,66 +164,69 @@ const Service_To_Do = () => {
                     <p>Not Payment</p>
                   )}
                 </td>
-                <th>
-                  <div className="dropdown dropdown-hover dropdown-top">
-                    <div tabIndex={0} role="button" className="btn m-1">
-                      Take a Action
+                <td>
+                  {book?.user?.status === "Complete" ? (
+                    <>
+                    <span className="text-green-600">Completed</span>
+                    </>
+                  ) : (
+                    <div className="dropdown dropdown-hover dropdown-top">
+                      <div
+                        tabIndex={0}
+                        role="button"
+                        className={
+                          book?.user?.status === "Working"
+                            ? "btn btn-sm bg-yellow-500"
+                            : "btn btn-sm m-1"
+                        }
+                      >
+                        {book?.user?.status}
+                      </div>
+                      <ul
+                        tabIndex={0}
+                        className="dropdown-content z-[1] space-y-2 menu shadow bg-base-100 rounded-box"
+                      >
+                        <li>
+                          <button
+                            onClick={() =>
+                              handleWorking(
+                                book._id,
+                                book?.user?.status,
+                                "Working"
+                              )
+                            }
+                            className={
+                              book?.user?.status === "Working"
+                                ? "btn btn-sm bg-yellow-500"
+                                : "btn btn-sm"
+                            }
+                            disabled={book?.user?.status === "Working"}
+                          >
+                            Working
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            onClick={() =>
+                              handleComplete(
+                                book._id,
+                                book?.user?.status,
+                                "Complete"
+                              )
+                            }
+                            className={
+                              book?.user?.status === "Complete"
+                                ? "btn btn-sm bg-green-600"
+                                : "btn btn-sm"
+                            }
+                          >
+                            Complete
+                          </button>
+                        </li>
+                      </ul>
                     </div>
-                    <ul
-                      tabIndex={0}
-                      className="dropdown-content z-[1] space-y-2 menu shadow bg-base-100 rounded-box"
-                    >
-                      <li>
-                        <button
-                          className={
-                            book?.user?.status === "Working"
-                              ? "btn btn-sm bg-gray-500-500"
-                              : "btn btn-sm"
-                          }
-                          defaultValue={book?.user?.status}
-                        >
-                          Pending
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          onClick={() =>
-                            handleWorking(
-                              book._id,
-                              book?.user?.status,
-                              "Working"
-                            )
-                          }
-                          className={
-                            book?.user?.status === "Working"
-                              ? "btn btn-sm bg-yellow-500"
-                              : "btn btn-sm"
-                          }
-                        >
-                          Working
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          onClick={() =>
-                            handleComplete(
-                              book._id,
-                              book?.user?.status,
-                              "Complete"
-                            )
-                          }
-                          className={
-                            book?.user?.status === "Complete"
-                              ? "btn btn-sm bg-green-600"
-                              : "btn btn-sm"
-                          }
-                        >
-                          Complete
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </th>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
