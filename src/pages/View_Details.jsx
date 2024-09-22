@@ -11,7 +11,6 @@ const View_Details = () => {
   const info = useLoaderData();
   const { user, errorToast,dark } = useAuth();
   const axiosSecure = useAxiosSecure();
-  console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

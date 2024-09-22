@@ -5,7 +5,7 @@ import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
-    baseURL:'http://localhost:5000',
+    baseURL:import.meta.env.VITE_API_URL,
     withCredentials:true,   
 })
 const useAxiosSecure = () => {
@@ -28,7 +28,7 @@ const useAxiosSecure = () => {
                     navigate('/Login');
                 })
                 .then((err) => {
-                  console.error(err.message);
+                  // console.error(err.message);
                 });
             }
             return Promise.reject(error);
