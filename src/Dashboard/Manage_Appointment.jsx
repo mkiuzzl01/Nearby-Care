@@ -13,6 +13,7 @@ const Manage_Appointment = () => {
   const { user, errorToast } = useAuth();
   const [services, setServices] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
+  const [description, setDescription] = useState('');
 
   //data face here
   const getData = async () => {
@@ -51,7 +52,7 @@ const Manage_Appointment = () => {
               text: "Appointment has been deleted.",
               icon: "success",
               showConfirmButton: false,
-              timer: 1500
+              timer: 1500,
             });
             getData();
           }
@@ -110,10 +111,25 @@ const Manage_Appointment = () => {
                   <p>$ {service.consultation_cost}</p>
                 </td>
                 <td>
-                  <p className="">
-                    {service.doctorName} {service?.description.substring(0, 30)}{" "}
-                    .....
-                  </p>
+                  <button
+                    className="btn btn-sm"
+                    onClick={() => {
+                      setDescription(service?.description);
+                      document.getElementById("my_modal_3").showModal();
+                    }}
+                  >
+                    See
+                  </button>
+                  <dialog id="my_modal_3" className="modal">
+                    <div className="modal-box">
+                      <form method="dialog">
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                          ✕
+                        </button>
+                      </form>
+                      <p className="py-4">{description}</p>
+                    </div>
+                  </dialog>
                 </td>
                 <th>
                   <div className="flex flex-col items-center space-y-4">

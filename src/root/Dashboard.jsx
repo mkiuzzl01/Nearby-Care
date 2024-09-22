@@ -5,7 +5,7 @@ import { FaMinimize } from "react-icons/fa6";
 import { FaList } from "react-icons/fa";
 
 const Dashboard_Layout = () => {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(true);
 
   const toggleMenu = () => {
     setOpen(!isOpen);
@@ -18,7 +18,7 @@ const Dashboard_Layout = () => {
 
           
           {/* This is NavLink part  */}
-          <Sidebar isOpen={isOpen}></Sidebar>
+          <Sidebar isOpen={isOpen} setOpen={setOpen}></Sidebar>
 
 
           {/* this is content part */}

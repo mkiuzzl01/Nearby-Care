@@ -53,7 +53,7 @@ const Router = createBrowserRouter([
       {
         path: "/View_Details/:id",
         loader: async ({ params }) =>
-          fetch(`https://nearby-care.vercel.app/View_Details/${params.id}`),
+          fetch(`http://localhost:5000/View_Details/${params.id}`),
         element: (
           <PrivetRoute>
             <Suspense fallback={<Loading></Loading>}>
@@ -65,7 +65,7 @@ const Router = createBrowserRouter([
       {
         path: "/Payment/:id",
         loader: async ({ params }) =>
-          fetch(`https://nearby-care.vercel.app/Payment/${params.id}`),
+          fetch(`http://localhost:5000/Payment/${params.id}`),
         element: (
           <Suspense fallback={<Loading></Loading>}>
             <Payment></Payment>
@@ -129,7 +129,7 @@ const Router = createBrowserRouter([
       {
         path: "Update_Appointment/:id",
         loader: async ({ params }) =>
-          fetch(`https://nearby-care.vercel.app/View_Details/${params.id}`),
+          fetch(`http://localhost:5000/View_Details/${params.id}`),
         element: (
           <Suspense fallback={<Loading></Loading>}>
             <Update_Appointment></Update_Appointment>

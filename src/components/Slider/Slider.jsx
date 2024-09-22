@@ -47,7 +47,7 @@ const Slider = () => {
               Your Health, Our Priority
               </h1>
               <p className="animate__animated animate__backInLeft">
-              Experience a seamless journey towards better health with trusted advice and comprehensive consultations from our team of experts. Your well-being is at the heart of everything we do.
+              Experience a seamless journey towards better health with trusted advice and comprehensive consultations from our team of experts.
               </p>
               <div className="space-x-2 flex">
                 <Link to={user? undefined :"/Register"} >
@@ -63,9 +63,9 @@ const Slider = () => {
             </div>
             <div className="">
               <img
-                src="https://i.postimg.cc/SKCkJgy4/home-slider1.png"
+                src="https://i.postimg.cc/fy0wxSzz/home-slider1-resized-700x500.png"
                 alt="Residential Image Coming soon"
-                className="w-[370px] md:w-full"
+                className=" md:w-full"
               />
             </div>
           </div>
@@ -93,9 +93,9 @@ const Slider = () => {
             </div>
             <div className="">
               <img
-                src="https://i.postimg.cc/7ZCxyxdf/home-slider2.png"
+                src="https://i.postimg.cc/Z0tJjYnr/home-slider2-resized-700x500.png"
                 alt="Residential Image Coming soon"
-                className="w-[412px] md:w-full"
+                className="md:w-full"
               />
             </div>
           </div>
@@ -104,10 +104,10 @@ const Slider = () => {
           <div className="flex flex-col lg:flex-row bg-purple-200 rounded-lg lg:justify-between items-center">
             <div className="p-4 lg:w-1/2 lg:ms-16 md:space-y-4 text-black">
               <h1 className="font-Merriweather font-medium text-4xl uppercase animate__animated animate__lightSpeedInRight">
-              Empowering Lives Through Expert Consultations
+              Expert Consultations
               </h1>
               <p className="animate__animated animate__backInLeft">
-              Explore a spectrum of consultation services tailored to your needs. Knowledge meets compassion in every interaction, empowering you to make informed choices for a healthier life.
+              Explore a spectrum of consultation services tailored to your needs. Knowledge meets compassion in every interaction.
               </p>
               <div className="space-x-2 flex">
                 <Link to={user? undefined :"/Register"} >
@@ -123,9 +123,9 @@ const Slider = () => {
             </div>
             <div className="">
               <img
-                src="https://i.postimg.cc/GhgcNBMW/home-slider3.png"
+                src="https://i.postimg.cc/qRFJhxdD/home-slider3-resized-700x500.png"
                 alt="Residential Image Coming soon"
-                className="w-[320px] md:w-full"
+                className=" md:w-full"
               />
             </div>
           </div>

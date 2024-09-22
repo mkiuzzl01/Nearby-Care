@@ -26,7 +26,7 @@ const Update_Appointment = () => {
     let image = 'https://i.ibb.co.com/MfnRRd4/Hands-Denied.png';
     if (photo) {
       const photoPath = new FormData();
-      photoPath.append("image", photoPath);
+      photoPath.append("image", photo);
 
       try {
         const {data} = await axiosPublic.post(imageHosting,photoPath);
@@ -45,9 +45,10 @@ const Update_Appointment = () => {
       consultation_cost,
       description,
     };
+
     try {
       const info = await axiosPublic.put(
-        `https://nearby-care.vercel.app/Update_Appointment/${update._id}`,
+        `${import.meta.env.VITE_API_URL}/Update_Appointment/${update._id}`,
         updateInfo
       );
       if (info.data.modifiedCount > 0) {
@@ -55,6 +56,8 @@ const Update_Appointment = () => {
           title: "Updated!",
           text: "Appointment has been Updated.",
           icon: "success",
+          showConfirmButton:false,
+          timer:1500,
         });
         form.reset();
         navigate("/Dashboard/Manage_Appointment");

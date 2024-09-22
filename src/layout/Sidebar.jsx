@@ -1,40 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaSignOutAlt } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Menu from "../Utility/Menu";
 
-const Sidebar = ({ isOpen }) => {
+const Sidebar = ({ isOpen, setOpen }) => {
   const { logOut } = useAuth();
 
   const handleLogout = () => {
     logOut();
   };
 
+  const click = () => {
+    setOpen(!isOpen);
+  };
+
   const navLink = (
     <>
-      <Menu link="/" name="Home"></Menu>
-      <Menu link="/Services" name="Services"></Menu>
+      <li onClick={click}>
+        <Menu link="/" name="Home"></Menu>
+      </li>
+      <li onClick={click}>
+        <Menu link="/Services" name="Services"></Menu>
+      </li>
     </>
   );
 
   const dashboardLinks = (
     <>
-      <Menu link="/Dashboard" name="User Profile"></Menu>
+      <li onClick={click}>
+        <Menu link="/Dashboard" name="User Profile"></Menu>
+      </li>
 
-      <Menu link="/Dashboard/Add_Appointment" name="Add Appointment"></Menu>
+      <li onClick={click}>
+        <Menu link="/Dashboard/Add_Appointment" name="Add Appointment"></Menu>
+      </li>
 
-      <Menu
-        link="/Dashboard/Manage_Appointment"
-        name="Manage Appointment"
-      ></Menu>
+      <li onClick={click}>
+        <Menu
+          link="/Dashboard/Manage_Appointment"
+          name="Manage Appointment"
+        ></Menu>
+      </li>
 
-      <Menu
-        link="/Dashboard/Booked_Appointment"
-        name="Your Booked"
-      ></Menu>
+      <li onClick={click}>
+        <Menu link="/Dashboard/Booked_Appointment" name="Your Booked"></Menu>
+      </li>
 
-      <Menu link="/Dashboard/Service_To_Do" name="Patient Booked"></Menu>
+      <li onClick={click}>
+        <Menu link="/Dashboard/Service_To_Do" name="Patient Booked"></Menu>
+      </li>
     </>
   );
 

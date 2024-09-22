@@ -144,7 +144,7 @@ const Service_To_Do = () => {
                           ✕
                         </button>
                       </form>
-                      <p>{selectedInstruction}</p>
+                      <p className="py-4">{selectedInstruction}</p>
                     </div>
                   </dialog>
                 </td>

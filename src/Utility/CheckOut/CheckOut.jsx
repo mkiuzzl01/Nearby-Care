@@ -21,7 +21,7 @@ const CheckOut = ({ bookInfo }) => {
 //   const taka = 200;
   const postData = async () => {
     if(cost > 0){
-        const {data} = await axios.post("https://nearby-care.vercel.app/payment-intent",{cost});
+        const {data} = await axios.post("http://localhost:5000/payment-intent",{cost});
         setClientSecret(data.clientSecret);
     }
   };
@@ -77,7 +77,7 @@ const CheckOut = ({ bookInfo }) => {
 
         // after payment sent data to database
         try {
-            const {data} =  await axios.patch(`https://nearby-care.vercel.app/payment-update/${_id}`,paymentInfo)
+            const {data} =  await axios.patch(`http://localhost:5000/payment-update/${_id}`,paymentInfo)
             if(data.modifiedCount>0){
                 Swal.fire({
                 title: "Your Payment Successful.!",
