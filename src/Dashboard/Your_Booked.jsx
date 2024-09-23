@@ -6,9 +6,10 @@ import Loading from "../Utility/Loading";
 import Empty from "../Utility/Empty";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Result } from "postcss";
 
 const Your_Booked = () => {
-  const { user, setLoading } = useAuth();
+  const { user, errorToast } = useAuth();
   const [booked, setBooked] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [instruction, setInstruction] = useState("");
@@ -27,18 +28,34 @@ const Your_Booked = () => {
   }, [user?.email]);
 
   const handleDelete = async (info) => {
-    const { data } = await axiosSecure.delete(
-      `/Delete_Booked_Appointment/${info?._id}`
-    );
-    if (data?.deletedCount > 0) {
+    try {
       Swal.fire({
-        title: "Deleted!",
-        text: "Booked appointment has been deleted.",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1500,
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const { data } = await axiosSecure.delete(
+            `/Delete_Booked_Appointment/${info?._id}`
+          );
+          getData();
+          if (data?.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Booked appointment has been deleted.",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        }
       });
-      getData();
+    } catch (error) {
+      return errorToast("Something went wrong");
     }
   };
 

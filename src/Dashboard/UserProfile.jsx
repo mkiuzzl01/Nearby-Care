@@ -45,11 +45,11 @@ const UserProfile = () => {
         imgPath.append("image", compressedFile);
 
         const { data } = await axiosPublic.post(imageHosting, imgPath);
-
         image = data?.data?.display_url;
+
       } catch (error) {
         setUpdate(false);
-        return errorToast(error?.message);
+        return errorToast(error?.response?.data?.error?.message);
       }
     }
 
@@ -57,10 +57,10 @@ const UserProfile = () => {
       form.reset();
       await profileUpdate(userName, image);
       successToast("Profile Updated");
-
       setTimeout(() => {
         window.location.reload();
       }, 1000);
+
     } catch (error) {
       errorToast(error?.message);
     } finally {

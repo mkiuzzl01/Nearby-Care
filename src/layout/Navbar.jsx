@@ -131,7 +131,7 @@ const Navbar = () => {
             </label>
           </div>
           {user ? (
-            <div className="flex items-center pe-10 z-10">
+            <div className="flex items-center z-10">
               <div className="dropdown dropdown-end">
                 <div className="relative flex items-center">
                   {/* Ping effect */}

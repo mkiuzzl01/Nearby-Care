@@ -62,7 +62,8 @@ const View_Details = () => {
           title: "Success!",
           text: "Appointment Book Successfully!",
           icon: "success",
-          confirmButtonText: "Ok",
+          showConfirmButton: false,
+          timer: 1500,
         });
       }
       form.reset();

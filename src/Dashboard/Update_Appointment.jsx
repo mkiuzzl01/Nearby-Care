@@ -3,6 +3,8 @@ import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useState } from "react";
+import { FaSpinner } from "react-icons/fa";
 
 const imgAPI = import.meta.env.VITE_IMG_API_KEY;
 const imageHosting = `https://api.imgbb.com/1/upload?key=${imgAPI}`;
@@ -13,6 +15,7 @@ const Update_Appointment = () => {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,18 +28,23 @@ const Update_Appointment = () => {
     const location = form.location.value;
     const photo = form.image.files[0];
 
+    setLoading(true);
+
     let image = update?.image;
     if (photo) {
       const photoPath = new FormData();
       photoPath.append("image", photo);
 
       try {
-        const {data} = await axiosPublic.post(imageHosting,photoPath);
+        const { data } = await axiosPublic.post(imageHosting, photoPath);
         image = data?.data?.display_url;
       } catch (error) {
-        errorToast(error?.message);
+        setLoading(false);
+        return errorToast(error?.response?.data?.error?.message);
       }
     }
+
+    setLoading(true);
 
     const updateInfo = {
       doctorName,
@@ -58,16 +66,19 @@ const Update_Appointment = () => {
           title: "Updated!",
           text: "Appointment has been Updated.",
           icon: "success",
-          showConfirmButton:false,
-          timer:1500,
+          showConfirmButton: false,
+          timer: 1500,
         });
         form.reset();
-        navigate("/Dashboard/Manage_Appointment");
+        setLoading(false);
+        return navigate("/Dashboard/Manage_Appointment");
       } else {
-        warningToast("Data is Already Updated");
+        setLoading(false);
+        return warningToast("Data is Already Updated");
       }
     } catch (error) {
-      errorToast("Something Wrong");
+      setLoading(false);
+      return errorToast(error?.response?.data?.error?.message);
     }
   };
 
@@ -182,11 +193,13 @@ const Update_Appointment = () => {
           </div>
         </div>
         <div className="my-2">
-          <input
+          <button
+            disabled={loading}
             type="submit"
             className="btn w-full text-black hover:text-white bg-green-300"
-            value="Update"
-          />
+          >
+            {loading ? <FaSpinner size={20} color="red"></FaSpinner> : "Update"}
+          </button>
         </div>
       </form>
     </div>

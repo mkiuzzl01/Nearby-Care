@@ -39,10 +39,13 @@ const AddAppointment = () => {
         image = data?.data?.display_url;
         setCreating(false);
       } catch (error) {
-        errorToast(error.message);
+        setCreating(false);
+       return errorToast(error?.response?.data?.error?.message);
       }
     }
 
+    setCreating(true);
+    
     const doctorInfo = {
       doctorName,
       doctorEmail,
@@ -66,8 +69,10 @@ const AddAppointment = () => {
         });
       }
       form.reset();
+      setCreating(false);
     } catch (error) {
-      errorToast(error.message);
+      setCreating(false);
+      return errorToast(error?.response?.data?.error?.message);
     }
   };
 
