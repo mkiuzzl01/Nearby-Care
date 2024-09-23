@@ -22,7 +22,7 @@ const CheckOut = ({ bookInfo }) => {
 //   const taka = 200;
   const postData = async () => {
     if(cost > 0){
-        const {data} = await axiosSecure.post("http://localhost:5000/payment-intent",{cost});
+        const {data} = await axiosSecure.post("/payment-intent",{cost});
         setClientSecret(data.clientSecret);
     }
   };
@@ -78,7 +78,7 @@ const CheckOut = ({ bookInfo }) => {
 
         // after payment sent data to database
         try {
-            const {data} =  await axiosSecure.patch(`http://localhost:5000/payment-update/${_id}`,paymentInfo)
+            const {data} =  await axiosSecure.patch(`/payment-update/${_id}`,paymentInfo)
             if(data.modifiedCount>0){
                 Swal.fire({
                 title: "Your Payment Successful.!",
@@ -87,7 +87,7 @@ const CheckOut = ({ bookInfo }) => {
               });
             }
         //navigate to book from
-        navigate('/Dashboard/Booked_Appointment');
+        navigate('/Dashboard/Your_Booked');
         } catch (error) {
             setError(error.message);
             

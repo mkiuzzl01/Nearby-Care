@@ -15,10 +15,10 @@ const View_Details = React.lazy(() => import("../pages/View_Details"));
 const Manage_Appointment = React.lazy(() =>
   import("../Dashboard/Manage_Appointment")
 );
-const Booked_Appointment = React.lazy(() =>
-  import("../Dashboard/Booked_Appointment")
+const Your_Booked = React.lazy(() =>
+  import("../Dashboard/Your_Booked")
 );
-const Service_To_Do = React.lazy(() => import("../Dashboard/Service_To_Do"));
+const Patients_Booked = React.lazy(() => import("../Dashboard/Patients_Booked"));
 
 const Update_Appointment = React.lazy(() =>
   import("../Dashboard/Update_Appointment")
@@ -110,25 +110,25 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path: "Booked_Appointment",
+        path: "Your_Booked",
         element: (
           <Suspense fallback={<Loading></Loading>}>
-            <Booked_Appointment></Booked_Appointment>
+            <Your_Booked></Your_Booked>
           </Suspense>
         ),
       },
       {
-        path: "Service_To_Do",
+        path: "Patients_Booked",
         element: (
           <Suspense fallback={<Loading></Loading>}>
-            <Service_To_Do></Service_To_Do>
+            <Patients_Booked></Patients_Booked>
           </Suspense>
         ),
       },
       {
         path: "Update_Appointment/:id",
         loader: async ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/Update_Appointment/${params.id}`),
+          fetch(`${import.meta.env.VITE_API_URL}/View_Details/${params.id}`),
         element: (
           <Suspense fallback={<Loading></Loading>}>
             <Update_Appointment></Update_Appointment>
@@ -139,7 +139,7 @@ const Router = createBrowserRouter([
   },
 
   // ==================================
-  //Authentication Related Route
+ //Authentication Related Route
   {
     path: "Login",
     element: (

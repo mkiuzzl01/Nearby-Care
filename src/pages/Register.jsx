@@ -71,10 +71,10 @@ const Register = () => {
       await profileUpdate(name, image);
       successToast("Registration successful");
       navigate(location?.state ? location.state : "/");
-      form.reset();
     } catch (error) {
       return setError(error.message.split("/")[1].split(")"));
     }
+    form.reset();
     setUser({ user, photoURL: image, displayName: name });
   };
   return (

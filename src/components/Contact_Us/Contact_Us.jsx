@@ -1,9 +1,11 @@
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Contact_Us = () => {
   const { user, errorToast } = useAuth();
+  const axiosPublic = useAxiosPublic();
+
   const handleContact = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -11,13 +13,9 @@ const Contact_Us = () => {
     const email = form.email.value;
     const query = form.query.value;
     const userQueryInfo = { name, email, query };
-    console.table(userQueryInfo);
 
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/Contact_us`,
-        userQueryInfo
-      );
+      const { data } = await axiosPublic.post(`/Contact_us`, userQueryInfo);
       // console.log(data);
       if (data.insertedId) {
         Swal.fire({

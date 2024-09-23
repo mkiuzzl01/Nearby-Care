@@ -13,16 +13,15 @@ const Manage_Appointment = () => {
   const { user, errorToast } = useAuth();
   const [services, setServices] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
   const axiosSecure = useAxiosSecure();
 
   //data face here
   const getData = async () => {
     setIsDataFetched(true);
-    const url = `${import.meta.env.VITE_API_URL}/Manage_Appointment/${
-      user?.email
-    }`;
-    const { data } = await axiosSecure.get(url);
+    const { data } = await axiosSecure.get(
+      `/Manage_Appointment/${user?.email}`
+    );
     setServices(data);
     setIsDataFetched(false);
   };
@@ -141,7 +140,7 @@ const Manage_Appointment = () => {
                     </Link>
                     <button
                       title="Delete"
-                      onClick={() => handleDelete(service._id)}
+                      onClick={() => handleDelete(service?._id)}
                       className="text-3xl text-red-500"
                     >
                       <MdDeleteOutline />

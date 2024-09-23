@@ -19,7 +19,7 @@ const useAxiosSecure = () => {
             return res;
           },
           (error) => {
-            // console.log("error track in the interceptor", error.response);
+            // console.log("error track in the interceptor", error);
             
             if (error.response.status === 401 || error.response.status === 403) {
               // console.log("LogOut the user");
@@ -28,7 +28,7 @@ const useAxiosSecure = () => {
                     navigate('/Login');
                 })
                 .then((err) => {
-                  // console.error(err.message);
+                  console.error(err.message);
                 });
             }
             return Promise.reject(error);

@@ -13,7 +13,6 @@ import {
 import { toast } from "react-toastify";
 import auth from "../Firebase/Firebase.config";
 import axios from "axios";
-// import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -61,7 +60,7 @@ const AuthProvider = ({ children }) => {
 
   const errorToast = (text) => {
     return toast.error(text, {
-      position: "bottom-center",
+      position: "top-right",
     });
   };
   const warningToast = (text) => {
@@ -81,7 +80,7 @@ const AuthProvider = ({ children }) => {
 
       if (currentUser) {
         axios
-          .post("http://localhost:5000/jwt", loggedUser, {
+          .post(`${import.meta.env.VITE_API_URL}/jwt`, loggedUser, {
             withCredentials: true,
           })
           .then((res) => {
@@ -89,7 +88,7 @@ const AuthProvider = ({ children }) => {
           });
       } else {
         axios
-          .post("http://localhost:5000/Logout", loggedUser, {
+          .post(`${import.meta.env.VITE_API_URL}/Logout`, loggedUser, {
             withCredentials: true,
           })
           .then((res) => {

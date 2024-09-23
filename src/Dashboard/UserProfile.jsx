@@ -29,11 +29,17 @@ const UserProfile = () => {
         });
       });
 
-    let image = null;
+    let image = user?.photoURL;
+
+    let userName = name;
+
+    if (!name) {
+      userName = user?.displayName;
+    }
 
     if (imageFile) {
       try {
-        const compressedFile = await compressImage(imageFile); 
+        const compressedFile = await compressImage(imageFile);
 
         const imgPath = new FormData();
         imgPath.append("image", compressedFile);
@@ -49,7 +55,7 @@ const UserProfile = () => {
 
     try {
       form.reset();
-      await profileUpdate(name, image);
+      await profileUpdate(userName, image);
       successToast("Profile Updated");
 
       setTimeout(() => {

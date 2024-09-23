@@ -25,7 +25,7 @@ const Update_Appointment = () => {
     const location = form.location.value;
     const photo = form.image.files[0];
 
-    let image = 'https://i.ibb.co.com/MfnRRd4/Hands-Denied.png';
+    let image = update?.image;
     if (photo) {
       const photoPath = new FormData();
       photoPath.append("image", photo);
@@ -81,7 +81,7 @@ const Update_Appointment = () => {
           Update Your Provided Information
         </h1>
         <div className="flex justify-center">
-          <img src={update.photo} alt="" className="lg:w-1/4 h-1/4" />
+          <img src={update?.photo} alt="" className="lg:w-1/4 h-1/4" />
         </div>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 p-4">
           <div className="form-control">
@@ -89,7 +89,7 @@ const Update_Appointment = () => {
               <span className="block text-sm font-medium ">Your Name</span>
             </label>
             <input
-              defaultValue={update.doctorName}
+              defaultValue={update?.doctorName}
               type="text"
               placeholder="Enter Your Name"
               className="input input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
@@ -101,7 +101,7 @@ const Update_Appointment = () => {
               <span className="block text-sm font-medium">Your Email</span>
             </label>
             <input
-              defaultValue={update.doctorEmail}
+              defaultValue={update?.doctorEmail}
               type="email"
               disabled
               placeholder="Enter Your Email"
@@ -114,7 +114,7 @@ const Update_Appointment = () => {
               <span className="block text-sm font-medium ">Expertise Name</span>
             </label>
             <select
-              defaultValue={update.expertise}
+              defaultValue={update?.expertise}
               name="expertise"
               id="expertise"
               required
@@ -138,7 +138,7 @@ const Update_Appointment = () => {
               </span>
             </label>
             <input
-              defaultValue={update.consultation_cost}
+              defaultValue={update?.consultation_cost}
               placeholder="Appointment Cost"
               type="text"
               className="input  input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
@@ -150,7 +150,7 @@ const Update_Appointment = () => {
               <span className="block text-sm font-medium">Location</span>
             </label>
             <input
-              defaultValue={update.location}
+              defaultValue={update?.location}
               type="text"
               placeholder="Enter Your Location"
               className="input input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
@@ -172,7 +172,7 @@ const Update_Appointment = () => {
               <span className="block text-sm font-medium ">Description</span>
             </label>
             <textarea
-              defaultValue={update.description}
+              defaultValue={update?.description}
               placeholder="Enter Your Description"
               name="description"
               cols="5"

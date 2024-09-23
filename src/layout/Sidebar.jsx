@@ -43,11 +43,11 @@ const Sidebar = ({ isOpen, setOpen }) => {
       </li>
 
       <li onClick={click}>
-        <Menu link="/Dashboard/Booked_Appointment" name="Your Booked"></Menu>
+        <Menu link="/Dashboard/Your_Booked" name="Your Booked"></Menu>
       </li>
 
       <li onClick={click}>
-        <Menu link="/Dashboard/Service_To_Do" name="Patients Booked"></Menu>
+        <Menu link="/Dashboard/Patients_Booked" name="Patients Booked"></Menu>
       </li>
     </>
   );

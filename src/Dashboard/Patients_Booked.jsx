@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import Loading from "../Utility/Loading";
 import Empty from "../Utility/Empty";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
-const Service_To_Do = () => {
+const Patients_Booked = () => {
   const { user, errorToast, warningToast } = useAuth();
   const [booked, setBooked] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
@@ -16,8 +15,7 @@ const Service_To_Do = () => {
 
   const getData = async () => {
     setIsDataFetched(true);
-    const url = `${import.meta.env.VITE_API_URL}/Service_To_Do/${user?.email}`;
-    const { data } = await axios.get(url);
+    const { data } = await axiosSecure.get(`/Patients_Booked/${user?.email}`);
     setBooked(data);
     setIsDataFetched(false);
   };
@@ -33,10 +31,7 @@ const Service_To_Do = () => {
     }
 
     try {
-      const { data } = await axiosSecure.patch(
-        `${import.meta.env.VITE_API_URL}/Status/${id}`,
-        { Status }
-      );
+      const { data } = await axiosSecure.patch(`/Status/${id}`, { Status });
       if (data.modifiedCount) {
         Swal.fire({
           title: "Success!",
@@ -58,10 +53,7 @@ const Service_To_Do = () => {
       return;
     }
     try {
-      const { data } = await axiosSecure.patch(
-        `${import.meta.env.VITE_API_URL}/Status/${id}`,
-        { Status }
-      );
+      const { data } = await axiosSecure.patch(`/Status/${id}`, { Status });
       if (data.modifiedCount) {
         Swal.fire({
           title: "Success!",
@@ -169,7 +161,7 @@ const Service_To_Do = () => {
                 <td>
                   {book?.user?.status === "Complete" ? (
                     <>
-                    <span className="text-green-600">Completed</span>
+                      <span className="text-green-600">Completed</span>
                     </>
                   ) : (
                     <div className="dropdown dropdown-hover dropdown-top">
@@ -238,4 +230,4 @@ const Service_To_Do = () => {
   );
 };
 
-export default Service_To_Do;
+export default Patients_Booked;

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Loading from "../Utility/Loading";
@@ -8,7 +7,7 @@ import Empty from "../Utility/Empty";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const Booked_Appointment = () => {
+const Your_Booked = () => {
   const { user, setLoading } = useAuth();
   const [booked, setBooked] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
@@ -17,9 +16,7 @@ const Booked_Appointment = () => {
 
   const getData = async () => {
     setIsDataFetched(true);
-    const url = `/Booked_Appointment/${
-      user?.email
-    }`;
+    const url = `/Booked_Appointment/${user?.email}`;
     const { data } = await axiosSecure.get(url);
     setBooked(data);
     setIsDataFetched(false);
@@ -29,19 +26,21 @@ const Booked_Appointment = () => {
     getData();
   }, [user?.email]);
 
-  const handleDelete = async (info)=>{
-    const {data} = await axiosSecure.delete(`/Delete_Booked_Appointment/${info?._id}`);
-    if(data?.deletedCount>0){
+  const handleDelete = async (info) => {
+    const { data } = await axiosSecure.delete(
+      `/Delete_Booked_Appointment/${info?._id}`
+    );
+    if (data?.deletedCount > 0) {
       Swal.fire({
         title: "Deleted!",
         text: "Booked appointment has been deleted.",
         icon: "success",
         showConfirmButton: false,
         timer: 1500,
-    })
-     getData();
+      });
+      getData();
     }
-  }
+  };
 
   if (isDataFetched) return <Loading />;
   if (!booked.length) return <Empty />;
@@ -134,14 +133,18 @@ const Booked_Appointment = () => {
                         className="dropdown-content space-y-2 menu bg-base-100 rounded-box z-[1] shadow"
                       >
                         <li>
-                          <button onClick={()=>handleDelete(book)} className="btn btn-sm btn-error">
+                          <button
+                            onClick={() => handleDelete(book)}
+                            className="btn btn-sm btn-error"
+                          >
                             Delete
                           </button>
-                        </li>
-                          {" "}
-                          <Link to={`/Payment/${book._id}`}>
-                            <button className="btn btn-sm btn-success">Payment</button>
-                          </Link>
+                        </li>{" "}
+                        <Link to={`/Payment/${book._id}`}>
+                          <button className="btn btn-sm btn-success">
+                            Payment
+                          </button>
+                        </Link>
                       </ul>
                     </div>
                   )}
@@ -169,4 +172,4 @@ const Booked_Appointment = () => {
   );
 };
 
-export default Booked_Appointment;
+export default Your_Booked;
