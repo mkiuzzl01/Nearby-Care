@@ -117,7 +117,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-center space-x-4">
+          <div className=" my-4 flex justify-center space-x-4">
             <Link>
               <CiFacebook className="text-3xl text-white" />
             </Link>

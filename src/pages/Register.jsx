@@ -49,29 +49,38 @@ const Register = () => {
     }
 
     setError();
+
     if (pass.length < 6) {
       toast.error("Something Wrong!", {
         position: "bottom-center",
       });
+      setLoading(false);
       return setError("Password must be at least 6 character or longer");
     } else if (!/[A-Z]/.test(pass)) {
       toast.error("Something Wrong!", {
         position: "bottom-center",
       });
+      setLoading(false);
       return setError("Should contain at least one upper case");
     } else if (!/[a-z]/.test(pass)) {
       toast.error("Something Wrong!", {
         position: "bottom-center",
       });
+      setLoading(false);
       return setError("Should contain at least one lower case");
     }
+
+    setLoading(true);
 
     try {
       await registerUser(email, pass);
       await profileUpdate(name, image);
       successToast("Registration successful");
       navigate(location?.state ? location.state : "/");
+      setLoading(false);
+
     } catch (error) {
+      setLoading(false);
       return setError(error.message.split("/")[1].split(")"));
     }
     form.reset();
@@ -172,7 +181,7 @@ const Register = () => {
                   </span>
                 </div>
               </label>
-              <p className="text-red-600">{error}</p>
+              <p className="text-red-400">{error}</p>
             </div>
            
             <div className="mt-6">

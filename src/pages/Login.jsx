@@ -7,11 +7,14 @@ import { FiEye } from "react-icons/fi";
 import { Helmet } from "react-helmet";
 import auth from "../Firebase/Firebase.config";
 import { sendPasswordResetEmail } from "firebase/auth";
+import { FaSpinner } from "react-icons/fa6";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const {
     logInUser,
     logInWithGoogle,
@@ -20,58 +23,73 @@ const Login = () => {
     errorToast,
     dark,
     warningToast,
-    updateUserPass
+    updateUserPass,
   } = useAuth();
+
+  //login function
   const handleLogin = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form?.email?.value;
     const password = form?.password?.value;
 
+    setLoading(true);
     try {
       await logInUser(email, password);
       successToast("Login successful");
       form.reset();
-      navigate(location?.state ? location.state : "/");
+      setLoading(false);
+      return navigate(location?.state ? location.state : "/");
     } catch (error) {
+      setLoading(false);
       // console.log(error.message);
-      errorToast("Something Wrong");
+      return errorToast("Something Wrong");
     }
   };
 
   const handleWithGoogle = async () => {
+    setLoading(true);
+
     try {
       await logInWithGoogle();
       successToast("Login successful");
-      navigate(location?.state ? location.state : "/");
+      setLoading(false);
+      return navigate(location?.state ? location.state : "/");
     } catch (error) {
+      setLoading(false);
       // console.log(error.message);
-      errorToast("Something Wrong");
+      return errorToast("Something Wrong");
     }
   };
   const handleWithGithub = async () => {
+    setLoading(true);
     try {
       await logInWithGithub();
       successToast("Login successful");
-      navigate(location?.state ? location.state : "/");
+      setLoading(false);
+      return navigate(location?.state ? location.state : "/");
     } catch (error) {
+      setLoading(false);
       // console.log(error.message);
-      errorToast("Something Wrong");
+      return errorToast("Something Wrong");
     }
   };
 
-  const handleForgetPass = async (email) => {
-    if (!email) {
+  const handleForgetPass = async () => {
+    setLoading(true);
+    if (!email.value) {
+      setLoading(false);
       return warningToast("Please enter your email address");
     }
     try {
-      await sendPasswordResetEmail(auth, email);
+      await sendPasswordResetEmail(auth, email.value);
       successToast("Password reset email sent. Check your inbox.");
+      setLoading(false);
     } catch (error) {
-      errorToast("Failed to send reset email: " + error.message);
+      setLoading(false);
+      return errorToast("Failed to send reset email: " + error.message);
     }
   };
-  
 
   return (
     <div
@@ -145,6 +163,7 @@ const Login = () => {
                 className="input w-full input-bordered focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
                 name="email"
                 required
+                id="email"
               />
             </div>
 
@@ -168,13 +187,20 @@ const Login = () => {
               </label>
             </div>
 
-            <span onClick={handleForgetPass} className="text-xs hover:underline text-white">Forget Password?</span>
+            <span
+              onClick={handleForgetPass}
+              className="text-xs hover:underline text-white"
+            >
+              Forget Password?
+            </span>
             <div className="mt-6">
-              <input
-                className="w-full btn bg-gray-500 border-none text-white hover:bg-red-600"
+              <button
+              disabled={loading}
+                className="w-full btn bg-gray-500 border-none text-white hover:bg-green-600"
                 type="submit"
-                value="Login"
-              />
+              >
+                {loading ? <FaSpinner size={20} color="red"></FaSpinner> : " Login"}
+              </button>
             </div>
           </form>
 
