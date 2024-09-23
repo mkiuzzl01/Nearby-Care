@@ -42,7 +42,8 @@ const Register = () => {
         image = data?.data?.display_url;
         setLoading(false);
       } catch (error) {
-        toast.error(error?.message, {
+        setLoading(false);
+        return toast.error(error?.response?.data?.error?.message, {
           position: "bottom-center",
         });
       }
